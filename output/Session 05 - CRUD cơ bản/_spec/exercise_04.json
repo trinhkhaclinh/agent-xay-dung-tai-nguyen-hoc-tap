@@ -1,0 +1,88 @@
+{
+  "filename": "[Phân tích] Phân tích tính Idempotent của các phương thức HTTP",
+  "subdir": "Bài tập",
+  "level": "Phân tích",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Phân tích so sánh tính Idempotent của các HTTP Methods"
+    },
+    {
+      "type": "h2",
+      "text": "1. Bối cảnh nghiệp vụ"
+    },
+    {
+      "type": "p",
+      "text": "Khi thiết kế hệ thống API chịu tải lớn và có khả năng xảy ra mất kết nối giữa chừng, tính chất Idempotent (đồng nhất kết quả khi gọi nhiều lần) của các phương thức HTTP đóng vai trò quyết định thiết kế an toàn hệ thống."
+    },
+    {
+      "type": "h2",
+      "text": "2. Yêu cầu phân tích"
+    },
+    {
+      "type": "p",
+      "text": "Sinh viên cần lập bảng phân tích so sánh tính chất an toàn (Safe) và tính chất đồng nhất (Idempotent) của 4 phương thức HTTP GET, POST, PUT, DELETE."
+    },
+    {
+      "type": "h2",
+      "text": "3. Yêu cầu đầu ra"
+    },
+    {
+      "type": "h3",
+      "text": "(1) Lập bảng so sánh"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Phương thức HTTP",
+        "Safe (An toàn)",
+        "Idempotent (Đồng nhất)",
+        "Mô tả hành vi khi gọi liên tiếp"
+      ],
+      "rows": [
+        [
+          "GET",
+          "",
+          "",
+          ""
+        ],
+        [
+          "POST",
+          "",
+          "",
+          ""
+        ],
+        [
+          "PUT",
+          "",
+          "",
+          ""
+        ],
+        [
+          "DELETE",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "(2) Giải thích ứng dụng thực tế"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Giải thích vì sao DELETE được coi là idempotent mặc dù lần gọi thứ 2 có thể trả về lỗi 404 thay vì 204.",
+        "Vì sao không được dùng GET để thực hiện hành động xóa hoặc thay đổi dữ liệu."
+      ]
+    }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session05",
+    "ex": "Ex04",
+    "example": "HNKS25CNTT1_FastAPI_Session05_Ex04"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "filename": "[Sáng tạo] Thiết kế API cổng điều phối Logistics",
+  "subdir": "Bài tập",
+  "level": "Sáng tạo",
+  "blocks": [
+    { "type": "h1", "text": "Thiết kế API cổng điều phối Logistics" },
+
+    { "type": "h2", "text": "1. Bối cảnh nghiệp vụ" },
+    { "type": "p", "text": "Một doanh nghiệp kho vận vận hành nhiều nhà kho ở các tỉnh thành. Ban điều hành muốn xây dựng một cổng điều phối Logistics (Logistics Dispatcher) dưới dạng API để các hệ thống khác (web quản trị, ứng dụng tài xế, đối tác bên thứ ba) cùng truy cập. Đây là kiến trúc Decoupled: server chỉ trả dữ liệu JSON, một API phục vụ được nhiều loại client." },
+    { "type": "p", "text": "Đây là bài tập mở. Bạn đóng vai kiến trúc sư API: tự đề xuất tập tính năng và thiết kế hệ endpoint cho cổng điều phối, sau đó triển khai bằng FastAPI ở mức tối thiểu chạy được." },
+
+    { "type": "h2", "text": "2. Yêu cầu bài toán" },
+    { "type": "p", "text": "Tự chọn và thiết kế tối thiểu một miền tài nguyên (resource) của hệ thống Logistics. Một vài gợi ý để khơi ý tưởng (không bắt buộc làm hết):" },
+    { "type": "bullets", "items": [
+      "warehouses — nhà kho: trạng thái vận hành, tỷ lệ tải (workload), danh sách node đang hoạt động.",
+      "shipments — đơn vận: tạo đơn, tra cứu trạng thái, cập nhật tiến trình giao hàng.",
+      "vehicles — phương tiện: danh sách xe, tình trạng sẵn sàng, phân công tuyến.",
+      "dispatch — điều phối: gán đơn vận cho phương tiện/kho phù hợp."
+    ]},
+    { "type": "p", "text": "Endpoint giám sát trạng thái hệ thống dưới đây là điểm khởi đầu có sẵn; bạn mở rộng từ đây." },
+    { "type": "code", "lang": "python", "text": "# gateway.py - điểm khởi đầu cổng điều phối Logistics\nfrom fastapi import FastAPI\n\napp = FastAPI(title=\"Logistics Dispatcher API\")\n\n@app.get(\"/\")\ndef get_system_status():\n    \"\"\"Tra ve tinh trang van hanh tuc thoi cua nha kho trung tam.\"\"\"\n    return {\n        \"gateway_status\": \"operational\",\n        \"workload_ratio\": 0.72,\n        \"active_nodes\": [\"VN-SGN-01\", \"VN-DAD-02\"],\n        \"system_message\": \"Logistics Dispatcher running smoothly.\"\n    }" },
+
+    { "type": "h2", "text": "3. Ràng buộc thiết kế" },
+    { "type": "bullets", "items": [
+      "Mọi endpoint phải tuân thủ quy chuẩn RESTful: đặt tên tài nguyên bằng danh từ số nhiều, không nhúng động từ vào URL, hành động xác định bằng HTTP method (GET/POST/PUT/PATCH/DELETE).",
+      "Có ít nhất một endpoint GET (đọc) và một endpoint POST (tạo) để minh họa ánh xạ CRUD.",
+      "Dữ liệu trao đổi ở định dạng JSON; có thể lưu tạm trong bộ nhớ (in-memory) cho phạm vi bài tập.",
+      "Ứng dụng chạy được bằng Uvicorn và xem được tài liệu tự sinh trên Swagger UI."
+    ]},
+
+    { "type": "h2", "text": "4. Yêu cầu" },
+
+    { "type": "h3", "text": "Phần 1 — Thiết kế (đặc tả)" },
+    { "type": "bullets", "items": [
+      "Mô tả tính năng bạn chọn xây dựng và liệt kê bảng các endpoint dự kiến (đường dẫn, HTTP method, mục đích).",
+      "Giải thích mỗi endpoint ánh xạ với thao tác CRUD nào và vì sao chọn HTTP method đó.",
+      "Nêu ngắn gọn cấu trúc dữ liệu JSON của tài nguyên chính."
+    ]},
+    { "type": "table",
+      "headers": ["Đường dẫn (endpoint)", "HTTP method", "Mục đích nghiệp vụ"],
+      "rows": [
+        ["/shipments", "GET", ""],
+        ["/shipments", "POST", ""],
+        ["", "", ""]
+      ]
+    },
+
+    { "type": "h3", "text": "Phần 2 — Triển khai" },
+    { "type": "bullets", "items": [
+      "Hiện thực hóa các endpoint đã thiết kế bằng FastAPI trong file gateway.py.",
+      "Trả về dữ liệu JSON đúng cấu trúc đã đặc tả; khai báo kiểu dữ liệu cho path/query parameter khi cần.",
+      "Đặt title/description cho app để Swagger UI hiển thị rõ ràng."
+    ]},
+
+    { "type": "h3", "text": "Phần 3 — Kiểm thử & thuyết minh" },
+    { "type": "numbers", "items": [
+      "Chạy server bằng uvicorn gateway:app --reload và truy cập http://127.0.0.1:8000/docs.",
+      "Dùng Try it out để gọi thử từng endpoint và chụp lại kết quả phản hồi JSON.",
+      "Viết một đoạn ngắn (5–7 dòng) thuyết minh vì sao thiết kế của bạn tuân thủ RESTful và dễ mở rộng cho các client khác nhau."
+    ]}
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session02",
+    "ex": "Ex05",
+    "example": "HNKS25CNTT1_FastAPI_Session02_Ex05"
+  }
+}

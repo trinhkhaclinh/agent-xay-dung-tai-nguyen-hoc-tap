@@ -1,0 +1,46 @@
+{
+  "filename": "[Vận dụng cơ bản 2] Đọc và vẽ lại sơ đồ kiến trúc Client-API-Database",
+  "subdir": "Bài tập",
+  "level": "Vận dụng cơ bản",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Phân tích sơ đồ luồng dữ liệu 3 lớp"
+    },
+    {
+      "type": "h2",
+      "text": "1. Bối cảnh nghiệp vụ"
+    },
+    {
+      "type": "p",
+      "text": "Khi phát triển phần mềm, việc hiểu rõ đường đi của dữ liệu từ giao diện người dùng đến database giúp chúng ta dễ dàng thiết kế cấu trúc API phù hợp và xử lý sự cố nhanh chóng."
+    },
+    {
+      "type": "h2",
+      "text": "2. Yêu cầu bài toán"
+    },
+    {
+      "type": "p",
+      "text": "Hãy tự vẽ lại sơ đồ kiến trúc Client-API-Database minh họa rõ các bước từ lúc người dùng nhấn nút đăng ký học, cho đến khi database MySQL lưu trữ thông tin sinh viên thành công."
+    },
+    {
+      "type": "h2",
+      "text": "3. Yêu cầu đầu ra"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Vẽ sơ đồ luồng bằng công cụ online (draw.io / Lucidchart) hoặc vẽ tay.",
+        "Giải thích rõ vai trò của FastAPI và Database MySQL trong sơ đồ.",
+        "Mô tả định dạng dữ liệu (JSON) truyền tải giữa Client và API."
+      ]
+    }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session01",
+    "ex": "Ex02",
+    "example": "HNKS25CNTT1_FastAPI_Session01_Ex02"
+  }
+}

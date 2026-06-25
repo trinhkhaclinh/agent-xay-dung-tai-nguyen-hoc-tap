@@ -1,0 +1,64 @@
+{
+  "filename": "[Vận dụng chuyên sâu] Triển khai API PATCH cập nhật từng phần",
+  "subdir": "Bài tập",
+  "level": "Vận dụng chuyên sâu",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Phát triển tính năng cập nhật từng phần với PATCH"
+    },
+    {
+      "type": "h2",
+      "text": "1. Bối cảnh nghiệp vụ"
+    },
+    {
+      "type": "p",
+      "text": "Mặc dù phương thức PUT rất phổ biến, nhưng đôi khi người dùng chỉ muốn sửa đổi một thuộc tính duy nhất (ví dụ: chỉ sửa đổi email của học viên mà giữ nguyên họ tên). Nếu dùng PUT, người dùng buộc phải gửi lại cả họ tên cũ. Giải pháp thay thế tối ưu là sử dụng phương thức PATCH."
+    },
+    {
+      "type": "h2",
+      "text": "2. Quy tắc nghiệp vụ"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Sử dụng decorator `@app.patch`.",
+        "Schema nhận vào phải cho phép các trường có giá trị tùy chọn (tất cả các trường đều có mặc định là None).",
+        "Chỉ cập nhật những thuộc tính được client gửi lên thực sự trong request body."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "3. Yêu cầu đầu ra"
+    },
+    {
+      "type": "h3",
+      "text": "(1) Thiết kế Pydantic Schema cho PATCH"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Tạo `StudentPatchSchema` với các trường `name: str | None = None` và `email: str | None = None`."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "(2) Viết logic cập nhật động"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Duyệt danh sách tìm kiếm học viên theo ID.",
+        "Sử dụng hàm `.dict(exclude_unset=True)` của Pydantic để chỉ lấy ra các trường được truyền lên và cập nhật vào đối tượng gốc.",
+        "Trả lỗi 404 nếu không tìm thấy."
+      ]
+    }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session05",
+    "ex": "Ex03",
+    "example": "HNKS25CNTT1_FastAPI_Session05_Ex03"
+  }
+}

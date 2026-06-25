@@ -1,0 +1,198 @@
+{
+  "filename": "Session 02 - Giới thiệu và Cài đặt FastAPI",
+  "subdir": "Mindmap",
+  "root": "Giới thiệu và Cài đặt FastAPI",
+  "children": [
+    {
+      "title": "1. Tổng quan kiến trúc web và FastAPI",
+      "children": [
+        {
+          "title": "Mô hình Client - Server",
+          "children": [
+            { "title": "Client gửi Request" },
+            { "title": "Server xử lý, trả Response" },
+            { "title": "Client <-> Internet (HTTP/HTTPS) <-> Server" },
+            { "title": "HTTP/HTTPS: nền tảng web hiện đại" }
+          ]
+        },
+        {
+          "title": "Định dạng JSON",
+          "children": [
+            { "title": "Định dạng trao đổi dữ liệu nhẹ" },
+            { "title": "Key & chuỗi: nháy kép" },
+            { "title": "Số/bool: không cần nháy" }
+          ]
+        },
+        {
+          "title": "Kiến trúc Decoupled (FE/BE tách biệt)",
+          "children": [
+            { "title": "Server chỉ trả dữ liệu thuần (JSON)" },
+            { "title": "1 API phục vụ Web + Mobile + bên thứ ba" },
+            { "title": "SSR vs SPA vs API-first" }
+          ]
+        },
+        {
+          "title": "FastAPI = Starlette + Pydantic",
+          "children": [
+            { "title": "Starlette: routing, middleware" },
+            { "title": "Pydantic: validation bằng type hints" }
+          ]
+        },
+        {
+          "title": "WSGI vs ASGI",
+          "children": [
+            { "title": "WSGI (Django/Flask): đồng bộ, 1 thread/request" },
+            { "title": "ASGI (FastAPI): bất đồng bộ (async/await), tải cao" },
+            { "title": "Uvicorn: ASGI server siêu nhanh" },
+            { "title": "Hiệu năng tiệm cận NodeJS/Go" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2. Virtual environment",
+      "children": [
+        {
+          "title": "Vì sao cần venv",
+          "children": [
+            { "title": "Cài vào Python hệ thống dễ xung đột phiên bản" },
+            { "title": "Cô lập thư viện theo từng dự án" }
+          ]
+        },
+        {
+          "title": "Tạo & kích hoạt",
+          "children": [
+            { "title": "python -m venv venv" },
+            { "title": "venv/ chứa interpreter & pip riêng" },
+            { "title": "Windows: .\\venv\\Scripts\\activate" },
+            { "title": "macOS/Linux: source venv/bin/activate" },
+            { "title": "Dấu hiệu: tiền tố (venv)" },
+            { "title": "Hủy: deactivate" }
+          ]
+        },
+        {
+          "title": "pip & requirements.txt",
+          "children": [
+            { "title": "pip freeze > requirements.txt (đóng gói)" },
+            { "title": "pip install -r requirements.txt (tái tạo)" },
+            { "title": "Thêm venv/ vào .gitignore" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. Khởi tạo ứng dụng FastAPI",
+      "children": [
+        {
+          "title": "Quy trình 3 bước",
+          "children": [
+            { "title": "Nạp lớp FastAPI" },
+            { "title": "Tạo thực thể app = FastAPI()" },
+            { "title": "Định nghĩa route + hàm xử lý" }
+          ]
+        },
+        {
+          "title": "Decorator & hàm xử lý",
+          "children": [
+            { "title": "@app.get(\"/\")" },
+            { "title": "Trả Dictionary -> tự chuyển thành JSON" }
+          ]
+        },
+        {
+          "title": "Chạy bằng Uvicorn",
+          "children": [
+            { "title": "FastAPI không tự lắng nghe cổng mạng" },
+            { "title": "uvicorn main:app --reload" },
+            { "title": "main = tên file, app = biến instance" },
+            { "title": "--reload: Hot Reload, tự restart khi sửa" }
+          ]
+        },
+        {
+          "title": "Truy cập server",
+          "children": [
+            { "title": "Mặc định http://127.0.0.1:8000" },
+            { "title": "Log 200 OK xác nhận hoạt động" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "4. API endpoint và Routing",
+      "children": [
+        {
+          "title": "Cấu trúc HTTP",
+          "children": [
+            { "title": "Request: Method / URL / Headers / Body" },
+            { "title": "Response: Status Code / Headers / Body" },
+            { "title": "HTTP: nền tảng mọi RESTful API" }
+          ]
+        },
+        {
+          "title": "HTTP Methods (CRUD)",
+          "children": [
+            { "title": "GET = Read" },
+            { "title": "POST = Create" },
+            { "title": "PUT = Update toàn bộ" },
+            { "title": "PATCH = Update một phần" },
+            { "title": "DELETE = Delete" }
+          ]
+        },
+        {
+          "title": "RESTful naming",
+          "children": [
+            { "title": "Danh từ số nhiều (/students)" },
+            { "title": "Không nhúng động từ (sai: /getStudents)" },
+            { "title": "Hành động xác định bởi Method, không phải URL" }
+          ]
+        },
+        {
+          "title": "Routing Engine",
+          "children": [
+            { "title": "Decorator routing (@app.get/post/put/delete)" },
+            { "title": "Dò URL path + HTTP method -> hàm xử lý" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5. Swagger UI",
+      "children": [
+        {
+          "title": "Chuẩn OpenAPI",
+          "children": [
+            { "title": "Tiêu chuẩn quốc tế mô tả REST API" },
+            { "title": "FastAPI tuân thủ hoàn toàn" }
+          ]
+        },
+        {
+          "title": "Zero Configuration",
+          "children": [
+            { "title": "Tự đọc hàm & kiểu dữ liệu sinh tài liệu" },
+            { "title": "Không cần cấu hình thêm" }
+          ]
+        },
+        {
+          "title": "Swagger UI (/docs)",
+          "children": [
+            { "title": "http://localhost:8000/docs" },
+            { "title": "Vừa tài liệu, vừa kiểm thử tương tác" },
+            { "title": "Try it out / Execute" }
+          ]
+        },
+        {
+          "title": "ReDoc (/redoc)",
+          "children": [
+            { "title": "http://localhost:8000/redoc" },
+            { "title": "Giao diện ba cột, tối ưu đọc/tra cứu" }
+          ]
+        },
+        {
+          "title": "Tags metadata",
+          "children": [
+            { "title": "Phân nhóm endpoint cho gọn gàng" }
+          ]
+        }
+      ]
+    }
+  ]
+}

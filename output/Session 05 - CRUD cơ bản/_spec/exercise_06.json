@@ -1,0 +1,51 @@
+{
+  "filename": "[BTTH] Phát triển ứng dụng quản lý sách thư viện hoàn chỉnh",
+  "subdir": "Bài tập",
+  "level": "Tổng hợp",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Bài tập thực hành tổng hợp: CRUD Thư viện Sách"
+    },
+    {
+      "type": "h2",
+      "text": "1. Bối cảnh nghiệp vụ"
+    },
+    {
+      "type": "p",
+      "text": "Học viên cần xây dựng một ứng dụng nhỏ quản lý sách trong thư viện trường học in-memory đầy đủ 4 thao tác tạo mới, lấy danh sách, sửa đổi và xóa sách."
+    },
+    {
+      "type": "h2",
+      "text": "2. Yêu cầu kỹ thuật"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "POST `/books`: Thêm sách mới gồm `title` (str, >=2 ký tự), `author` (str), `isbn` (str, phải duy nhất). Trả về 201 Created.",
+        "GET `/books`: Trả về danh sách sách, hỗ trợ lọc theo query `author` (tùy chọn).",
+        "GET `/books/{book_id}`: Trả về chi tiết sách theo ID, lỗi 404 nếu không tìm thấy.",
+        "PUT `/books/{book_id}`: Ghi đè cập nhật sách, lỗi 404 nếu không thấy.",
+        "DELETE `/books/{book_id}`: Xóa sách, trả về 204 No Content, lỗi 404 nếu không thấy."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "3. Yêu cầu đầu ra"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Viết file `main.py` hoàn chỉnh, cấu hình đầy đủ Pydantic Schemas và chạy được bằng Uvicorn.",
+        "Thực hiện demo đầy đủ cả 5 API trên Swagger UI."
+      ]
+    }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session05",
+    "ex": "Ex06",
+    "example": "HNKS25CNTT1_FastAPI_Session05_Ex06"
+  }
+}

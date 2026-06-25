@@ -1,0 +1,55 @@
+{
+  "filename": "Lesson 04 - Type Hints trong FastAPI - Ràng buộc dữ liệu",
+  "subdir": "Kịch bản quay video",
+  "lesson_no": 4,
+  "blocks": [
+    {
+      "type": "h2",
+      "text": "## Đặt các ràng buộc dữ liệu nâng cao"
+    },
+    {
+      "type": "narration",
+      "text": "Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Trong bài học hôm nay, thầy và các em sẽ cùng nhau tìm hiểu cách thiết lập các ràng buộc nâng cao cho dữ liệu bằng cách sử dụng Query, Path, và Field."
+    },
+    {
+      "type": "narration",
+      "text": "Trong thực tế, chỉ định nghĩa kiểu dữ liệu là số hay chuỗi chưa đủ. Chúng ta cần những ràng buộc chi tiết hơn như: tuổi phải lớn hơn 18, từ khóa tìm kiếm phải dài ít nhất 2 ký tự, hay email phải đúng định dạng."
+    },
+    {
+      "type": "marker",
+      "text": "[Chuyển tiếp slide]"
+    },
+    {
+      "type": "h2",
+      "text": "## Sử dụng Query, Path, và Field"
+    },
+    {
+      "type": "narration",
+      "text": "Hãy cùng theo dõi ví dụ trên màn hình. Để ràng buộc query parameter, chúng ta dùng Query(). Để ràng buộc path parameter, chúng ta dùng Path() và để đặt ràng buộc cho thuộc tính của Pydantic model, chúng ta dùng Field()."
+    },
+    {
+      "type": "marker",
+      "text": "[mở trình duyệt hiển thị code ví dụ kết hợp Query, Path và Field]"
+    },
+    {
+      "type": "narration",
+      "text": "Các em có thể dùng tham số min_length, max_length cho chuỗi; ge, le, gt, lt cho số và pattern để dùng biểu thức chính quy kiểm tra email. Tất cả các ràng buộc này không chỉ tự động kiểm chứng khi chạy mà còn hiển thị rất rõ ràng trên tài liệu Swagger UI tự động."
+    },
+    {
+      "type": "marker",
+      "text": "[mở tài liệu Swagger UI tại đường dẫn /docs và demo kiểm thử]"
+    },
+    {
+      "type": "narration",
+      "text": "Khi thầy nhập thử tuổi là 15 vào API tạo sản phẩm, Swagger UI sẽ hiển thị ngay lỗi 422. Cấu trúc lỗi này gồm loc chỉ ra vị trí lỗi, msg mô tả lỗi và type phân loại lỗi, giúp lập trình viên frontend dễ dàng lập trình hiển thị thông báo lỗi lên giao diện."
+    },
+    {
+      "type": "h2",
+      "text": "## Tổng kết bài giảng"
+    },
+    {
+      "type": "narration",
+      "text": "Như vậy là chúng ta đã cùng nhau làm chủ kỹ thuật validate dữ liệu nâng cao với Query, Path, Field và hiểu sâu cấu trúc lỗi 422. Cảm ơn các em đã theo dõi bài học hôm nay. Hẹn gặp lại các em ở session học tiếp theo nhé!"
+    }
+  ]
+}

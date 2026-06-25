@@ -1,0 +1,55 @@
+{
+  "filename": "Lesson 03 - API Update - Cập nhật dữ liệu với PUT",
+  "subdir": "Kịch bản quay video",
+  "lesson_no": 3,
+  "blocks": [
+    {
+      "type": "h2",
+      "text": "## Tìm hiểu về API Update và phương thức PUT"
+    },
+    {
+      "type": "narration",
+      "text": "Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Bài học hôm nay của chúng ta sẽ tập trung vào thao tác Update sử dụng phương thức HTTP PUT."
+    },
+    {
+      "type": "narration",
+      "text": "Khi sử dụng PUT, mục đích của chúng ta là thay thế hoặc ghi đè toàn bộ dữ liệu của một tài nguyên đang có bằng một bộ dữ liệu mới gửi lên từ client."
+    },
+    {
+      "type": "marker",
+      "text": "[Chuyển tiếp slide]"
+    },
+    {
+      "type": "h2",
+      "text": "## Khai báo API PUT và phân biệt với PATCH"
+    },
+    {
+      "type": "narration",
+      "text": "Bây giờ, chúng ta sẽ xem cách viết code API PUT trong FastAPI. Chúng ta cần nhận cả ID của sinh viên qua path parameter và thông tin cập nhật mới qua request body."
+    },
+    {
+      "type": "marker",
+      "text": "[mở trình duyệt hiển thị code API PUT]"
+    },
+    {
+      "type": "narration",
+      "text": "Khi tìm thấy sinh viên khớp ID, thầy thực hiện ghi đè toàn bộ trường name và email. Nếu không tìm thấy, hệ thống trả lỗi 404. Các em cũng lưu ý sự khác biệt: PUT dùng để ghi đè toàn bộ, trong khi phương thức PATCH được dùng khi chúng ta chỉ muốn cập nhật một hoặc vài thuộc tính riêng lẻ của đối tượng."
+    },
+    {
+      "type": "marker",
+      "text": "[mở Postman thực hiện demo API PUT]"
+    },
+    {
+      "type": "narration",
+      "text": "Thầy gửi yêu cầu PUT thành công, dữ liệu sinh viên đã thay đổi ngay lập tức trên danh sách in-memory của server."
+    },
+    {
+      "type": "h2",
+      "text": "## Tổng kết bài giảng"
+    },
+    {
+      "type": "narration",
+      "text": "Như vậy, thầy đã hướng dẫn các em nắm bắt phương thức PUT để cập nhật dữ liệu và cách phân biệt với PATCH. Cảm ơn các em và hẹn gặp lại các em ở bài học xóa dữ liệu tiếp theo!"
+    }
+  ]
+}

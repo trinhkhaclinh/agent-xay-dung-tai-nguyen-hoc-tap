@@ -1,0 +1,57 @@
+{
+  "filename": "[Vận dụng chuyên sâu] API đăng ký sinh viên",
+  "subdir": "Bài tập",
+  "level": "Vận dụng chuyên sâu",
+  "blocks": [
+    { "type": "h1", "text": "API đăng ký sinh viên" },
+
+    { "type": "h2", "text": "1. Bối cảnh nghiệp vụ" },
+    { "type": "p", "text": "Trung tâm đào tạo mở cổng đăng ký sinh viên mới đầu khóa. Bộ phận tuyển sinh cần một API cho phép Frontend gửi thông tin của một sinh viên lên hệ thống để tạo hồ sơ. Đây là thao tác tạo mới tài nguyên, vì vậy phải dùng đúng HTTP method theo ánh xạ CRUD đã học (POST = Create)." },
+    { "type": "p", "text": "Hệ thống hiện chỉ mới có endpoint GET /students để liệt kê. Bạn cần bổ sung luồng đăng ký hoàn chỉnh cho danh sách lưu tạm trong bộ nhớ (in-memory) ở phạm vi của session này." },
+
+    { "type": "h2", "text": "2. Quy tắc nghiệp vụ" },
+    { "type": "bullets", "items": [
+      "Mỗi sinh viên gồm các trường: name (họ tên), email, class_name (lớp). ID do hệ thống tự sinh, Client không gửi lên.",
+      "Khi đăng ký thành công, hệ thống cấp một id tăng dần (auto-increment) và trả về toàn bộ hồ sơ vừa tạo.",
+      "Không cho phép đăng ký trùng email: nếu email đã tồn tại trong danh sách, API phải báo lỗi rõ ràng.",
+      "Endpoint tuân thủ RESTful: tạo mới tài nguyên students bằng POST /students (không dùng /createStudent hay /addStudent)."
+    ]},
+
+    { "type": "h2", "text": "3. Mã nguồn hiện tại (Legacy Code)" },
+    { "type": "p", "text": "Đoạn code khởi điểm dưới đây mới chỉ có danh sách tạm và endpoint liệt kê. Bạn cần bổ sung endpoint đăng ký." },
+    { "type": "code", "lang": "python", "text": "# main.py - điểm khởi đầu, cần bổ sung endpoint đăng ký\nfrom fastapi import FastAPI\n\napp = FastAPI(title=\"Student Registration API\")\n\n# Danh sách lưu tạm trong bộ nhớ\nstudents_db = [\n    {\"id\": 1, \"name\": \"Nguyen Van An\", \"email\": \"an@ptit.edu.vn\", \"class_name\": \"CNTT1\"}\n]\n\n@app.get(\"/students\")\ndef list_students():\n    return students_db\n\n# TODO: bổ sung endpoint đăng ký sinh viên mới (POST /students)" },
+
+    { "type": "h2", "text": "4. Yêu cầu" },
+
+    { "type": "h3", "text": "Phần 1 — Triển khai endpoint đăng ký" },
+    { "type": "bullets", "items": [
+      "Viết endpoint POST /students nhận vào name, email, class_name của sinh viên cần đăng ký.",
+      "Tự sinh id mới bằng cách lấy id lớn nhất hiện có cộng thêm 1 (hoặc dùng độ dài danh sách + 1).",
+      "Thêm hồ sơ mới vào students_db và trả về hồ sơ vừa tạo (gồm cả id) cho Client."
+    ]},
+
+    { "type": "h3", "text": "Phần 2 — Xử lý quy tắc nghiệp vụ" },
+    { "type": "bullets", "items": [
+      "Trước khi tạo mới, kiểm tra email gửi lên đã tồn tại trong students_db hay chưa.",
+      "Nếu email đã tồn tại, trả về thông báo lỗi rõ ràng (ví dụ trường error mô tả email bị trùng) thay vì tạo bản ghi trùng.",
+      "Đảm bảo dùng đúng HTTP method POST cho thao tác tạo mới và giữ tên endpoint là /students."
+    ]},
+
+    { "type": "h3", "text": "Phần 3 — Kiểm thử trên Swagger UI" },
+    { "type": "numbers", "items": [
+      "Chạy server bằng uvicorn main:app --reload.",
+      "Mở Swagger UI tại http://127.0.0.1:8000/docs, dùng Try it out gửi một sinh viên mới và xác nhận phản hồi có id tự sinh.",
+      "Gửi lại đúng email vừa tạo và xác nhận hệ thống báo lỗi trùng email.",
+      "Gọi GET /students để xác nhận sinh viên mới đã nằm trong danh sách."
+    ]},
+    { "type": "p", "text": "Ví dụ phản hồi khi đăng ký thành công:" },
+    { "type": "code", "lang": "json", "text": "{\n  \"id\": 2,\n  \"name\": \"Tran Thi Binh\",\n  \"email\": \"binh@ptit.edu.vn\",\n  \"class_name\": \"CNTT2\"\n}" }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session02",
+    "ex": "Ex03",
+    "example": "HNKS25CNTT1_FastAPI_Session02_Ex03"
+  }
+}

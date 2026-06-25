@@ -1,0 +1,72 @@
+{
+  "filename": "Session 05 - CRUD co ban",
+  "subdir": "Mindmap",
+  "root": "Thao tác CRUD cơ bản in-memory",
+  "children": [
+    {
+      "title": "1. Create (Tạo dữ liệu)",
+      "children": [
+        {
+          "title": "HTTP Method: POST"
+        },
+        {
+          "title": "HTTP Status Code: 201 Created"
+        },
+        {
+          "title": "Logic nghiệp vụ: Kiểm tra trùng lặp email/ID trước khi lưu"
+        }
+      ]
+    },
+    {
+      "title": "2. Read (Đọc dữ liệu)",
+      "children": [
+        {
+          "title": "HTTP Method: GET"
+        },
+        {
+          "title": "HTTP Status Code: 200 OK"
+        },
+        {
+          "title": "GET list: Lọc danh sách theo Query Parameter keyword"
+        },
+        {
+          "title": "GET detail: Lấy theo ID, trả lỗi 404 Not Found nếu không tồn tại"
+        }
+      ]
+    },
+    {
+      "title": "3. Update (Cập nhật)",
+      "children": [
+        {
+          "title": "HTTP Method: PUT (Ghi đè toàn bộ tài nguyên)"
+        },
+        {
+          "title": "HTTP Method: PATCH (Cập nhật từng phần linh hoạt)"
+        },
+        {
+          "title": "Tính chất: Idempotent (cập nhật nhiều lần cùng kết quả)"
+        },
+        {
+          "title": "Xử lý lỗi: Trả 404 Not Found nếu ID không hợp lệ"
+        }
+      ]
+    },
+    {
+      "title": "4. Delete (Xóa dữ liệu)",
+      "children": [
+        {
+          "title": "HTTP Method: DELETE"
+        },
+        {
+          "title": "HTTP Status Code: 204 No Content (thành công, body trống)"
+        },
+        {
+          "title": "Hard Delete (Xóa vật lý): Xóa vĩnh viễn bằng pop() hoặc DELETE FROM"
+        },
+        {
+          "title": "Soft Delete (Xóa mềm): Đổi cờ trạng thái is_deleted = True để bảo toàn dữ liệu"
+        }
+      ]
+    }
+  ]
+}

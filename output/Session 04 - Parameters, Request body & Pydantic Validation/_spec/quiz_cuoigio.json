@@ -1,0 +1,275 @@
+{
+  "sheet_name": "Quiz_CuoiGio_FastAPI_04",
+  "questions": [
+    {
+      "q": "Nếu route định nghĩa là /students/{student_id} và hàm xử lý là def get_student(student_id: int), chuyện gì xảy ra khi client gọi GET /students/123?",
+      "answers": [
+        "student_id sẽ nhận giá trị kiểu chuỗi '123'",
+        "Hệ thống báo lỗi 500 Internal Server Error",
+        "student_id sẽ được ép kiểu thành số nguyên 123 và trả về kết quả thành công",
+        "Hệ thống tự động chuyển hướng sang trang chủ"
+      ],
+      "explanations": [
+        "Không đúng, FastAPI tự ép kiểu sang int theo type hint.",
+        "Không đúng, request hoàn toàn hợp lệ.",
+        "Chính xác, FastAPI ép kiểu thông minh dựa trên type hint.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 6,
+      "category": "PATH_PARAMETER"
+    },
+    {
+      "q": "Khi định nghĩa route tĩnh /students/me và route động /students/{student_id}, vì sao phải đặt route tĩnh lên trước?",
+      "answers": [
+        "Để code trông đẹp hơn",
+        "Để tránh FastAPI nhận nhầm chuỗi 'me' là giá trị student_id của route động và cố ép sang kiểu int",
+        "Để tăng tốc độ thực thi của máy chủ Uvicorn",
+        "Đó là quy tắc bắt buộc của Python, không xếp trước sẽ lỗi cú pháp Python"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Chính xác, nếu xếp route động trước, request /students/me sẽ khớp vào {student_id} và trả về lỗi 422 do 'me' không phải int.",
+        "Tốc độ thực thi không đổi.",
+        "Python không kiểm soát thứ tự này, đây là cơ chế định tuyến của FastAPI/Starlette."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "ROUTE_ORDER"
+    },
+    {
+      "q": "Trong hàm def read_items(keyword: str = '', category: str | None = None), hai tham số này thuộc loại nào?",
+      "answers": [
+        "Path parameters bắt buộc",
+        "Query parameters tùy chọn (optional)",
+        "Request body bắt buộc",
+        "Query parameters bắt buộc"
+      ],
+      "explanations": [
+        "Không đúng, chúng không có mặt trong đường dẫn route.",
+        "Chính xác, vì chúng không có trong route path và đều có giá trị mặc định ('', None).",
+        "Không đúng.",
+        "Không đúng, chúng là tùy chọn vì có giá trị mặc định."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "QUERY_PARAMETER"
+    },
+    {
+      "q": "Để khai báo một Query Parameter là BẮT BUỘC trong FastAPI, chúng ta phải làm thế nào?",
+      "answers": [
+        "Đặt kiểu dữ liệu là Required",
+        "Bọc tên tham số trong dấu ngoặc nhọn",
+        "Không gán giá trị mặc định cho tham số đó trong hàm xử lý route",
+        "Sử dụng decorator @app.required"
+      ],
+      "explanations": [
+        "Python không có kiểu dữ liệu Required.",
+        "Đó là khai báo Path Parameter.",
+        "Chính xác, không gán giá trị mặc định nghĩa là client buộc phải truyền giá trị đó trên URL.",
+        "Không có decorator này."
+      ],
+      "correct": 3,
+      "difficulty": 7,
+      "category": "QUERY_PARAMETER"
+    },
+    {
+      "q": "FastAPI hỗ trợ ép kiểu logic (bool) từ query parameter. Giá trị nào dưới đây truyền trên URL sẽ được ép kiểu thành False?",
+      "answers": [
+        "1",
+        "yes",
+        "0",
+        "true"
+      ],
+      "explanations": [
+        "1 được hiểu là True.",
+        "yes được hiểu là True.",
+        "Chính xác, 0, false, no, off đều được FastAPI ép kiểu thành False.",
+        "true được hiểu là True."
+      ],
+      "correct": 3,
+      "difficulty": 5,
+      "category": "QUERY_PARAMETER"
+    },
+    {
+      "q": "Khi khai báo class StudentCreate(BaseModel), đối tượng này đóng vai trò gì khi khai báo trong tham số hàm của route POST?",
+      "answers": [
+        "Lấy dữ liệu từ Path Parameter",
+        "Tự động ánh xạ tới bảng trong database",
+        "Định nghĩa cấu trúc (schema) và đại diện cho dữ liệu nhận từ Request Body",
+        "Dùng để render file HTML"
+      ],
+      "explanations": [
+        "Không đúng, path parameter khai báo trên URL.",
+        "Đó là ORM model (SQLAlchemy), BaseModel của Pydantic chỉ mô tả schema dữ liệu truyền nhận.",
+        "Chính xác, FastAPI nhận diện tham số kiểu BaseModel và đọc dữ liệu từ thân request (JSON body).",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 6,
+      "category": "REQUEST_BODY"
+    },
+    {
+      "q": "Cấu trúc thông báo lỗi 422 Unprocessable Entity của FastAPI gồm 3 trường thông tin chính nào cho mỗi lỗi?",
+      "answers": [
+        "code, message, status",
+        "loc (vị trí), msg (thông báo), type (loại lỗi)",
+        "error, timestamp, path",
+        "file, line, expression"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Chính xác, đây là các trường chuẩn của cấu trúc lỗi FastAPI giúp dễ gỡ lỗi.",
+        "Không đúng.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 7,
+      "category": "ERROR_HANDLING"
+    },
+    {
+      "q": "Ký hiệu '...' (dấu ba chấm / Ellipsis) truyền vào đối số đầu tiên của Path() có ý nghĩa gì?",
+      "answers": [
+        "Tham số này có thể nhận bất kỳ giá trị nào",
+        "Đánh dấu đây là tham số tùy chọn (optional)",
+        "Đánh dấu đây là tham số bắt buộc phải truyền (required)",
+        "Bỏ qua bước xác thực kiểu dữ liệu"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Không đúng.",
+        "Chính xác, Ellipsis dùng để báo với FastAPI rằng tham số này là bắt buộc trong cấu trúc validation.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 7,
+      "category": "VALIDATION"
+    },
+    {
+      "q": "Ràng buộc 'ge=18' trong Field(..., ge=18) của Pydantic model có ý nghĩa gì?",
+      "answers": [
+        "Giá trị thuộc tính phải lớn hơn 18",
+        "Giá trị thuộc tính phải nhỏ hơn hoặc bằng 18",
+        "Giá trị thuộc tính phải lớn hơn hoặc bằng 18",
+        "Độ dài chuỗi thuộc tính phải bằng 18 ký tự"
+      ],
+      "explanations": [
+        "Lớn hơn là gt (Greater Than).",
+        "Nhỏ hơn hoặc bằng là le (Less than or Equal).",
+        "Chính xác, ge viết tắt của Greater than or Equal.",
+        "Độ dài chuỗi là min_length / max_length."
+      ],
+      "correct": 3,
+      "difficulty": 5,
+      "category": "VALIDATION"
+    },
+    {
+      "q": "Khi cần kiểm tra độ dài tối đa của một chuỗi truyền vào Query Parameter là 50 ký tự, ta khai báo như thế nào?",
+      "answers": [
+        "Query(max_length=50)",
+        "Query(le=50)",
+        "Query(lt=50)",
+        "Query(size=50)"
+      ],
+      "explanations": [
+        "Chính xác, max_length dùng cho kiểu dữ liệu chuỗi (string).",
+        "le dùng cho giới hạn số học (nhỏ hơn hoặc bằng).",
+        "lt dùng cho giới hạn số học (nhỏ hơn).",
+        "Không có tham số size."
+      ],
+      "correct": 1,
+      "difficulty": 5,
+      "category": "VALIDATION"
+    },
+    {
+      "q": "Để kiểm tra định dạng email của một trường trong Pydantic BaseModel bằng Regex, ta truyền regex vào tham số nào của Field()?",
+      "answers": [
+        "regex",
+        "pattern",
+        "format",
+        "match"
+      ],
+      "explanations": [
+        "Đã bị loại bỏ trong Pydantic v2.",
+        "Chính xác, trong Pydantic v2 ta sử dụng tham số pattern để chỉ định biểu thức chính quy.",
+        "Không phải tham số hợp lệ.",
+        "Không phải tham số hợp lệ."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "VALIDATION"
+    },
+    {
+      "q": "Tham số response_model trong route decorator của FastAPI mang lại lợi ích gì?",
+      "answers": [
+        "Tăng tốc độ truy vấn cơ sở dữ liệu lên gấp đôi",
+        "Giúp chuẩn hóa dữ liệu đầu ra và tự động lọc bớt các thông tin nhạy cảm trước khi trả về client",
+        "Chuyển đổi giao diện sang chế độ tối",
+        "Tự động mã hóa toàn bộ dữ liệu trả về thành dạng nhị phân"
+      ],
+      "explanations": [
+        "Không tác động trực tiếp tới tốc độ database.",
+        "Chính xác, ví dụ giúp ẩn trường mật khẩu của tài khoản người dùng trước khi trả về.",
+        "Không liên quan.",
+        "Dữ liệu vẫn là JSON văn bản."
+      ],
+      "correct": 2,
+      "difficulty": 7,
+      "category": "RESPONSE_MODEL"
+    },
+    {
+      "q": "Sự khác biệt lớn nhất về mặt nghiệp vụ giữa Path Parameter và Query Parameter là gì?",
+      "answers": [
+        "Path Parameter chỉ nhận số, Query Parameter chỉ nhận chữ",
+        "Path Parameter định danh duy nhất tài nguyên, mang tính bắt buộc; Query Parameter dùng để lọc/sắp xếp/tìm kiếm tài nguyên, mang tính tùy chọn",
+        "Path Parameter chạy nhanh hơn Query Parameter",
+        "Query Parameter bắt buộc phải viết mã hóa bảo mật hơn"
+      ],
+      "explanations": [
+        "Cả hai đều có thể nhận bất kỳ kiểu dữ liệu nào.",
+        "Chính xác, đây là quy chuẩn thiết kế RESTful chuẩn hóa toàn cầu.",
+        "Hiệu năng xử lý tương đương nhau.",
+        "Mức độ bảo mật như nhau."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "REST_DESIGN"
+    },
+    {
+      "q": "Hàm Field() được import từ thư viện nào?",
+      "answers": [
+        "fastapi",
+        "typing",
+        "pydantic",
+        "starlette"
+      ],
+      "explanations": [
+        "Fastapi cung cấp Query() và Path().",
+        "Typing cung cấp các type hint như Optional.",
+        "Chính xác, Field() được cung cấp bởi pydantic.",
+        "Starlette là framework core ở dưới."
+      ],
+      "correct": 3,
+      "difficulty": 5,
+      "category": "VALIDATION"
+    },
+    {
+      "q": "Nếu client gửi JSON có thêm một số trường lạ không khai báo trong Pydantic BaseModel, FastAPI sẽ xử lý như thế nào mặc định?",
+      "answers": [
+        "Báo lỗi 422 Unprocessable Entity lập tức",
+        "Bỏ qua các trường thừa đó và chỉ lấy các trường có khai báo trong Model",
+        "Crash toàn bộ ứng dụng server",
+        "Tự động thêm các trường đó vào database"
+      ],
+      "explanations": [
+        "Không báo lỗi.",
+        "Chính xác, mặc định Pydantic lọc bỏ các trường không được định nghĩa trong schema.",
+        "Server vẫn hoạt động bình thường.",
+        "FastAPI không tự lưu database."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "REQUEST_BODY"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "filename": "Lesson 03 - Thiết lập môi trường",
+  "subdir": "Kịch bản quay video",
+  "lesson_no": 2,
+  "blocks": [
+    { "type": "h2", "text": "## Vì sao cần môi trường ảo" },
+    { "type": "narration", "text": "Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Trong bài học hôm nay, thầy và các em sẽ cùng nhau tìm hiểu về việc thiết lập môi trường lập trình cho dự án FastAPI, đặc biệt là khái niệm môi trường ảo, cách tạo và kích hoạt nó, và cách quản lý thư viện bằng pip cùng file requirements.txt." },
+    { "type": "narration", "text": "Trước khi viết dòng code FastAPI đầu tiên, thầy muốn các em hiểu vì sao việc chuẩn bị môi trường lại quan trọng đến vậy. Nhiều bạn mới học thường bỏ qua bước này, và đó là nguyên nhân gây ra rất nhiều lỗi khó hiểu sau này." },
+    { "type": "marker", "text": "[Chuyển tiếp slide]" },
+    { "type": "narration", "text": "Các em hãy nhìn vào tình huống trên màn hình. Giả sử các em có hai dự án chạy song song. Dự án A cần một thư viện X ở phiên bản 1.0, còn dự án B lại cần đúng thư viện X đó nhưng ở phiên bản 2.0. Hai phiên bản này không tương thích với nhau." },
+    { "type": "narration", "text": "Bây giờ nếu các em cài thư viện trực tiếp vào Python của hệ thống, tức là cài chung một chỗ cho mọi dự án, thì điều gì xảy ra? Khi các em cài phiên bản 2.0 cho dự án B, thì dự án A đang dùng phiên bản 1.0 sẽ lập tức bị hỏng. Đây chính là vấn đề xung đột phiên bản, hay version conflict, mà thầy muốn các em luôn cảnh giác." },
+    { "type": "bullets", "items": [
+      "Cài thư viện trực tiếp vào Python hệ thống dùng chung cho mọi dự án.",
+      "Hai dự án cần hai phiên bản khác nhau của cùng một thư viện.",
+      "Hậu quả: cài cho dự án này làm hỏng dự án kia, gọi là xung đột phiên bản."
+    ] },
+    { "type": "narration", "text": "Giải pháp cho vấn đề này chính là môi trường ảo, trong tiếng Anh gọi là Virtual Environment, viết tắt là venv. Ý tưởng rất đơn giản: mỗi dự án sẽ có một môi trường riêng biệt, một không gian cách ly của riêng nó, với bộ thư viện độc lập. Nhờ vậy, thư viện của dự án A và dự án B không bao giờ giẫm chân lên nhau." },
+    { "type": "marker", "text": "[Chuyển tiếp slide]" },
+    { "type": "h2", "text": "## Tạo và kích hoạt môi trường ảo" },
+    { "type": "narration", "text": "Bây giờ thầy sẽ hướng dẫn các em tạo một môi trường ảo trong thực tế. Lệnh để tạo môi trường ảo rất ngắn gọn, các em hãy nhìn lên màn hình." },
+    { "type": "marker", "text": "[mở terminal]" },
+    { "type": "code", "lang": "bash", "text": "python -m venv venv\n.\\venv\\Scripts\\activate\npip install fastapi uvicorn\npip freeze > requirements.txt" },
+    { "type": "narration", "text": "Lệnh đầu tiên là python gạch m venv venv. Thầy giải thích cho các em: phần python gạch m venv là yêu cầu Python chạy mô-đun tạo môi trường ảo, còn chữ venv đứng cuối là tên thư mục mà chúng ta muốn đặt cho môi trường. Sau khi chạy lệnh này, các em sẽ thấy một thư mục mới tên là venv xuất hiện. Bên trong thư mục đó chứa một trình thông dịch Python riêng và một pip riêng, hoàn toàn tách biệt với hệ thống." },
+    { "type": "narration", "text": "Tạo xong thôi chưa đủ, các em phải kích hoạt nó thì mới sử dụng được. Trên hệ điều hành Windows, các em gõ lệnh chấm gạch chéo ngược venv, gạch chéo ngược Scripts, gạch chéo ngược activate, như trên màn hình. Còn nếu các em dùng macOS hoặc Linux, lệnh sẽ là source venv gạch chéo bin gạch chéo activate." },
+    { "type": "bullets", "items": [
+      "Tạo môi trường: python -m venv venv",
+      "Kích hoạt trên Windows: .\\venv\\Scripts\\activate",
+      "Kích hoạt trên macOS/Linux: source venv/bin/activate"
+    ] },
+    { "type": "narration", "text": "Làm sao để biết mình đã kích hoạt thành công? Các em hãy nhìn vào đầu dòng lệnh trong terminal. Khi kích hoạt thành công, các em sẽ thấy xuất hiện tiền tố là chữ venv nằm trong dấu ngoặc đơn ở ngay đầu dòng. Đó là dấu hiệu chắc chắn rằng từ giờ mọi thư viện các em cài sẽ nằm gọn trong môi trường ảo này, không ảnh hưởng ra ngoài." },
+    { "type": "narration", "text": "Khi nào làm việc xong và muốn thoát khỏi môi trường ảo, các em chỉ cần gõ lệnh deactivate. Tiền tố venv sẽ biến mất, báo hiệu các em đã trở về môi trường Python hệ thống. Và một lưu ý nhỏ nhưng rất quan trọng: các em nên thêm thư mục venv vào file chấm gitignore, để không vô tình đẩy cả môi trường ảo nặng nề này lên Git." },
+    { "type": "marker", "text": "[Chuyển tiếp slide]" },
+    { "type": "h2", "text": "## Quản lý thư viện với pip và requirements.txt" },
+    { "type": "narration", "text": "Sau khi đã kích hoạt môi trường ảo, các em sẽ cài thư viện bằng công cụ pip, đây là trình quản lý gói của Python. Như trong đoạn lệnh ban nãy, thầy đã cài hai thư viện cốt lõi cho khóa học là fastapi và uvicorn, bằng lệnh pip install fastapi uvicorn. Sau lệnh này, FastAPI và Uvicorn đã sẵn sàng để chúng ta sử dụng." },
+    { "type": "narration", "text": "Bây giờ đến một câu hỏi thực tế: khi các em làm việc nhóm, làm sao để đồng đội cài đúng những thư viện mà các em đang dùng, với đúng phiên bản? Chẳng lẽ đọc cho nhau từng cái một? Câu trả lời là dùng file requirements.txt." },
+    { "type": "narration", "text": "Các em hãy nhìn lệnh trên màn hình: pip freeze, dấu lớn hơn, requirements.txt. Lệnh này sẽ chụp lại danh sách toàn bộ thư viện đang có trong môi trường cùng với phiên bản chính xác của chúng, rồi ghi tất cả vào file requirements.txt. Các em có thể coi đây là bản kê khai đầy đủ của dự án." },
+    { "type": "narration", "text": "Khi đồng đội của các em nhận được dự án, họ chỉ cần tạo môi trường ảo của riêng họ, rồi chạy lệnh pip install gạch r requirements.txt. Lệnh này đọc file kê khai và cài đặt lại y hệt toàn bộ thư viện với đúng phiên bản. Nhờ vậy, cả nhóm có một môi trường đồng nhất, tránh được tình trạng máy người này chạy được, máy người kia thì lỗi." },
+    { "type": "bullets", "items": [
+      "Cài thư viện: pip install fastapi uvicorn",
+      "Đóng gói danh sách thư viện: pip freeze > requirements.txt",
+      "Tái tạo môi trường trên máy khác: pip install -r requirements.txt"
+    ] },
+    { "type": "marker", "text": "[Chuyển tiếp slide]" },
+    { "type": "h2", "text": "## Tổng kết bài giảng" },
+    { "type": "narration", "text": "Như vậy là trong bài học hôm nay, thầy và các em đã hiểu vì sao cần môi trường ảo để tránh xung đột phiên bản giữa các dự án. Chúng ta đã biết cách tạo môi trường bằng lệnh python gạch m venv venv, cách kích hoạt trên Windows cũng như macOS và Linux, cách thoát bằng deactivate. Chúng ta cũng đã biết quản lý thư viện bằng pip, đóng gói bằng pip freeze ra requirements.txt và tái tạo lại bằng pip install gạch r. Đến đây, môi trường Python kèm FastAPI của các em đã hoạt động và sẵn sàng cho bài tiếp theo." },
+    { "type": "narration", "text": "Cảm ơn các em đã theo dõi bài học hôm nay. Hẹn gặp lại các em trong các bài học tiếp theo." }
+  ]
+}

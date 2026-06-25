@@ -1,0 +1,70 @@
+{
+  "filename": "BÀI ĐỌC_ API READ TRONG FASTAPI_",
+  "subdir": "Bài đọc",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Bài Đọc Chuyên Sâu: API Read - Phương Thức GET, Tìm Kiếm Danh Sách Và Lỗi 404 Not Found"
+    },
+    {
+      "type": "p",
+      "text": "Thao tác thứ hai trong chu trình CRUD là Read (Đọc dữ liệu). Trong kiến trúc RESTful API, việc truy xuất thông tin danh sách hoặc lấy chi tiết dữ liệu luôn sử dụng phương thức HTTP GET. Bài đọc này hướng dẫn chi tiết cách viết Endpoint GET lấy danh sách có lọc theo từ khóa và lấy chi tiết tài nguyên kèm xử lý ngoại lệ 404 Not Found."
+    },
+    {
+      "type": "h2",
+      "text": "1. Phương thức GET và tính chất Safe / Idempotent"
+    },
+    {
+      "type": "p",
+      "text": "GET là phương thức 'an toàn' (safe) vì nó chỉ đọc dữ liệu và không làm thay đổi trạng thái của máy chủ. Nó cũng mang tính 'idempotent' (đồng nhất): việc gọi GET 1 lần hay 100 lần liên tiếp cùng một URL luôn trả về cùng một kết quả dữ liệu (nếu dữ liệu gốc chưa bị tác động bởi thao tác khác)."
+    },
+    {
+      "type": "h2",
+      "text": "2. Triển khai API GET lấy danh sách và tìm kiếm"
+    },
+    {
+      "type": "p",
+      "text": "Thông thường, API lấy danh sách sẽ hỗ trợ thêm các Query Parameter để lọc kết quả theo từ khóa."
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "text": "@app.get(\"/students\")\ndef list_students(keyword: str = \"\"):\n    if keyword:\n        return [s for s in students_db if keyword.lower() in s[\"name\"].lower()]\n    return students_db"
+    },
+    {
+      "type": "h2",
+      "text": "3. Triển khai API GET lấy chi tiết và lỗi 404 Not Found"
+    },
+    {
+      "type": "p",
+      "text": "Khi client muốn xem chi tiết một sinh viên cụ thể thông qua ID (Path Parameter), chúng ta phải tìm kiếm trong danh sách. Nếu tìm thấy, trả về thông tin đối tượng kèm mã 200 OK. Nếu duyệt hết danh sách mà không tìm thấy sinh viên nào khớp ID, bắt buộc phải trả về lỗi HTTP 404 Not Found kèm thông điệp báo lỗi rõ ràng."
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "text": "@app.get(\"/students/{student_id}\")\ndef read_student_detail(student_id: int):\n    for s in students_db:\n        if s[\"id\"] == student_id:\n            return s\n    raise HTTPException(status_code=404, detail=\"Không tìm thấy sinh viên yêu cầu\")"
+    },
+    {
+      "type": "h2",
+      "text": "Tổng Kết"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "HTTP GET dùng để đọc dữ liệu, có tính chất an toàn (safe) và đồng nhất (idempotent).",
+        "API danh sách thường kết hợp query parameter để thực hiện lọc và tìm kiếm.",
+        "Khi tìm kiếm theo ID không tồn tại, luôn trả về mã lỗi HTTP 404 Not Found để thông báo chính xác trạng thái."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Tài Liệu Tham Khảo"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "MDN Web Docs - GET: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET"
+      ]
+    }
+  ]
+}

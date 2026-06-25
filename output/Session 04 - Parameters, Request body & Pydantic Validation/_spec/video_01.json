@@ -1,0 +1,63 @@
+{
+  "filename": "Lesson 01 - Path Parameters - Lấy dữ liệu từ URL",
+  "subdir": "Kịch bản quay video",
+  "lesson_no": 1,
+  "blocks": [
+    {
+      "type": "h2",
+      "text": "## Giới thiệu về Path Parameters"
+    },
+    {
+      "type": "narration",
+      "text": "Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Trong bài học hôm nay, thầy và các em sẽ cùng nhau tìm hiểu về một khái niệm rất quan trọng trong thiết kế và xây dựng API - đó chính là Path Parameters, hay còn gọi là tham số đường dẫn."
+    },
+    {
+      "type": "narration",
+      "text": "Hãy cùng nhìn lên sơ đồ kiến trúc URL trên màn hình. Mỗi tài nguyên trong hệ thống đều cần một định danh duy nhất. Khi các em muốn truy xuất thông tin cụ thể của một sinh viên nào đó, các em không thể gọi chung chung là đường dẫn học sinh được. Chúng ta cần một mã số định danh cụ thể, ví dụ như mã số 123. Phần thay đổi này nằm trực tiếp trong đường dẫn và đó chính là Path Parameter."
+    },
+    {
+      "type": "marker",
+      "text": "[Chuyển tiếp slide]"
+    },
+    {
+      "type": "h2",
+      "text": "## Cách khai báo Path Parameter trong FastAPI"
+    },
+    {
+      "type": "narration",
+      "text": "Bây giờ, chúng ta sẽ mở công cụ soạn thảo mã nguồn VS Code lên để xem cách khai báo trong code FastAPI nhé. Trong FastAPI, các em chỉ cần bọc tên biến trong cặp dấu ngoặc nhọn ở đường dẫn của route decorator. Đồng thời, các em khai báo tên tham số đó trong hàm xử lý bên dưới."
+    },
+    {
+      "type": "marker",
+      "text": "[mở trình duyệt và hiển thị code FastAPI]"
+    },
+    {
+      "type": "narration",
+      "text": "Như các em thấy trên màn hình, khi chúng ta đặt student_id có kiểu dữ liệu là int, FastAPI sẽ thực hiện hai việc. Một là ép kiểu chuỗi nhận từ URL sang kiểu int. Hai là tự động kiểm chứng dữ liệu. Nếu người dùng truyền vào chữ thay vì số, FastAPI sẽ trả về lỗi HTTP 422."
+    },
+    {
+      "type": "marker",
+      "text": "[mở công cụ Postman và thực hiện demo gọi API /students/abc]"
+    },
+    {
+      "type": "narration",
+      "text": "Khi thầy gửi request với tham số abc, các em sẽ thấy ngay mã lỗi 422 Unprocessable Entity hiển thị dưới dạng JSON. Đây chính là tính năng tự động validate cực kỳ mạnh mẽ của FastAPI."
+    },
+    {
+      "type": "h2",
+      "text": "## Thứ tự khai báo route để tránh xung đột"
+    },
+    {
+      "type": "narration",
+      "text": "Một lưu ý cực kỳ quan trọng mà các em cần nhớ: đó là thứ tự khai báo route. Vì FastAPI phân giải đường dẫn từ trên xuống dưới, các em luôn phải đặt route tĩnh ví dụ như /students/me lên trước route động là /students/student_id. Nếu không, route tĩnh sẽ bị nhận nhầm là một giá trị của route động."
+    },
+    {
+      "type": "h2",
+      "text": "## Tổng kết bài giảng"
+    },
+    {
+      "type": "narration",
+      "text": "Như vậy là trong bài học này, thầy đã hướng dẫn các em hiểu rõ cách hoạt động của Path Parameter, cách khai báo và thứ tự sắp xếp route để tránh xung đột đường dẫn. Cảm ơn các em đã theo dõi bài học hôm nay. Hẹn gặp lại các em trong bài học tiếp theo nhé!"
+    }
+  ]
+}

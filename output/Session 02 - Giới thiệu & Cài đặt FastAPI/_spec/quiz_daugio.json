@@ -1,0 +1,547 @@
+{
+  "sheet_name": "Quiz_DauGio_OOP",
+  "filename": "Import_Quiz_DauGio_Session02",
+  "subdir": "Câu hỏi Quiziz session",
+  "questions": [
+    {
+      "q": "Từ khóa nào dùng để định nghĩa một hàm trong Python?",
+      "answers": ["function", "func", "def", "define"],
+      "explanations": [
+        "'function' là cú pháp của JavaScript, không phải Python.",
+        "'func' là từ khóa của Go/Swift, không dùng trong Python.",
+        "Đúng. Python dùng 'def' để định nghĩa hàm.",
+        "'define' không phải từ khóa hợp lệ trong Python."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Cấu trúc rẽ nhánh nhiều điều kiện trong Python dùng từ khóa nào ở nhánh giữa?",
+      "answers": ["else if", "elseif", "elif", "switch"],
+      "explanations": [
+        "'else if' là cú pháp của C/Java, Python viết gọn lại.",
+        "'elseif' là cú pháp của PHP, không dùng trong Python.",
+        "Đúng. Python dùng 'elif' cho nhánh điều kiện ở giữa.",
+        "Python (trước 3.10) không có 'switch'; match-case mới có sau này."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Từ khóa nào dùng để thoát ngay khỏi vòng lặp trong Python?",
+      "answers": ["continue", "break", "exit", "stop"],
+      "explanations": [
+        "'continue' chỉ bỏ qua phần còn lại của lần lặp hiện tại rồi sang lần kế tiếp.",
+        "Đúng. 'break' thoát hoàn toàn khỏi vòng lặp đang chạy.",
+        "'exit' (hay sys.exit) thoát cả chương trình chứ không chỉ vòng lặp.",
+        "'stop' không phải từ khóa của Python."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Trong vòng lặp, 'continue' có tác dụng gì?",
+      "answers": [
+        "Bỏ qua phần còn lại của lần lặp hiện tại và sang lần lặp kế tiếp",
+        "Thoát hoàn toàn khỏi vòng lặp",
+        "Dừng toàn bộ chương trình",
+        "Lặp lại đúng lần lặp hiện tại từ đầu"
+      ],
+      "explanations": [
+        "Đúng. 'continue' nhảy ngay sang lần lặp tiếp theo, bỏ qua các lệnh sau nó.",
+        "Đó là tác dụng của 'break', không phải 'continue'.",
+        "Đó là tác dụng của sys.exit(), không phải 'continue'.",
+        "'continue' không quay lại lặp lại lần hiện tại mà tiến tới lần kế tiếp."
+      ],
+      "correct": 1,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Kiểu dữ liệu nào trong Python là MUTABLE (thay đổi được sau khi tạo)?",
+      "answers": ["tuple", "str (chuỗi)", "list", "int"],
+      "explanations": [
+        "tuple là immutable, không thể thay đổi phần tử sau khi tạo.",
+        "Chuỗi (str) là immutable trong Python.",
+        "Đúng. list là mutable, có thể thêm/sửa/xóa phần tử.",
+        "int là immutable, mỗi giá trị số là một đối tượng cố định."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Đặc điểm nào sau đây mô tả đúng về tuple trong Python?",
+      "answers": [
+        "Có thứ tự nhưng không cho phép thay đổi phần tử (immutable)",
+        "Không có thứ tự và không cho phép trùng lặp",
+        "Có thứ tự và thay đổi được tự do như list",
+        "Là tập hợp các cặp key-value"
+      ],
+      "explanations": [
+        "Đúng. tuple có thứ tự, truy cập theo chỉ số nhưng không sửa được sau khi tạo.",
+        "Đó là đặc điểm của set, không phải tuple.",
+        "tuple không thay đổi được; chỉ list mới sửa được tự do.",
+        "Cặp key-value là đặc điểm của dict, không phải tuple."
+      ],
+      "correct": 1,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Cấu trúc dữ liệu nào trong Python lưu các cặp key-value?",
+      "answers": ["list", "set", "tuple", "dict"],
+      "explanations": [
+        "list là danh sách có thứ tự, truy cập bằng chỉ số (index), không phải key.",
+        "set là tập hợp các phần tử duy nhất, không có key-value.",
+        "tuple là dãy có thứ tự cố định, truy cập bằng chỉ số.",
+        "Đúng. dict lưu dữ liệu dưới dạng cặp key-value, truy cập bằng key."
+      ],
+      "correct": 4,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Đặc điểm nào sau đây đúng với set trong Python?",
+      "answers": [
+        "Lưu các phần tử không trùng lặp, không có thứ tự chỉ số",
+        "Cho phép phần tử trùng lặp và truy cập bằng index",
+        "Lưu cặp key-value như dict",
+        "Là dãy immutable giống tuple"
+      ],
+      "explanations": [
+        "Đúng. set chỉ chứa phần tử duy nhất và không hỗ trợ truy cập theo chỉ số.",
+        "set tự loại bỏ phần tử trùng và không truy cập bằng index.",
+        "Cặp key-value là đặc điểm của dict, không phải set.",
+        "set thông thường là mutable (thêm/xóa được), khác tuple immutable."
+      ],
+      "correct": 1,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Trong định nghĩa hàm, **kwargs nhận tham số ở dạng nào?",
+      "answers": [
+        "Một tuple các đối số vị trí",
+        "Một dictionary các đối số dạng từ khóa (key=value)",
+        "Một list các đối số",
+        "Một set các giá trị duy nhất"
+      ],
+      "explanations": [
+        "Đó là *args (một dấu sao) gom đối số vị trí thành tuple.",
+        "Đúng. **kwargs gom các đối số dạng key=value thành một dictionary.",
+        "Python không gom đối số thành list trong cú pháp này.",
+        "Không có cơ chế gom tham số thành set khi định nghĩa hàm."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "*args trong định nghĩa hàm Python gom các đối số vị trí thành kiểu gì?",
+      "answers": ["list", "dict", "tuple", "set"],
+      "explanations": [
+        "*args không tạo list mà tạo tuple.",
+        "dict là kết quả của **kwargs, không phải *args.",
+        "Đúng. *args gom các đối số vị trí dư thừa thành một tuple.",
+        "set không phải kết quả của *args."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Từ khóa nào dùng để tạo một hàm ẩn danh (anonymous function) trong Python?",
+      "answers": ["lambda", "anon", "func", "arrow"],
+      "explanations": [
+        "Đúng. 'lambda' tạo hàm ẩn danh ngắn gọn trong Python.",
+        "'anon' không phải từ khóa của Python.",
+        "'func' không tồn tại trong Python (đó là Go/Swift).",
+        "'arrow' (=>) là cú pháp hàm mũi tên của JavaScript, không phải Python."
+      ],
+      "correct": 1,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Từ khóa nào biến một hàm thành generator trong Python?",
+      "answers": ["return", "yield", "generate", "async"],
+      "explanations": [
+        "'return' trả giá trị rồi kết thúc hàm, không tạo generator.",
+        "Đúng. 'yield' tạm dừng hàm và trả giá trị từng lần, biến hàm thành generator.",
+        "'generate' không phải từ khóa của Python.",
+        "'async' dùng cho lập trình bất đồng bộ (coroutine), không tạo generator thông thường."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Ưu điểm chính của generator (dùng yield) so với việc trả về một list lớn là gì?",
+      "answers": [
+        "Tính giá trị theo từng lần (lazy), tiết kiệm bộ nhớ",
+        "Luôn chạy nhanh hơn mọi vòng lặp",
+        "Tự động sắp xếp dữ liệu",
+        "Không bao giờ kết thúc"
+      ],
+      "explanations": [
+        "Đúng. generator sinh từng phần tử khi cần nên không nạp toàn bộ vào bộ nhớ.",
+        "Tốc độ không phải ưu điểm cốt lõi; lợi ích là bộ nhớ và lazy evaluation.",
+        "generator không tự sắp xếp dữ liệu.",
+        "generator vẫn kết thúc khi hết phần tử cần sinh."
+      ],
+      "correct": 1,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Từ khóa nào dùng để định nghĩa một lớp (class) trong Python?",
+      "answers": ["class", "Class", "struct", "object"],
+      "explanations": [
+        "Đúng. Python dùng từ khóa 'class' (viết thường) để định nghĩa lớp.",
+        "Python phân biệt hoa thường; 'Class' viết hoa không phải từ khóa.",
+        "'struct' là cú pháp của C/Go, không phải Python.",
+        "'object' là lớp cơ sở của mọi lớp, không phải từ khóa khai báo lớp."
+      ],
+      "correct": 1,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Phương thức __init__ trong một class Python có vai trò gì?",
+      "answers": [
+        "Hàm khởi tạo (constructor), gán giá trị ban đầu cho đối tượng",
+        "Hàm hủy đối tượng (destructor)",
+        "Hàm in đối tượng ra màn hình",
+        "Hàm so sánh hai đối tượng"
+      ],
+      "explanations": [
+        "Đúng. __init__ được gọi khi tạo đối tượng để khởi tạo thuộc tính.",
+        "Hàm hủy là __del__, không phải __init__.",
+        "Hàm in/biểu diễn là __str__ hoặc __repr__.",
+        "Hàm so sánh là __eq__, không phải __init__."
+      ],
+      "correct": 1,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Tham số đầu tiên của một phương thức instance trong class Python thường tên là gì?",
+      "answers": ["this", "self", "cls", "me"],
+      "explanations": [
+        "'this' là quy ước của Java/C++/JavaScript, không phải Python.",
+        "Đúng. Python dùng 'self' để tham chiếu chính đối tượng hiện tại.",
+        "'cls' dùng cho classmethod (tham chiếu lớp), không phải phương thức instance thông thường.",
+        "'me' chỉ là tên tùy ý, không phải quy ước chuẩn của Python."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Để lớp Dog kế thừa từ lớp Animal trong Python, ta viết thế nào?",
+      "answers": [
+        "class Dog extends Animal:",
+        "class Dog: inherits Animal",
+        "class Dog(Animal):",
+        "class Dog -> Animal:"
+      ],
+      "explanations": [
+        "'extends' là cú pháp kế thừa của Java, không phải Python.",
+        "'inherits' không phải cú pháp của Python.",
+        "Đúng. Python kế thừa bằng cách đặt lớp cha trong ngoặc tròn.",
+        "Cú pháp mũi tên này không tồn tại trong Python."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Cú pháp list comprehension nào tạo list bình phương các số từ 0 đến 4?",
+      "answers": [
+        "[x*x for x in range(5)]",
+        "{x*x for x in range(5)}",
+        "(x*x for x in range(5))",
+        "[for x in range(5): x*x]"
+      ],
+      "explanations": [
+        "Đúng. Dùng ngoặc vuông [] tạo list từ biểu thức x*x lặp qua range(5).",
+        "Ngoặc nhọn {} tạo set comprehension, không phải list.",
+        "Ngoặc tròn () tạo generator expression, không phải list.",
+        "Cú pháp này sai; biểu thức phải đứng trước 'for'."
+      ],
+      "correct": 1,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Cách an toàn để mở và tự động đóng file trong Python là gì?",
+      "answers": [
+        "f = open('a.txt'); ... ; (không cần đóng)",
+        "with open('a.txt') as f:",
+        "file.read('a.txt')",
+        "open('a.txt').close() ngay lập tức"
+      ],
+      "explanations": [
+        "Quên close() dễ gây rò rỉ tài nguyên; cần đóng file thủ công.",
+        "Đúng. 'with open(...) as f' tự động đóng file kể cả khi có lỗi.",
+        "Không có hàm file.read(tên_file) như vậy; phải mở file trước.",
+        "Đóng ngay khi vừa mở thì không đọc/ghi được gì."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Để ghép phương thức nhận chuỗi viết hoa toàn bộ trong Python là gì?",
+      "answers": ["s.toUpperCase()", "s.upper()", "s.capitalize()", "s.uppercase()"],
+      "explanations": [
+        "toUpperCase() là phương thức của JavaScript, không phải Python.",
+        "Đúng. s.upper() trả về bản sao chuỗi viết hoa toàn bộ.",
+        "capitalize() chỉ viết hoa chữ cái đầu, không phải toàn bộ.",
+        "uppercase() không phải phương thức chuỗi của Python."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Phương thức nào tách một chuỗi thành list các từ theo dấu phân cách?",
+      "answers": ["s.join()", "s.split()", "s.append()", "s.divide()"],
+      "explanations": [
+        "join() làm ngược lại: nối list chuỗi thành một chuỗi.",
+        "Đúng. s.split() tách chuỗi thành list các phần con.",
+        "append() là phương thức của list, không phải chuỗi.",
+        "divide() không phải phương thức chuỗi của Python."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Kết quả của biểu thức len([1, 2, 3]) + len('ab') trong Python là bao nhiêu?",
+      "answers": ["6", "5", "3", "Lỗi vì không cộng được"],
+      "explanations": [
+        "len(list) = 3 và len('ab') = 2, tổng là 5 chứ không phải 6.",
+        "Đúng. len([1,2,3]) = 3, len('ab') = 2, cộng lại bằng 5.",
+        "Mới chỉ tính một trong hai len; phải cộng cả hai.",
+        "Cả hai len() đều trả số nguyên nên cộng được bình thường."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Trong mô hình Client-Server, ai là bên KHỞI TẠO yêu cầu (Request)?",
+      "answers": ["Server", "Client", "Database", "Router mạng"],
+      "explanations": [
+        "Server là bên nhận và xử lý yêu cầu, rồi trả Response.",
+        "Đúng. Client gửi Request, Server phân tích và trả về Response.",
+        "Database lưu trữ dữ liệu, thường được Server truy vấn chứ không khởi tạo Request tới Server.",
+        "Router chỉ chuyển tiếp gói tin, không phải bên khởi tạo Request ứng dụng."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Định dạng dữ liệu nhẹ nào thường được dùng để trao đổi giữa Frontend và Backend trong API hiện đại?",
+      "answers": ["XML", "JSON", "CSV", "HTML"],
+      "explanations": [
+        "XML từng phổ biến nhưng nặng nề hơn; API hiện đại ưu tiên định dạng nhẹ hơn.",
+        "Đúng. JSON là định dạng trao đổi dữ liệu nhẹ, chuẩn cho API hiện đại.",
+        "CSV chỉ phù hợp dữ liệu bảng đơn giản, không biểu diễn tốt dữ liệu lồng nhau.",
+        "HTML dùng để hiển thị trang, không phải để trao đổi dữ liệu thuần giữa hệ thống."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Trong JSON, giá trị chuỗi (string) phải được bọc bằng ký hiệu nào?",
+      "answers": ["Nháy đơn '...'", "Nháy kép \"...\"", "Dấu backtick `...`", "Không cần dấu nào"],
+      "explanations": [
+        "JSON không chấp nhận nháy đơn cho chuỗi (đó là thói quen của JS/Python).",
+        "Đúng. Chuẩn JSON yêu cầu key và giá trị chuỗi bọc trong nháy kép.",
+        "Backtick là template string của JavaScript, không hợp lệ trong JSON.",
+        "Số và boolean không cần nháy, nhưng chuỗi bắt buộc phải có nháy kép."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "FastAPI được xây dựng dựa trên hai thư viện nền tảng nào?",
+      "answers": [
+        "Django và Flask",
+        "Starlette và Pydantic",
+        "Requests và NumPy",
+        "Tornado và SQLAlchemy"
+      ],
+      "explanations": [
+        "Django và Flask là các framework độc lập, không phải nền của FastAPI.",
+        "Đúng. FastAPI = Starlette (web toolkit) + Pydantic (validation bằng type hints).",
+        "Requests là thư viện HTTP client, NumPy là tính toán số, không phải nền FastAPI.",
+        "Tornado và SQLAlchemy không phải nền tảng cốt lõi của FastAPI."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Sự khác biệt cốt lõi giữa WSGI và ASGI là gì?",
+      "answers": [
+        "WSGI xử lý đồng bộ, ASGI hỗ trợ bất đồng bộ (async/await)",
+        "WSGI hỗ trợ async, ASGI chỉ đồng bộ",
+        "Cả hai đều chỉ xử lý đồng bộ",
+        "ASGI chỉ dùng cho frontend, WSGI cho backend"
+      ],
+      "explanations": [
+        "Đúng. WSGI (Django/Flask) xử lý đồng bộ; ASGI hỗ trợ bất đồng bộ, chịu tải cao hơn.",
+        "Ngược lại: ASGI mới là chuẩn hỗ trợ async, không phải WSGI.",
+        "ASGI hỗ trợ bất đồng bộ, không phải cả hai đều đồng bộ.",
+        "Cả hai đều là chuẩn giao tiếp server-ứng dụng phía backend, không liên quan frontend."
+      ],
+      "correct": 1,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Uvicorn đóng vai trò gì trong hệ sinh thái FastAPI?",
+      "answers": [
+        "Một ASGI server siêu nhanh để vận hành ứng dụng FastAPI",
+        "Một thư viện validation dữ liệu",
+        "Một hệ quản trị cơ sở dữ liệu",
+        "Một trình duyệt để gọi API"
+      ],
+      "explanations": [
+        "Đúng. Uvicorn là ASGI server siêu nhanh, giúp hiệu năng FastAPI tiệm cận NodeJS/Go.",
+        "Validation là vai trò của Pydantic, không phải Uvicorn.",
+        "Uvicorn không phải hệ quản trị cơ sở dữ liệu.",
+        "Uvicorn là server chạy ứng dụng, không phải trình duyệt."
+      ],
+      "correct": 1,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Tại sao nên dùng môi trường ảo (virtual environment) cho mỗi dự án Python?",
+      "answers": [
+        "Để cô lập thư viện, tránh xung đột phiên bản giữa các dự án",
+        "Để tăng tốc CPU khi chạy chương trình",
+        "Để thay thế hoàn toàn việc cài đặt Python",
+        "Để mã hóa source code khỏi bị đọc trộm"
+      ],
+      "explanations": [
+        "Đúng. venv cô lập thư viện riêng cho từng dự án, tránh đụng độ phiên bản.",
+        "venv không liên quan đến tốc độ CPU.",
+        "venv vẫn cần một bản Python; nó chỉ tạo môi trường riêng dựa trên Python đã cài.",
+        "venv không mã hóa hay bảo vệ mã nguồn."
+      ],
+      "correct": 1,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Lệnh nào tạo một môi trường ảo tên 'venv' trong Python?",
+      "answers": [
+        "pip create venv",
+        "python -m venv venv",
+        "python venv --new",
+        "virtualenv install venv"
+      ],
+      "explanations": [
+        "pip dùng để cài thư viện, không tạo môi trường ảo.",
+        "Đúng. 'python -m venv venv' tạo thư mục venv/ chứa trình thông dịch và pip riêng.",
+        "Không có cú pháp 'python venv --new'.",
+        "Cú pháp này sai; công cụ virtualenv dùng khác và đây không phải cách chuẩn."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Định nghĩa kiến trúc RESTful, cách đặt tên endpoint nào sau đây ĐÚNG chuẩn?",
+      "answers": [
+        "/getStudents",
+        "/students",
+        "/createNewStudent",
+        "/student_list_action"
+      ],
+      "explanations": [
+        "Sai chuẩn REST: nhúng động từ 'get' vào URL; hành động phải do HTTP method xác định.",
+        "Đúng. REST đặt tên bằng danh từ số nhiều, không nhúng động từ.",
+        "Sai chuẩn: nhúng động từ 'create' vào URL.",
+        "Tên rườm rà và nhúng hành động ('action'), không theo chuẩn REST."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Trong REST, hành động trên tài nguyên được xác định chủ yếu bởi yếu tố nào?",
+      "answers": [
+        "Tên động từ trong URL",
+        "HTTP Method (GET/POST/PUT/DELETE)",
+        "Thứ tự gọi các endpoint",
+        "Cổng (port) của server"
+      ],
+      "explanations": [
+        "REST tránh nhúng động từ vào URL; hành động không nằm ở tên URL.",
+        "Đúng. HTTP Method quyết định hành động (đọc, tạo, sửa, xóa) trên tài nguyên.",
+        "Thứ tự gọi không quyết định hành động của một request.",
+        "Cổng chỉ là nơi server lắng nghe, không xác định hành động REST."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Giao diện tài liệu API tương tác mà FastAPI tự sinh mặc định tại /docs là gì?",
+      "answers": ["ReDoc", "Swagger UI", "Postman", "GraphiQL"],
+      "explanations": [
+        "ReDoc nằm tại /redoc, là giao diện đọc tài liệu khác.",
+        "Đúng. Swagger UI tại /docs vừa là tài liệu vừa cho phép kiểm thử tương tác.",
+        "Postman là công cụ riêng cần cài đặt, không phải tài liệu tự sinh tại /docs.",
+        "GraphiQL dành cho GraphQL, không phải REST API của FastAPI."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Chuẩn quốc tế nào dùng để mô tả REST API mà FastAPI tuân thủ để tự sinh tài liệu?",
+      "answers": ["SOAP", "OpenAPI", "RSS", "WSDL"],
+      "explanations": [
+        "SOAP là giao thức cũ nặng nề dựa trên XML, không phải chuẩn mô tả của FastAPI.",
+        "Đúng. OpenAPI là tiêu chuẩn mô tả REST API mà FastAPI tuân thủ hoàn toàn.",
+        "RSS là định dạng phân phối nội dung, không liên quan mô tả API.",
+        "WSDL gắn với SOAP/web service cũ, không phải chuẩn của FastAPI."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Khi một hàm xử lý trong FastAPI trả về một Dictionary, điều gì xảy ra với response?",
+      "answers": [
+        "Báo lỗi vì FastAPI chỉ trả chuỗi",
+        "FastAPI tự động chuyển Dictionary thành JSON",
+        "Trả về dưới dạng HTML",
+        "Trả về dưới dạng file nhị phân"
+      ],
+      "explanations": [
+        "FastAPI không báo lỗi; nó hỗ trợ trả dict rất tự nhiên.",
+        "Đúng. FastAPI tự động serialize Dictionary thành JSON cho client.",
+        "Mặc định response là JSON, không phải HTML.",
+        "Dictionary được chuyển thành JSON text, không phải file nhị phân."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    }
+  ]
+}

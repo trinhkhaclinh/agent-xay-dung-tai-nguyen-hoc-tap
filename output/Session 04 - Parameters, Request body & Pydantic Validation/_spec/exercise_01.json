@@ -1,0 +1,69 @@
+{
+  "filename": "[Vận dụng cơ bản 1] Sửa lỗi xung đột thứ tự Route trong API Sinh viên",
+  "subdir": "Bài tập",
+  "level": "Vận dụng cơ bản",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Sửa lỗi xung đột thứ tự Route trong API Sinh viên"
+    },
+    {
+      "type": "h2",
+      "text": "1. Bối cảnh nghiệp vụ"
+    },
+    {
+      "type": "p",
+      "text": "Một hệ thống quản lý học tập đang phát triển các endpoint để quản lý thông tin sinh viên. Nhà phát triển đã viết mã để hỗ trợ hai tính năng: một route lấy hồ sơ cá nhân của sinh viên hiện tại đăng nhập qua đường dẫn '/students/me' và một route lấy thông tin sinh viên bất kỳ qua ID học sinh '/students/{student_id}'."
+    },
+    {
+      "type": "h2",
+      "text": "2. Vấn đề hiện tại"
+    },
+    {
+      "type": "p",
+      "text": "Tuy nhiên, khi gọi API `/students/me`, hệ thống liên tục trả về lỗi mã trạng thái 422 Unprocessable Entity với thông điệp báo rằng 'me' không phải số nguyên hợp lệ. Sinh viên cần xác định nguyên nhân và sửa lại mã nguồn."
+    },
+    {
+      "type": "h2",
+      "text": "3. Mã nguồn hiện tại (Legacy Code)"
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "text": "from fastapi import FastAPI\n\napp = FastAPI()\n\n# Lấy chi tiết sinh viên bất kỳ theo ID\n@app.get(\"/students/{student_id}\")\ndef get_student_by_id(student_id: int):\n    return {\"student_id\": student_id, \"name\": \"Nguyen Van An\", \"role\": \"student\"}\n\n# Lấy thông tin sinh viên hiện tại\n@app.get(\"/students/me\")\ndef get_my_profile():\n    return {\"student_id\": 999, \"name\": \"Sinh viên hiện tại (Tôi)\", \"role\": \"admin\"}"
+    },
+    {
+      "type": "h2",
+      "text": "4. Yêu cầu đầu ra"
+    },
+    {
+      "type": "h3",
+      "text": "Nhiệm vụ 1: Phân tích nguyên nhân lỗi"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Hãy giải thích chi tiết cơ chế phân giải đường dẫn của FastAPI và tại sao lỗi này xảy ra khi gọi GET `/students/me`.",
+        "Chỉ ra dòng code gây ra xung đột."
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "Nhiệm vụ 2: Sửa lỗi mã nguồn"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Sắp xếp lại các route để sửa dứt điểm lỗi xung đột.",
+        "Viết code hoàn thiện và chạy thử nghiệm trên Uvicorn."
+      ]
+    }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session04",
+    "ex": "Ex01",
+    "example": "HNKS25CNTT1_FastAPI_Session04_Ex01"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "filename": "[Vận dụng cơ bản 2] Sai sót khi lấy thông tin sinh viên theo ID",
+  "subdir": "Bài tập",
+  "level": "Vận dụng cơ bản",
+  "blocks": [
+    { "type": "h1", "text": "Sai sót khi lấy thông tin sinh viên theo ID" },
+
+    { "type": "h2", "text": "1. Bối cảnh nghiệp vụ" },
+    { "type": "p", "text": "Tiếp nối hệ thống Quản lý sinh viên, đội phát triển cần một endpoint trả về thông tin chi tiết của một sinh viên dựa trên mã định danh (ID). Màn hình hồ sơ sinh viên sẽ gọi endpoint này mỗi khi người dùng bấm vào một dòng trong danh sách." },
+    { "type": "p", "text": "Một bạn trong nhóm đã viết endpoint nhưng khi truy cập http://127.0.0.1:8000/students/2 thì server báo lỗi 404 Not Found, còn ID trong phản hồi thì luôn sai. Bạn được nhờ tìm nguyên nhân và sửa lại cho đúng." },
+
+    { "type": "h2", "text": "2. Vấn đề hiện tại" },
+    { "type": "bullets", "items": [
+      "Đường dẫn khai báo trong decorator là /student (số ít) và không có tham số đường dẫn (path parameter), nên Routing Engine của FastAPI không khớp được URL /students/2 → trả về 404.",
+      "Hàm xử lý không nhận tham số id từ URL mà lại gán cứng một giá trị, khiến mọi lời gọi đều trả về cùng một sinh viên — ID phản hồi luôn sai so với ID yêu cầu.",
+      "Endpoint chưa khai báo kiểu dữ liệu cho path parameter nên không tận dụng được khả năng validate tự động của FastAPI."
+    ]},
+
+    { "type": "h2", "text": "3. Mã nguồn hiện tại (Legacy Code)" },
+    { "type": "code", "lang": "python", "text": "# main.py - phiên bản lỗi cần sửa\nfrom fastapi import FastAPI\n\napp = FastAPI()\n\nSTUDENTS = [\n    {\"id\": 1, \"name\": \"Nguyen Van An\", \"class\": \"CNTT1\"},\n    {\"id\": 2, \"name\": \"Tran Thi Binh\", \"class\": \"CNTT2\"},\n    {\"id\": 3, \"name\": \"Le Van Cuong\", \"class\": \"CNTT1\"}\n]\n\n# Endpoint lấy 1 sinh viên theo ID (đang bị lỗi)\n@app.get(\"/student\")\ndef get_student():\n    student_id = 1  # Lỗi: gán cứng ID, không lấy từ URL\n    for s in STUDENTS:\n        if s[\"id\"] == student_id:\n            return s\n    return {\"error\": \"not found\"}" },
+
+    { "type": "h2", "text": "4. Yêu cầu" },
+
+    { "type": "h3", "text": "Phần 1 — Phân tích lỗi (trace)" },
+    { "type": "numbers", "items": [
+      "Truy vết vì sao gọi GET /students/2 lại trả về 404: so sánh URL được khai báo trong decorator với URL mà Client thực sự gọi.",
+      "Giải thích vì sao phản hồi luôn trả về sinh viên có id = 1 dù Client yêu cầu id khác.",
+      "Nêu khái niệm path parameter và cách FastAPI ánh xạ {student_id} trên URL vào tham số của hàm xử lý."
+    ]},
+
+    { "type": "h3", "text": "Phần 2 — Sửa lỗi (triển khai)" },
+    { "type": "bullets", "items": [
+      "Đổi đường dẫn thành dạng tài nguyên có path parameter: GET /students/{student_id}.",
+      "Khai báo tham số student_id: int trong hàm xử lý để FastAPI tự lấy giá trị từ URL và validate kiểu dữ liệu.",
+      "Dùng student_id nhận được để tìm đúng sinh viên trong danh sách thay vì gán cứng.",
+      "Chạy lại bằng uvicorn main:app --reload và kiểm thử GET /students/2 trên Swagger UI tại /docs."
+    ]},
+
+    { "type": "h3", "text": "Phần 3 — Kết quả mong đợi" },
+    { "type": "p", "text": "Khi gọi GET /students/2, API trả về đúng sinh viên có id = 2:" },
+    { "type": "code", "lang": "json", "text": "{\n  \"id\": 2,\n  \"name\": \"Tran Thi Binh\",\n  \"class\": \"CNTT2\"\n}" }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session02",
+    "ex": "Ex02",
+    "example": "HNKS25CNTT1_FastAPI_Session02_Ex02"
+  }
+}

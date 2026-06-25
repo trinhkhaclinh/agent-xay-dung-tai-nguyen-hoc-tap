@@ -1,0 +1,178 @@
+{
+  "session_no": 2,
+  "session_id": "Session 02",
+  "title": "Giới thiệu & Cài đặt FastAPI cơ bản",
+  "folder_name": "Session 02 - Giới thiệu & Cài đặt FastAPI",
+  "module": "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+  "hinh_thuc_hoc": "Lý thuyết",
+  "mon_hoc": "FastAPI",
+  "summary": "Session nền tảng: hiểu kiến trúc web Client-Server và vị thế của FastAPI, thiết lập môi trường ảo, khởi tạo ứng dụng FastAPI chạy bằng Uvicorn, thiết kế API endpoint theo chuẩn RESTful, và khai thác tài liệu API tự động với Swagger UI/OpenAPI.",
+  "domain_xuyen_suot": "Quản lý sinh viên / Khóa học và Logistics (cổng điều phối kho vận) — dùng nhất quán cho ví dụ và bài tập.",
+  "lessons": [
+    {
+      "no": 1,
+      "title": "Tổng quan kiến trúc web và FastAPI",
+      "objectives": [
+        "Giải thích (Hiểu) mô hình Client-Server và vòng đời Request-Response qua giao thức HTTP/HTTPS",
+        "Phân biệt (Phân tích) Web truyền thống (SSR) với Web Service/API (Decoupled) và kiến trúc API-first",
+        "Giải thích (Hiểu) vì sao FastAPI đạt hiệu năng cao nhờ chuẩn ASGI + Uvicorn so với WSGI",
+        "Vẽ (Vận dụng) được sơ đồ Client → API → Database"
+      ],
+      "key_concepts": [
+        "Mô hình Client-Server", "Request/Response & HTTP/HTTPS", "Định dạng JSON",
+        "Kiến trúc Decoupled (Frontend/Backend tách biệt)", "SSR vs SPA vs API-first",
+        "FastAPI = Starlette + Pydantic", "WSGI vs ASGI", "Uvicorn (ASGI server)"
+      ],
+      "scenario": "So sánh trải nghiệm tải trang giữa một website tin tức SSR truyền thống và một ứng dụng SPA hiện đại tiêu thụ API; minh hoạ Request/Response bằng DevTools (tab Network) và Postman gọi API mẫu.",
+      "facts": [
+        "Client gửi Request, Server phân tích và trả về Response; HTTP/HTTPS là nền tảng của mọi ứng dụng web hiện đại.",
+        "JSON là định dạng trao đổi dữ liệu nhẹ giữa Frontend và Backend; key và value chuỗi bọc trong nháy kép, số/bool không cần.",
+        "Kiến trúc Decoupled: Server chỉ trả dữ liệu thuần (JSON), một API phục vụ được Web, Mobile và bên thứ ba.",
+        "FastAPI dựa trên Starlette (web toolkit: routing, middleware) và Pydantic (data validation bằng type hints).",
+        "WSGI (Django/Flask) xử lý đồng bộ, mỗi request chiếm một thread; ASGI xử lý bất đồng bộ (async/await), chịu tải cao hơn.",
+        "Uvicorn là ASGI server siêu nhanh, đưa hiệu năng FastAPI tiệm cận NodeJS/Go."
+      ],
+      "code_examples": [
+        {
+          "caption": "Gọi thử một API trả JSON (minh hoạ Response)",
+          "lang": "json",
+          "code": "{\n  \"userId\": 1,\n  \"id\": 1,\n  \"title\": \"sunt aut facere\",\n  \"body\": \"quia et suscipit...\"\n}"
+        }
+      ],
+      "san_pham_dau_ra": "Vẽ được sơ đồ Client → API → Database"
+    },
+    {
+      "no": 2,
+      "title": "Thiết lập môi trường và Virtual Environment",
+      "objectives": [
+        "Giải thích (Hiểu) vì sao cần môi trường ảo để tránh xung đột phiên bản thư viện giữa các dự án",
+        "Tạo và kích hoạt (Vận dụng) môi trường ảo venv trên Windows/macOS/Linux",
+        "Quản lý (Vận dụng) thư viện bằng pip và requirements.txt để tái tạo môi trường đồng bộ"
+      ],
+      "key_concepts": [
+        "Xung đột phiên bản (version conflict)", "Virtual Environment (venv)",
+        "Kích hoạt/Hủy kích hoạt môi trường", "pip", "requirements.txt", ".gitignore"
+      ],
+      "scenario": "Hai dự án song song cần hai phiên bản khác nhau của cùng một thư viện (Project A cần Lib X v1.0, Project B cần v2.0); dùng venv để cô lập, rồi đóng gói requirements.txt để đồng đội tái tạo môi trường.",
+      "facts": [
+        "Cài thư viện trực tiếp vào Python hệ thống dễ gây xung đột phiên bản giữa các dự án.",
+        "Lệnh tạo: python -m venv venv; thư mục venv/ chứa trình thông dịch và pip riêng biệt.",
+        "Kích hoạt Windows: .\\venv\\Scripts\\activate; macOS/Linux: source venv/bin/activate; dấu hiệu là tiền tố (venv).",
+        "Hủy kích hoạt bằng deactivate; thêm venv/ vào .gitignore để không đẩy lên Git.",
+        "pip freeze > requirements.txt để đóng gói; pip install -r requirements.txt để tái tạo môi trường."
+      ],
+      "code_examples": [
+        {
+          "caption": "Khởi tạo, kích hoạt môi trường ảo và cài thư viện (Windows)",
+          "lang": "bash",
+          "code": "python -m venv venv\n.\\venv\\Scripts\\activate\npip install fastapi uvicorn\npip freeze > requirements.txt"
+        }
+      ],
+      "san_pham_dau_ra": "Môi trường Python + FastAPI hoạt động"
+    },
+    {
+      "no": 3,
+      "title": "Khởi tạo ứng dụng FastAPI",
+      "objectives": [
+        "Triển khai (Vận dụng) ứng dụng FastAPI tối thiểu trong file main.py",
+        "Chạy (Vận dụng) server bằng Uvicorn và truy cập localhost:8000",
+        "Giải thích (Hiểu) cơ chế Hot Reload với cờ --reload trong phát triển"
+      ],
+      "key_concepts": [
+        "Đối tượng FastAPI app", "Decorator @app.get", "Hàm xử lý trả Dictionary → JSON",
+        "Lệnh uvicorn main:app --reload", "Hot Reload", "127.0.0.1:8000"
+      ],
+      "scenario": "Xây dựng API giám sát trạng thái cổng điều phối Logistics (gateway.py) trả về tình trạng vận hành kho dưới dạng JSON; bật --reload để cập nhật tức thì khi sửa code.",
+      "facts": [
+        "FastAPI không tự lắng nghe cổng mạng; cần Uvicorn (ASGI server) để vận hành.",
+        "Quy trình 3 bước: nạp lớp FastAPI → tạo thực thể app → định nghĩa route và hàm xử lý.",
+        "Hàm xử lý trả về Dictionary được FastAPI tự động chuyển thành JSON.",
+        "Lệnh chạy: uvicorn main:app --reload (main = tên file, app = biến instance, --reload = tự restart khi sửa).",
+        "Mặc định server lắng nghe tại http://127.0.0.1:8000; log 200 OK xác nhận hoạt động."
+      ],
+      "code_examples": [
+        {
+          "caption": "Ứng dụng FastAPI tối thiểu (main.py)",
+          "lang": "python",
+          "code": "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/\")\ndef read_root():\n    return {\"message\": \"Chào mừng đến FastAPI!\"}"
+        },
+        {
+          "caption": "API giám sát cổng điều phối Logistics (gateway.py)",
+          "lang": "python",
+          "code": "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/\")\ndef get_system_status():\n    \"\"\"Trả về tình trạng vận hành tức thời của nhà kho trung tâm.\"\"\"\n    return {\n        \"gateway_status\": \"operational\",\n        \"workload_ratio\": 0.72,\n        \"active_nodes\": [\"VN-SGN-01\", \"VN-DAD-02\"],\n        \"system_message\": \"Logistics Dispatcher running smoothly.\"\n    }"
+        }
+      ],
+      "san_pham_dau_ra": "Project FastAPI đầu tiên chạy bằng Uvicorn"
+    },
+    {
+      "no": 4,
+      "title": "API endpoint và routing",
+      "objectives": [
+        "Giải thích (Hiểu) cấu trúc HTTP Request/Response và các phương thức HTTP cốt lõi (GET/POST/PUT/PATCH/DELETE)",
+        "Áp dụng (Vận dụng) quy chuẩn đặt tên endpoint RESTful (danh từ số nhiều, không nhúng động từ)",
+        "Triển khai (Vận dụng) endpoint /hello với decorator và hiểu cơ chế Routing Engine của FastAPI"
+      ],
+      "key_concepts": [
+        "HTTP Request (Method/URL/Headers/Body)", "HTTP Response (Status Code/Headers/Body)",
+        "Ánh xạ CRUD ↔ HTTP Method", "Endpoint định danh tài nguyên", "RESTful naming",
+        "Decorator routing (@app.get/post/put/delete)", "Routing Engine"
+      ],
+      "scenario": "Thiết kế hệ endpoint cho hệ thống quản lý sinh viên/khóa học: /students, /courses, /students/{id}/grades; minh hoạ ánh xạ CRUD qua HTTP method và một endpoint /hello đơn giản.",
+      "facts": [
+        "Mỗi cuộc hội thoại HTTP gồm Request và Response; HTTP là nền tảng của mọi RESTful API.",
+        "GET=Read, POST=Create, PUT=Update toàn bộ, PATCH=Update một phần, DELETE=Delete.",
+        "Endpoint đặt tên bằng danh từ số nhiều (/students), không nhúng động từ (sai: /getStudents, /createCourse).",
+        "Hành động được xác định bởi HTTP Method chứ không phải bởi URL.",
+        "Routing Engine của FastAPI dò URL path + HTTP method để ánh xạ tới đúng hàm xử lý Python."
+      ],
+      "code_examples": [
+        {
+          "caption": "Endpoint /hello và ánh xạ CRUD qua HTTP method",
+          "lang": "python",
+          "code": "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/hello\")\ndef say_hello():\n    return {\"message\": \"Hello!\"}\n\n@app.get(\"/students\")\ndef list_students():\n    return [{\"id\": 1, \"name\": \"An\"}]\n\n@app.post(\"/students\")\ndef create_student(name: str):\n    return {\"id\": 2, \"name\": name}"
+        }
+      ],
+      "san_pham_dau_ra": "Endpoint /hello hoạt động"
+    },
+    {
+      "no": 5,
+      "title": "Tài liệu API với OpenAPI và Swagger UI",
+      "objectives": [
+        "Giải thích (Hiểu) chuẩn OpenAPI và cách FastAPI tự sinh tài liệu (Zero Configuration)",
+        "Sử dụng (Vận dụng) Swagger UI tại /docs để đọc tài liệu và kiểm thử API tương tác",
+        "Phân biệt (Hiểu) Swagger UI và ReDoc"
+      ],
+      "key_concepts": [
+        "Chuẩn OpenAPI", "Zero Configuration", "Swagger UI (/docs)", "ReDoc (/redoc)",
+        "Try it out / Execute", "Tags metadata phân nhóm API"
+      ],
+      "scenario": "Mở /docs của ứng dụng quản lý khóa học, dùng 'Try it out' để gọi thử endpoint mà không cần Postman; so sánh giao diện đọc tài liệu của ReDoc.",
+      "facts": [
+        "OpenAPI là tiêu chuẩn quốc tế mô tả REST API; FastAPI tuân thủ hoàn toàn.",
+        "FastAPI tự đọc cấu trúc hàm và kiểu dữ liệu để sinh tài liệu, không cần cấu hình thêm.",
+        "Swagger UI mặc định tại http://localhost:8000/docs — vừa là tài liệu vừa là môi trường kiểm thử tương tác.",
+        "ReDoc mặc định tại http://localhost:8000/redoc — giao diện ba cột tối giản, tối ưu cho đọc/tra cứu.",
+        "Có thể phân nhóm endpoint bằng tags metadata để tài liệu gọn gàng."
+      ],
+      "code_examples": [
+        {
+          "caption": "Khai báo metadata để Swagger UI hiển thị đẹp hơn",
+          "lang": "python",
+          "code": "from fastapi import FastAPI\n\napp = FastAPI(\n    title=\"Course Management API\",\n    description=\"API quản lý khóa học cho trung tâm đào tạo\",\n    version=\"1.0.0\"\n)\n\n@app.get(\"/courses\", tags=[\"courses\"])\ndef list_courses():\n    return [{\"id\": 1, \"name\": \"Web API with FastAPI\"}]"
+        }
+      ],
+      "san_pham_dau_ra": "Swagger hiển thị và test được API"
+    }
+  ],
+  "prior_session": {
+    "no": 1,
+    "title": "Định hướng học tập, demo sản phẩm cuối môn",
+    "review_topics": [
+      "Cú pháp Python cơ bản (def, if/elif, vòng lặp, break/continue)",
+      "Kiểu dữ liệu Python (list, tuple, dict, set) và tính mutable/immutable",
+      "Hàm, tham số *args/**kwargs, hàm lambda, generator (yield)",
+      "Lập trình hướng đối tượng: class, kế thừa, __init__",
+      "Xử lý chuỗi, list comprehension, đọc/ghi file với with open"
+    ]
+  }
+}

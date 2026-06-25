@@ -1,0 +1,55 @@
+{
+  "filename": "Lesson 02 - Phân tích sản phẩm cuối môn và Kiến trúc hệ thống",
+  "subdir": "Kịch bản quay video",
+  "lesson_no": 2,
+  "blocks": [
+    {
+      "type": "h2",
+      "text": "## Giới thiệu sản phẩm cuối môn"
+    },
+    {
+      "type": "narration",
+      "text": "Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Trong bài học này, thầy và các em sẽ cùng nhau phân tích chi tiết sản phẩm cuối khóa mà các em sẽ tự tay xây dựng."
+    },
+    {
+      "type": "narration",
+      "text": "Đích đến kỹ thuật của môn học là một hệ thống Web API hoàn chỉnh. Để hiểu rõ sản phẩm hoạt động thế nào, hãy cùng nhìn vào sơ đồ kiến trúc 3 tầng Client-API-Database trên màn hình."
+    },
+    {
+      "type": "marker",
+      "text": "[Chuyển tiếp slide]"
+    },
+    {
+      "type": "h2",
+      "text": "## Phân tích kiến trúc 3 tầng và API"
+    },
+    {
+      "type": "narration",
+      "text": "Trong kiến trúc này, phía giao diện người dùng gửi các HTTP Request chứa dữ liệu đến Backend FastAPI. Backend của chúng ta tiếp nhận, thực thi nghiệp vụ và tương tác với cơ sở dữ liệu MySQL thông qua SQLAlchemy ORM để truy xuất hoặc lưu trữ thông tin, sau đó trả dữ liệu JSON về cho Client."
+    },
+    {
+      "type": "marker",
+      "text": "[mở tài liệu Swagger UI của sản phẩm mẫu]"
+    },
+    {
+      "type": "narration",
+      "text": "Như các em thấy trên màn hình là tài liệu Swagger UI của sản phẩm mẫu. Chúng ta có các API đăng ký, đăng nhập bảo mật, các API quản lý lớp học, sinh viên với đầy đủ chức năng tạo mới, hiển thị, cập nhật và xóa. Đây chính là cấu trúc giao diện mà các em sẽ hoàn thiện."
+    },
+    {
+      "type": "h2",
+      "text": "## Cấu trúc thư mục dự án tiêu chuẩn"
+    },
+    {
+      "type": "narration",
+      "text": "Để dự án không bị rối, các em cần tuân thủ cấu trúc chia thư mục rõ ràng. Chúng ta chia nhỏ code thành models chứa cấu trúc bảng CSDL, schemas chứa lớp validate Pydantic, services xử lý nghiệp vụ và routers quản lý đường dẫn API."
+    },
+    {
+      "type": "h2",
+      "text": "## Tổng kết bài giảng"
+    },
+    {
+      "type": "narration",
+      "text": "Tóm lại, trong bài học này các em đã hiểu rõ mục tiêu sản phẩm cuối khóa cũng như cấu trúc dự án mẫu cần hướng tới. Hãy chuẩn bị tinh thần học tập thật tốt. Cảm ơn các em và chúc các em học tập hiệu quả!"
+    }
+  ]
+}

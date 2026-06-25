@@ -1,0 +1,55 @@
+{
+  "filename": "Lesson 01 - Định hướng lộ trình học tập FastAPI",
+  "subdir": "Kịch bản quay video",
+  "lesson_no": 1,
+  "blocks": [
+    {
+      "type": "h2",
+      "text": "## Chào mừng và Định hướng môn học"
+    },
+    {
+      "type": "narration",
+      "text": "Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Thầy rất vui được đồng hành cùng các em trong môn học IT-215 - Phát triển dịch vụ web với FastAPI."
+    },
+    {
+      "type": "narration",
+      "text": "Trong thời đại ứng dụng web và di động phát triển bùng nổ như hiện nay, việc xây dựng các API Backend nhanh, hiệu năng cao và an toàn là kỹ năng cực kỳ quan trọng. FastAPI chính là công cụ đắc lực nhất giúp chúng ta thực hiện điều đó một cách dễ dàng nhất."
+    },
+    {
+      "type": "marker",
+      "text": "[Chuyển tiếp slide]"
+    },
+    {
+      "type": "h2",
+      "text": "## Lộ trình 26 buổi học IT-215"
+    },
+    {
+      "type": "narration",
+      "text": "Hãy cùng nhìn lên lộ trình học tập trên màn hình. Môn học của chúng ta kéo dài 26 buổi. Chúng ta sẽ bắt đầu từ các khái niệm định tuyến cơ bản, đi qua phần tích hợp cơ sở dữ liệu SQLAlchemy, thực hiện phân quyền bảo mật bằng token JWT, làm việc nhóm qua các buổi Hackathon và cuối cùng là hoàn thành dự án cuối khóa để tốt nghiệp."
+    },
+    {
+      "type": "marker",
+      "text": "[mở trình duyệt và hiển thị slide phương pháp học tập ngược]"
+    },
+    {
+      "type": "narration",
+      "text": "Phương pháp học tập của chúng ta tuân thủ triết lý Thiết kế ngược. Chúng ta đặt ra mục tiêu sản phẩm thực tế trước, từ đó tìm kiếm kiến thức để giải quyết nó. Điều này đòi hỏi các em phải chủ động thực hành viết code liên tục."
+    },
+    {
+      "type": "h2",
+      "text": "## Chuẩn bị công cụ phát triển"
+    },
+    {
+      "type": "narration",
+      "text": "Trước khi kết thúc buổi học đầu tiên, các em hãy nhớ cài đặt đầy đủ Python phiên bản mới nhất, trình soạn thảo mã nguồn VS Code, hệ thống quản lý mã nguồn Git để nộp bài tập và công cụ Postman để kiểm thử API nhé."
+    },
+    {
+      "type": "h2",
+      "text": "## Tổng kết bài giảng"
+    },
+    {
+      "type": "narration",
+      "text": "Như vậy, thầy đã giới thiệu tổng quan lộ trình môn học và các công cụ cần thiết. Cảm ơn các em đã theo dõi bài học hôm nay. Hẹn gặp lại các em ở bài học giới thiệu sản phẩm tiếp theo!"
+    }
+  ]
+}

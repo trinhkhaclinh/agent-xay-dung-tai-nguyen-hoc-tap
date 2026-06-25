@@ -1,0 +1,117 @@
+{
+  "filename": "BÀI ĐỌC_ TYPE HINTS TRONG FASTAPI_",
+  "subdir": "Bài đọc",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Bài Đọc Chuyên Sâu: Ràng Buộc Dữ Liệu Nâng Cao Bằng Type Hints Và Thư Viện FastAPI"
+    },
+    {
+      "type": "p",
+      "text": "Xác định kiểu dữ liệu (như số hay chuỗi) là chưa đủ đối với một hệ thống thực tế. Chúng ta cần những ràng buộc chặt chẽ hơn: từ khóa tìm kiếm phải có độ dài từ 2 đến 50 ký tự; số trang phải lớn hơn hoặc bằng 1; giá sản phẩm phải lớn hơn 0; hay mã số sinh viên phải tuân theo một định dạng nhất định. FastAPI cung cấp các công cụ đắc lực như `Path()`, `Query()`, và `Field()` tích hợp trực tiếp vào hệ thống Type Hints để khai báo các ràng buộc dữ liệu này một cách trực quan nhất. Bài đọc này giúp chúng ta làm chủ kỹ năng này."
+    },
+    {
+      "type": "h2",
+      "text": "1. Vai trò của Type Hints làm nền tảng cho validation tự động"
+    },
+    {
+      "type": "p",
+      "text": "Type hints trong Python ban đầu sinh ra chỉ để phục vụ cho việc nhắc mã nguồn và kiểm tra tĩnh. Tuy nhiên, FastAPI và Pydantic đã tận dụng tối đa sức mạnh của nó để thực hiện kiểm chứng dữ liệu động khi runtime. Không có type hints, FastAPI không thể biết cách ép kiểu và validate dữ liệu."
+    },
+    {
+      "type": "h2",
+      "text": "2. Sử dụng Query() để validate Query Parameters"
+    },
+    {
+      "type": "p",
+      "text": "Để thêm các ràng buộc validation (độ dài chuỗi, biểu thức chính quy, mô tả hiển thị trên Swagger) cho query parameter, chúng ta sử dụng hàm `Query()` từ thư viện `fastapi` làm giá trị mặc định của tham số."
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "text": "from fastapi import FastAPI, Query\n\napp = FastAPI()\n\n@app.get(\"/products\")\ndef search_products(\n    keyword: str = Query(\n        None, \n        min_length=2, \n        max_length=50, \n        description=\"Từ khóa tìm kiếm sản phẩm\"\n    ),\n    page: int = Query(1, ge=1, description=\"Số trang, tối thiểu là 1\")\n):\n    return {\"keyword\": keyword, \"page\": page}"
+    },
+    {
+      "type": "p",
+      "text": "Trong đoạn code trên:\n- `min_length=2`: từ khóa tìm kiếm phải có ít nhất 2 ký tự.\n- `max_length=50`: tối đa 50 ký tự.\n- `ge=1` (Greater than or Equal): số trang phải lớn hơn hoặc bằng 1. Nếu client vi phạm, FastAPI lập tức trả lỗi 422."
+    },
+    {
+      "type": "h2",
+      "text": "3. Sử dụng Path() để validate Path Parameters"
+    },
+    {
+      "type": "p",
+      "text": "Tương tự như `Query()`, chúng ta sử dụng `Path()` để đặt các ràng buộc cho path parameter. Tuy nhiên, vì path parameter luôn luôn là bắt buộc, đối số đầu tiên truyền vào `Path()` phải là dấu ba chấm `...` (biểu thị required)."
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "text": "from fastapi import FastAPI, Path\n\napp = FastAPI()\n\n@app.get(\"/students/{student_id}\")\ndef get_student(\n    student_id: int = Path(..., ge=1, le=1000, description=\"Mã ID sinh viên, từ 1 đến 1000\")\n):\n    return {\"student_id\": student_id}"
+    },
+    {
+      "type": "p",
+      "text": "Nếu client gọi `/students/0` hoặc `/students/1500`, yêu cầu sẽ bị chặn lại ngay lập tức do vi phạm ràng buộc số học `ge=1` và `le=1000`."
+    },
+    {
+      "type": "h2",
+      "text": "4. Sử dụng Field() để validate thuộc tính Pydantic Model"
+    },
+    {
+      "type": "p",
+      "text": "Để áp dụng validation bên trong Pydantic model (request body), chúng ta dùng hàm `Field()` từ thư viện `pydantic`. Các đối số ràng buộc của `Field()` hoàn toàn tương đồng với `Query()` và `Path()`."
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "text": "from pydantic import BaseModel, Field\n\nclass StudentCreateSchema(BaseModel):\n    name: str = Field(..., min_length=2, max_length=100, description=\"Họ và tên sinh viên\")\n    email: str = Field(..., pattern=r\"^\\S+@\\S+\\.\\S+$\", description=\"Email đúng định dạng\")\n    age: int = Field(..., gt=18, lt=100, description=\"Tuổi phải từ 19 đến 99\")\n    gpa: float = Field(0.0, ge=0.0, le=4.0, description=\"GPA hệ 4, từ 0 đến 4.0\")"
+    },
+    {
+      "type": "p",
+      "text": "Lưu ý:\n- Đối số đầu tiên `...` chỉ ra rằng thuộc tính đó là bắt buộc phải truyền.\n- `pattern`: Sử dụng regex (biểu thức chính quy) để kiểm tra định dạng email.\n- `gt=18` (Greater Than): lớn hơn 18 tuổi.\n- `lt=100` (Less Than): nhỏ hơn 100 tuổi."
+    },
+    {
+      "type": "h2",
+      "text": "5. Phân tích cấu trúc lỗi 422 (Unprocessable Entity)"
+    },
+    {
+      "type": "p",
+      "text": "Khi một ràng buộc bị vi phạm, FastAPI trả về mã lỗi 422 kèm cấu trúc JSON lỗi chuẩn hóa. Dưới đây là phân tích chi tiết cấu trúc này:"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "`loc` (Location): Vị trí xảy ra lỗi, ví dụ `[\"body\", \"age\"]` chỉ ra lỗi nằm trong request body ở trường age; hoặc `[\"query\", \"keyword\"]` chỉ ra lỗi nằm ở query parameter keyword trên URL.",
+        "`msg` (Message): Mô tả chi tiết về lỗi xảy ra (ví dụ: 'ensure this value is greater than 18').",
+        "`type` (Type): Mã loại lỗi để lập trình viên frontend có thể bắt lỗi tự động (ví dụ `value_error.number.not_gt`)."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Hiểu rõ cấu trúc này giúp các nhà phát triển frontend dễ dàng bắt lỗi và hiển thị cảnh báo đỏ trên giao diện người dùng một cách chính xác nhất."
+    },
+    {
+      "type": "h2",
+      "text": "Tổng Kết"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "FastAPI tích hợp Type Hints để khai báo validation cực kỳ tường minh.",
+        "Dùng Query() để validate query parameter, Path() để validate path parameter và Field() để validate Pydantic model.",
+        "Các ràng buộc bao gồm: độ dài chuỗi (min_length, max_length), khoảng số học (ge, le, gt, lt), regex pattern.",
+        "Lỗi 422 chứa thông tin chi tiết về vị trí (loc), thông điệp (msg), và loại lỗi (type), giúp lập trình viên dễ dàng debug."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Tài Liệu Tham Khảo"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "FastAPI Query Parameters and String Validations: https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+        "FastAPI Path Parameters and Numeric Validations: https://fastapi.tiangolo.com/tutorial/path-params-numeric-validations/"
+      ]
+    }
+  ]
+}

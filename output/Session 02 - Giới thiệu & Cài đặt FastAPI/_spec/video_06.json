@@ -1,0 +1,47 @@
+{
+  "filename": "Lesson 06 - Tài liệu API tự động",
+  "subdir": "Kịch bản quay video",
+  "lesson_no": 5,
+  "blocks": [
+    { "type": "h2", "text": "## Chuẩn OpenAPI và tài liệu tự động" },
+    { "type": "narration", "text": "Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Trong bài học hôm nay, thầy và các em sẽ cùng nhau tìm hiểu về chuẩn OpenAPI và khả năng tự sinh tài liệu của FastAPI, cách sử dụng Swagger UI tại đường dẫn docs để đọc và kiểm thử API ngay trên trình duyệt, cũng như cách phân biệt Swagger UI với ReDoc." },
+    { "type": "narration", "text": "Đây là một trong những tính năng khiến rất nhiều lập trình viên yêu thích FastAPI ngay từ lần đầu sử dụng. Các em hãy hình dung: thông thường, sau khi viết API xong, người ta còn phải ngồi viết tài liệu mô tả từng endpoint cho người khác dùng, vừa tốn công vừa dễ lạc hậu so với code. FastAPI giải quyết triệt để vấn đề này." },
+    { "type": "marker", "text": "[Chuyển tiếp slide]" },
+    { "type": "narration", "text": "Trước hết, thầy giới thiệu với các em chuẩn OpenAPI. Đây là một tiêu chuẩn quốc tế dùng để mô tả các REST API một cách thống nhất, để máy móc và con người đều hiểu được cấu trúc của một API. Và điều tuyệt vời là FastAPI tuân thủ hoàn toàn chuẩn OpenAPI này." },
+    { "type": "narration", "text": "Vậy FastAPI tận dụng điều đó như thế nào? Đây chính là khái niệm thầy muốn các em ghi nhớ: Zero Configuration, nghĩa là không cần cấu hình gì thêm. FastAPI tự động đọc cấu trúc các hàm xử lý của các em, đọc các kiểu dữ liệu mà các em khai báo, rồi từ đó tự sinh ra tài liệu API hoàn chỉnh. Các em không phải viết thêm một dòng tài liệu nào, mà tài liệu vẫn luôn khớp với code, vì nó được sinh ra trực tiếp từ code." },
+    { "type": "bullets", "items": [
+      "OpenAPI: tiêu chuẩn quốc tế mô tả REST API, FastAPI tuân thủ hoàn toàn.",
+      "Zero Configuration: FastAPI tự sinh tài liệu, không cần cấu hình thêm.",
+      "Tài liệu luôn khớp với code vì được sinh ra từ chính cấu trúc hàm và kiểu dữ liệu."
+    ] },
+    { "type": "marker", "text": "[Chuyển tiếp slide]" },
+    { "type": "h2", "text": "## Trải nghiệm Swagger UI" },
+    { "type": "narration", "text": "Lý thuyết là vậy, bây giờ thầy sẽ cho các em thấy tài liệu tự động đó trông như thế nào trong thực tế. Giả sử chúng ta đang chạy ứng dụng quản lý khóa học. Thầy sẽ mở trình duyệt và truy cập vào giao diện tài liệu." },
+    { "type": "marker", "text": "[mở trình duyệt]" },
+    { "type": "narration", "text": "Giao diện tài liệu mặc định của FastAPI gọi là Swagger UI, và nó nằm tại địa chỉ localhost cổng 8000, thêm đường dẫn gạch chéo docs. Thầy gõ địa chỉ này vào trình duyệt. Các em hãy nhìn vào màn hình: một trang web đẹp mắt hiện ra, liệt kê toàn bộ các endpoint mà chúng ta đã định nghĩa, kèm phương thức HTTP của từng cái được tô màu khác nhau cho dễ phân biệt." },
+    { "type": "narration", "text": "Điều đặc biệt của Swagger UI là nó không chỉ để đọc. Thầy muốn các em ghi nhớ: Swagger UI vừa là tài liệu, vừa là một môi trường kiểm thử tương tác. Nghĩa là các em có thể gọi thử API ngay tại đây, mà không cần đến công cụ ngoài như Postman." },
+    { "type": "narration", "text": "Để các em thấy rõ, thầy sẽ bấm vào một endpoint, ví dụ endpoint lấy danh sách khóa học. Khi mở rộng ra, các em thấy có một nút mang tên Try it out. Thầy bấm vào nút Try it out này. Bây giờ giao diện cho phép thầy nhập tham số nếu cần, và xuất hiện thêm một nút Execute để thực thi." },
+    { "type": "marker", "text": "[nhấn nút Try it out trên Swagger UI]" },
+    { "type": "marker", "text": "[nhấn nút Execute trên Swagger UI]" },
+    { "type": "narration", "text": "Thầy bấm nút Execute. Các em hãy quan sát phần kết quả phía dưới. Swagger UI hiển thị ngay Response mà server trả về: bao gồm mã trạng thái, ví dụ 200, và phần Body chứa dữ liệu JSON. Như vậy chỉ với vài cú nhấp chuột, các em đã kiểm thử được endpoint của mình ngay trên trình duyệt, cực kỳ tiện lợi khi vừa phát triển vừa muốn thử nhanh." },
+    { "type": "marker", "text": "[Chuyển tiếp slide]" },
+    { "type": "h2", "text": "## Tùy biến tài liệu và ReDoc" },
+    { "type": "narration", "text": "Tài liệu tự động đã đẹp sẵn, nhưng FastAPI còn cho phép các em làm cho nó chuyên nghiệp hơn nữa bằng cách khai báo một số thông tin mô tả. Các em hãy nhìn đoạn code trên màn hình." },
+    { "type": "code", "lang": "python", "text": "from fastapi import FastAPI\n\napp = FastAPI(\n    title=\"Course Management API\",\n    description=\"API quản lý khóa học cho trung tâm đào tạo\",\n    version=\"1.0.0\"\n)\n\n@app.get(\"/courses\", tags=[\"courses\"])\ndef list_courses():\n    return [{\"id\": 1, \"name\": \"Web API with FastAPI\"}]" },
+    { "type": "narration", "text": "Khi tạo thực thể FastAPI, các em có thể truyền vào tiêu đề qua tham số title, mô tả qua description, và phiên bản qua version. Những thông tin này sẽ hiển thị ngay trên đầu trang tài liệu, giúp người đọc biết họ đang xem API của hệ thống nào. Ngoài ra, các em để ý ở decorator có thêm tham số tags. Tham số này dùng để phân nhóm các endpoint lại với nhau, giúp tài liệu gọn gàng khi API của các em lớn dần lên với hàng chục endpoint." },
+    { "type": "bullets", "items": [
+      "title, description, version: hiển thị thông tin tổng quan đầu trang tài liệu.",
+      "tags: phân nhóm các endpoint cho tài liệu gọn gàng, dễ tra cứu."
+    ] },
+    { "type": "narration", "text": "Cuối cùng, thầy muốn giới thiệu thêm cho các em một giao diện tài liệu thứ hai mà FastAPI cũng tự sinh ra, đó là ReDoc. ReDoc nằm tại địa chỉ localhost cổng 8000 thêm đường dẫn gạch chéo redoc. Thầy mở thử địa chỉ này trên trình duyệt." },
+    { "type": "narration", "text": "Các em hãy so sánh hai giao diện. Swagger UI ở đường dẫn docs mạnh về tương tác và kiểm thử, với các nút Try it out và Execute. Còn ReDoc ở đường dẫn redoc có giao diện ba cột tối giản, được tối ưu cho việc đọc và tra cứu tài liệu một cách thoải mái, phù hợp khi các em muốn chia sẻ tài liệu cho đối tác đọc. Cùng một API, các em có hai cách trình bày để chọn lựa tùy mục đích." },
+    { "type": "bullets", "items": [
+      "Swagger UI tại /docs: tài liệu cộng kiểm thử tương tác, có Try it out và Execute.",
+      "ReDoc tại /redoc: giao diện ba cột tối giản, tối ưu cho đọc và tra cứu."
+    ] },
+    { "type": "marker", "text": "[Chuyển tiếp slide]" },
+    { "type": "h2", "text": "## Tổng kết bài giảng" },
+    { "type": "narration", "text": "Như vậy là trong bài học hôm nay, thầy và các em đã hiểu chuẩn quốc tế OpenAPI và khả năng tự sinh tài liệu theo tinh thần Zero Configuration của FastAPI. Chúng ta đã trải nghiệm Swagger UI tại đường dẫn docs, vừa đọc tài liệu vừa kiểm thử API bằng Try it out và Execute ngay trên trình duyệt. Chúng ta cũng biết cách bổ sung title, description, version và dùng tags để phân nhóm endpoint, cũng như phân biệt được Swagger UI với ReDoc tại đường dẫn redoc. Đến đây Swagger đã hiển thị và test được API của các em." },
+    { "type": "narration", "text": "Cảm ơn các em đã theo dõi bài học hôm nay. Hẹn gặp lại các em trong các bài học tiếp theo." }
+  ]
+}

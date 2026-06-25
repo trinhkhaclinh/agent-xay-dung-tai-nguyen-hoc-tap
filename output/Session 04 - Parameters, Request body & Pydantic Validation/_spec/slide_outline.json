@@ -1,0 +1,186 @@
+{
+  "filename": "Session 04 - Parameters, Request body và Pydantic Validation",
+  "subdir": "Bài giảng",
+  "title": "Parameters, Request body & Pydantic Validation",
+  "module": "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+  "version": "1.0",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Parameters, Request body & Pydantic Validation",
+      "content": [
+        "Session 04",
+        "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+        "Phiên bản: 1.0"
+      ]
+    },
+    {
+      "layout": "agenda",
+      "section": "NỘI DUNG",
+      "title": "Nội dung bài học",
+      "content": [
+        "1. Path Parameters: Định danh & Lấy dữ liệu từ URL",
+        "2. Query Parameters: Tìm kiếm & Lọc dữ liệu",
+        "3. Request Body với Pydantic: Đọc & Validate JSON",
+        "4. Type Hints: Ràng buộc dữ liệu nâng cao với Query, Path, Field"
+      ]
+    },
+    {
+      "layout": "section-title",
+      "section": "1. Path Parameters",
+      "title": "Phần 1: Path Parameters - Lấy dữ liệu từ URL",
+      "content": [
+        "Định danh tài nguyên RESTful",
+        "Cú pháp khai báo trong FastAPI",
+        "Ép kiểu dữ liệu tự động"
+      ]
+    },
+    {
+      "layout": "bullets",
+      "section": "1. Path Parameters",
+      "title": "Khái niệm Path Parameters",
+      "content": [
+        "Là phần thay đổi trực tiếp nằm trên URL nhằm xác định tài nguyên cụ thể.",
+        "Ví dụ: Trong đường dẫn /students/123, '123' là mã số của sinh viên cần lấy.",
+        "Sử dụng cho các trường hợp lấy chi tiết, cập nhật hoặc xóa một tài nguyên cụ thể."
+      ],
+      "diagram_hint": "Hình minh họa URL /students/{student_id} với mũi tên chỉ vào {student_id} chú thích 'Path Parameter'"
+    },
+    {
+      "layout": "code",
+      "section": "1. Path Parameters",
+      "title": "Khai báo Path Parameter trong code",
+      "content": [
+        "from fastapi import FastAPI\napp = FastAPI()\n\n@app.get(\"/students/{student_id}\")\ndef read_student(student_id: int):\n    return {\"student_id\": student_id}"
+      ],
+      "speaker_notes": "Giải thích cách bọc ngoặc nhọn ở route và khai báo kiểu int ở hàm."
+    },
+    {
+      "layout": "bullets",
+      "section": "1. Path Parameters",
+      "title": "Quy tắc thứ tự khai báo Route",
+      "content": [
+        "FastAPI phân giải các route từ trên xuống dưới.",
+        "Nếu route động đặt trước route tĩnh, route tĩnh sẽ bị nuốt chửng và lỗi validate 422.",
+        "Giải pháp: Đặt route tĩnh (ví dụ /students/me) trước route động (ví dụ /students/{student_id})."
+      ],
+      "speaker_notes": "Nhấn mạnh lỗi thường gặp của học viên khi làm API thông tin cá nhân."
+    },
+    {
+      "layout": "section-title",
+      "section": "2. Query Parameters",
+      "title": "Phần 2: Query Parameters - Tìm kiếm và Lọc",
+      "content": [
+        "Khái niệm tham số truy vấn",
+        "Khai báo tham số tùy chọn",
+        "Ép kiểu logic Boolean"
+      ]
+    },
+    {
+      "layout": "bullets",
+      "section": "2. Query Parameters",
+      "title": "Khái niệm Query Parameters",
+      "content": [
+        "Là các cặp key-value xuất hiện sau dấu '?' trên URL.",
+        "Ví dụ: /courses?keyword=python&level=beginner.",
+        "Dùng để lọc dữ liệu, phân trang hoặc tìm kiếm. Không trực tiếp làm thay đổi định danh đường dẫn chính."
+      ]
+    },
+    {
+      "layout": "code",
+      "section": "2. Query Parameters",
+      "title": "Khai báo Query Parameter",
+      "content": [
+        "@app.get(\"/courses\")\ndef get_courses(keyword: str = \"\", level: str | None = None):\n    # keyword và level là các query parameter tùy chọn vì có giá trị mặc định\n    return {\"keyword\": keyword, \"level\": level}"
+      ],
+      "speaker_notes": "So sánh: tham số không khai báo ở route decorator chính là query parameter."
+    },
+    {
+      "layout": "section-title",
+      "section": "3. Request Body với Pydantic",
+      "title": "Phần 3: Request Body - Đọc & Validate JSON",
+      "content": [
+        "Giới thiệu Request Body",
+        "Kế thừa Pydantic BaseModel",
+        "Cơ chế validate tự động"
+      ]
+    },
+    {
+      "layout": "bullets",
+      "section": "3. Request Body với Pydantic",
+      "title": "Vì sao cần Request Body?",
+      "content": [
+        "Khi cần gửi dữ liệu lớn, có cấu trúc và cần bảo mật (như đăng ký sinh viên mới).",
+        "Dữ liệu được gửi ẩn trong thân HTTP request dưới định dạng JSON.",
+        "FastAPI kết hợp với Pydantic để tự động hóa việc đọc và kiểm tra cấu trúc dữ liệu này."
+      ]
+    },
+    {
+      "layout": "code",
+      "section": "3. Request Body với Pydantic",
+      "title": "Sử dụng Pydantic BaseModel",
+      "content": [
+        "from pydantic import BaseModel\n\nclass StudentCreate(BaseModel):\n    name: str\n    email: str\n    age: int\n\n@app.post(\"/students\")\ndef create(student: StudentCreate):\n    return student"
+      ],
+      "speaker_notes": "Hướng dẫn cách viết BaseModel và tích hợp vào hàm POST."
+    },
+    {
+      "layout": "section-title",
+      "section": "4. Type Hints",
+      "title": "Phần 4: Ràng buộc dữ liệu nâng cao",
+      "content": [
+        "Sử dụng Query() và Path() của FastAPI",
+        "Sử dụng Field() của Pydantic",
+        "Phân tích cấu trúc lỗi 422"
+      ]
+    },
+    {
+      "layout": "code",
+      "section": "4. Type Hints",
+      "title": "Validate với Query() và Path()",
+      "content": [
+        "from fastapi import Query, Path\n\n@app.get(\"/items/{id}\")\ndef read(\n    id: int = Path(..., ge=1),\n    keyword: str = Query(None, min_length=2)\n):\n    return {\"id\": id, \"keyword\": keyword}"
+      ],
+      "speaker_notes": "Giải thích ge=1 là lớn hơn hoặc bằng 1, và min_length=2 là độ dài chuỗi tối thiểu."
+    },
+    {
+      "layout": "code",
+      "section": "4. Type Hints",
+      "title": "Validate thuộc tính với Field()",
+      "content": [
+        "from pydantic import Field, BaseModel\n\nclass Product(BaseModel):\n    name: str = Field(..., min_length=2)\n    price: float = Field(..., gt=0)"
+      ],
+      "speaker_notes": "Giải thích cách dùng Field() trong BaseModel để kiểm soát chặt chẽ giá trị thuộc tính."
+    },
+    {
+      "layout": "bullets",
+      "section": "4. Type Hints",
+      "title": "Cơ chế báo lỗi HTTP 422",
+      "content": [
+        "Khi dữ liệu gửi lên vi phạm bất kỳ ràng buộc nào, FastAPI lập tức chặn lại.",
+        "Phản hồi mã trạng thái 422 Unprocessable Entity.",
+        "JSON trả về chứa loc (vị trí xảy ra lỗi), msg (thông điệp chi tiết) và type (mã lỗi)."
+      ],
+      "diagram_hint": "Sơ đồ JSON lỗi 422 chỉ ra ba thành phần loc, msg, type"
+    },
+    {
+      "layout": "summary",
+      "section": "TỔNG KẾT",
+      "title": "Tổng kết bài học",
+      "content": [
+        "Path Parameter: Dùng ngoặc nhọn {}, định danh duy nhất tài nguyên.",
+        "Query Parameter: Lọc & tìm kiếm, mặc định khi không khai báo ở route.",
+        "Request Body: Đọc dữ liệu JSON phức tạp qua Pydantic BaseModel.",
+        "Query(), Path(), Field(): Đặt ràng buộc dữ liệu trực quan trên Type Hints.",
+        "Lỗi 422: Tự động trả về khi validate thất bại, chứa chi tiết vị trí lỗi."
+      ]
+    },
+    {
+      "layout": "closing",
+      "title": "KẾT THÚC",
+      "content": [
+        "HỌC VIỆN ĐÀO TẠO LẬP TRÌNH CHẤT LƯỢNG NHẬT BẢN"
+      ]
+    }
+  ]
+}

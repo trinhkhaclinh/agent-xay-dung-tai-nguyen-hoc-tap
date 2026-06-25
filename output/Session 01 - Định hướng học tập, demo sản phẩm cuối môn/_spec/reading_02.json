@@ -1,0 +1,86 @@
+{
+  "filename": "BÀI ĐỌC_ PHÂN TÍCH SẢN PHẨM CUỐI MÔN_",
+  "subdir": "Bài đọc",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Bài Đọc Chuyên Sâu: Demo & Phân Tích Kiến Trúc Sản Phẩm Cuối Môn"
+    },
+    {
+      "type": "p",
+      "text": "Đích đến của môn học IT-215 là xây dựng một hệ thống Web API chất lượng cao cho một dự án thực tế (ví dụ: Hệ thống quản lý trung tâm đào tạo hoặc Hệ thống bán hàng). Để hình dung rõ sản phẩm này, chúng ta cần phân tích kiến trúc hệ thống Client-Server-Database và tìm hiểu các tính năng nghiệp vụ bắt buộc phải có."
+    },
+    {
+      "type": "h2",
+      "text": "1. Tổng quan Kiến trúc Client-API-Database"
+    },
+    {
+      "type": "p",
+      "text": "Một ứng dụng web hiện đại thường tuân theo kiến trúc 3 tầng tách biệt giúp nâng cao khả năng mở rộng:"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "**Client (Giao diện):** Nơi người dùng tương tác trực tiếp (giao diện Web React/Vue hoặc ứng dụng di động Mobile App).",
+        "**API Server (Backend):** Máy chủ viết bằng FastAPI tiếp nhận request, kiểm tra nghiệp vụ, tương tác với database và trả dữ liệu JSON.",
+        "**Database (Cơ sở dữ liệu):** MySQL lưu trữ các bảng thông tin một cách bền vững."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "API đóng vai trò là chiếc cầu nối duy nhất truyền tải thông tin an toàn giữa giao diện người dùng và cơ sở dữ liệu."
+    },
+    {
+      "type": "h2",
+      "text": "2. Cấu trúc Thư mục Dự án FastAPI mẫu"
+    },
+    {
+      "type": "p",
+      "text": "Để dự án lớn không bị rối và dễ bảo trì, chúng ta tổ chức code theo cấu trúc phân lớp chức năng tiêu chuẩn:"
+    },
+    {
+      "type": "code",
+      "lang": "text",
+      "text": "my_project/\n├── app/                         # Thư mục chính chứa mã nguồn\n│   ├── main.py                  # Điểm chạy khởi tạo ứng dụng\n│   ├── database.py              # Cấu hình kết nối MySQL\n│   ├── models.py                # Định nghĩa các bảng cơ sở dữ liệu (ORM)\n│   ├── schemas.py               # Định nghĩa schema validate dữ liệu (Pydantic)\n│   ├── services.py              # Xử lý logic nghiệp vụ chính\n│   └── routers/                 # Quản lý định tuyến chia nhỏ API\n│       ├── users.py             # Các API liên quan đến người dùng\n│       └── courses.py           # Các API liên quan đến môn học\n├── requirements.txt             # Danh sách thư viện cần cài đặt\n└── README.md                    # Hướng dẫn chạy dự án"
+    },
+    {
+      "type": "h2",
+      "text": "3. Các Tính năng Cốt lõi của Sản phẩm Cuối khóa"
+    },
+    {
+      "type": "p",
+      "text": "Dự án cuối khóa của học viên bắt buộc phải có tối thiểu các nhóm chức năng sau:"
+    },
+    {
+      "type": "numbers",
+      "items": [
+        "Quản lý CRUD: Cho phép tạo mới, hiển thị chi tiết, cập nhật và xóa tài nguyên.",
+        "Tìm kiếm & Phân trang: Lọc danh sách theo từ khóa, giới hạn số bản ghi trả về.",
+        "Xác thực & Phân quyền: Đăng ký, đăng nhập nhận token JWT; phân chia quyền Admin và User.",
+        "Tài liệu API Swagger UI: Mọi API phải được mô tả đầy đủ tham số và phản hồi lỗi chuẩn xác."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Tổng Kết"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Sản phẩm cuối môn là một Web API hoàn chỉnh viết bằng FastAPI kết nối MySQL.",
+        "Mô hình kiến trúc Client-API-Database giúp phân tách giao diện và xử lý dữ liệu độc lập.",
+        "Cấu trúc dự án phân lớp rõ ràng (models, schemas, services, routers) là yêu cầu kỹ thuật bắt buộc."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Tài Liệu Tham Khảo"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "FastAPI Project Structure Best Practices: https://fastapi.tiangolo.com/tutorial/bigger-applications/"
+      ]
+    }
+  ]
+}

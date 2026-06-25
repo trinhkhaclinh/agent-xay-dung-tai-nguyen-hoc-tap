@@ -1,0 +1,101 @@
+---
+type: "kich-ban-video"
+title: "Lesson 02 - Kiến trúc và hiệu năng của FastAPI"
+session: 2
+lesson: 1
+tags:
+  - "type/kich-ban-video"
+  - "session/02"
+concepts:
+  - "[[Mô hình Client-Server]]"
+  - "[[Request-Response & HTTP-HTTPS|Request/Response & HTTP/HTTPS]]"
+  - "[[Định dạng JSON]]"
+  - "[[Kiến trúc Decoupled (Frontend-Backend tách biệt)|Kiến trúc Decoupled (Frontend/Backend tách biệt)]]"
+  - "[[SSR vs SPA vs API-first]]"
+  - "[[FastAPI = Starlette + Pydantic]]"
+  - "[[WSGI vs ASGI]]"
+  - "[[Uvicorn (ASGI server)]]"
+deliverable_filename: "Lesson 02 - Kiến trúc và hiệu năng của FastAPI"
+status: "done"
+---
+
+## Kiến trúc của FastAPI
+
+Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Trong bài học hôm nay, thầy và các em sẽ cùng nhau tìm hiểu về kiến trúc bên trong của FastAPI, sự khác biệt giữa hai chuẩn WSGI và ASGI, và lý do vì sao FastAPI đạt được hiệu năng cao nhờ Uvicorn. Đây là phần tiếp nối trực tiếp của video trước, khi chúng ta đã hiểu mô hình Client - Server.
+
+Ở video trước, thầy đã hứa sẽ trả lời câu hỏi: FastAPI được xây dựng như thế nào và tại sao nó nhanh đến vậy. Bây giờ chúng ta sẽ cùng giải đáp. Trước hết, thầy muốn các em hiểu rằng FastAPI không phải được viết lại từ con số không. Nó được xây dựng khéo léo dựa trên hai thư viện nền tảng rất mạnh.
+
+**[Chuyển tiếp slide]**
+
+Các em hãy nhìn vào sơ đồ kiến trúc trên màn hình. Ở giữa là FastAPI. Bên dưới đỡ nó là hai trụ cột. Trụ cột thứ nhất là Starlette, đóng vai trò là bộ công cụ web. Trụ cột thứ hai là Pydantic, đóng vai trò kiểm tra và xác thực dữ liệu.
+
+Thầy sẽ giải thích vai trò của từng phần. Starlette là một web toolkit chịu trách nhiệm cho những việc như định tuyến, tức routing, và xử lý middleware. Nói nôm na, Starlette lo phần vận hành mạng và điều hướng các Request đến đúng nơi cần xử lý. Còn Pydantic chịu trách nhiệm xác thực dữ liệu dựa trên type hints của Python, tức là dựa vào việc các em khai báo kiểu dữ liệu. Nhờ Pydantic, FastAPI có thể tự động kiểm tra dữ liệu đầu vào có hợp lệ hay không.
+
+- FastAPI = Starlette + Pydantic.
+- Starlette: web toolkit lo routing và middleware.
+- Pydantic: xác thực dữ liệu dựa trên type hints.
+
+Các em hãy ghi nhớ công thức ngắn gọn này: FastAPI bằng Starlette cộng với Pydantic. Chính nhờ đứng trên vai hai người khổng lồ này mà FastAPI vừa nhanh trong việc xử lý mạng, vừa an toàn và chặt chẽ trong việc kiểm soát dữ liệu, mà người lập trình lại viết rất ít code.
+
+**[Chuyển tiếp slide]**
+
+## WSGI so với ASGI
+
+Để hiểu vì sao FastAPI nhanh, thầy và các em cần so sánh hai chuẩn giao tiếp giữa web server và ứng dụng Python. Đó là WSGI và ASGI. Đây là phần hơi mang tính kỹ thuật, nhưng thầy sẽ giải thích thật đời thường để các em dễ hình dung.
+
+Chuẩn cũ hơn là WSGI, được dùng trong các framework quen thuộc như Django hay Flask. WSGI xử lý theo cơ chế đồng bộ. Nghĩa là gì? Mỗi Request đến sẽ chiếm trọn một luồng xử lý, tức một thread, và phải xử lý xong hoàn toàn mới giải phóng để phục vụ Request tiếp theo. Các em hãy hình dung một quầy thanh toán siêu thị chỉ có một nhân viên, khách phải xếp hàng lần lượt, người trước xong thì người sau mới tới.
+
+Vấn đề nằm ở chỗ: nhiều tác vụ web phải chờ đợi, ví dụ chờ truy vấn cơ sở dữ liệu hoặc chờ gọi một dịch vụ khác. Trong lúc chờ, luồng xử lý đó bị khóa lại, không làm được việc gì khác, rất lãng phí.
+
+Chuẩn mới hơn là ASGI, mà FastAPI sử dụng. ASGI hỗ trợ xử lý bất đồng bộ, dựa trên cơ chế async và await trong Python. Điều này có nghĩa là trong lúc một Request đang phải chờ đợi, ví dụ chờ cơ sở dữ liệu trả kết quả, hệ thống có thể tạm gác nó sang một bên và quay sang phục vụ Request khác. Nhờ vậy, cùng một lượng tài nguyên nhưng ASGI chịu được tải cao hơn rất nhiều.
+
+- WSGI (Django, Flask): xử lý đồng bộ, mỗi Request chiếm một thread cho đến khi xong.
+- ASGI: xử lý bất đồng bộ với async và await, tận dụng thời gian chờ để phục vụ Request khác.
+- Kết quả: ASGI chịu tải cao hơn, phù hợp với ứng dụng hiện đại nhiều người dùng đồng thời.
+
+**[Chuyển tiếp slide]**
+
+## Uvicorn và hiệu năng của FastAPI
+
+Đến đây các em có thể thắc mắc: vậy bản thân FastAPI có tự chạy được không? Câu trả lời quan trọng mà thầy muốn các em ghi nhớ là: không. FastAPI tự nó không lắng nghe cổng mạng. Nó cần một ASGI server đứng phía trước để tiếp nhận các Request từ Internet rồi chuyển vào cho ứng dụng FastAPI xử lý.
+
+ASGI server phổ biến nhất, và là server mà chúng ta sẽ dùng xuyên suốt khóa học này, chính là Uvicorn. Uvicorn là một ASGI server siêu nhanh. Nó chính là cầu nối đưa các Request từ bên ngoài vào ứng dụng FastAPI của các em, và đưa Response từ FastAPI trở ra ngoài.
+
+Các em hãy nhìn lại bức tranh tổng thể trên màn hình: Client gửi Request đến Uvicorn, Uvicorn chuyển cho FastAPI, FastAPI xử lý nhờ Starlette và Pydantic, rồi trả Response ngược lại qua Uvicorn để về Client. Chính nhờ sự kết hợp của chuẩn ASGI bất đồng bộ cùng với Uvicorn siêu nhanh, hiệu năng của FastAPI được đẩy lên rất cao, tiệm cận với những công nghệ nổi tiếng về tốc độ như NodeJS và Go.
+
+Thầy muốn các em hiểu rằng đây không phải lời quảng cáo. Đây là kết quả của việc FastAPI chọn đúng kiến trúc: đứng trên Starlette và Pydantic, tuân theo chuẩn ASGI, và chạy cùng Uvicorn. Tốc độ cao mà vẫn dễ viết, đó là lý do FastAPI ngày càng được ưa chuộng.
+
+**[Chuyển tiếp slide]**
+
+## Sơ đồ Client - API - Database
+
+Trước khi kết thúc, thầy muốn chốt lại toàn bộ kiến thức của hai video đầu bằng một sơ đồ mà sản phẩm đầu ra của lesson này yêu cầu các em phải vẽ được. Đó là sơ đồ Client đến API đến Database.
+
+Các em hãy hình dung dòng chảy như sau. Ngoài cùng bên trái là Client, ví dụ trình duyệt hay ứng dụng di động. Client gửi Request đến API, chính là ứng dụng FastAPI của chúng ta đang chạy nhờ Uvicorn. API tiếp nhận yêu cầu, và nếu cần dữ liệu, nó sẽ truy vấn xuống Database, tức cơ sở dữ liệu. Database trả dữ liệu lên cho API, API đóng gói thành JSON và gửi Response ngược về Client.
+
+- Client: gửi Request, nhận và hiển thị dữ liệu.
+- API (FastAPI + Uvicorn): tiếp nhận, xử lý logic, trả JSON.
+- Database: lưu trữ và cung cấp dữ liệu cho API.
+
+Thầy mong các em tự tay vẽ lại sơ đồ ba lớp này. Khi các em vẽ được nó và giải thích được vai trò từng lớp, nghĩa là các em đã thực sự nắm vững bức tranh kiến trúc tổng thể, và đã sẵn sàng để bắt tay vào thiết lập môi trường lập trình ở bài học tiếp theo.
+
+**[Chuyển tiếp slide]**
+
+## Tổng kết bài giảng
+
+Như vậy là trong bài học hôm nay, thầy và các em đã hiểu rõ kiến trúc bên trong của FastAPI. Chúng ta biết rằng FastAPI bằng Starlette cộng Pydantic, phân biệt được WSGI đồng bộ với ASGI bất đồng bộ, hiểu vì sao FastAPI cần Uvicorn để vận hành và đạt hiệu năng tiệm cận NodeJS hay Go, đồng thời vẽ được sơ đồ Client đến API đến Database.
+
+Cảm ơn các em đã theo dõi bài học hôm nay. Hẹn gặp lại các em trong các bài học tiếp theo.
+
+## Khái niệm liên quan
+
+- [[Mô hình Client-Server]]
+- [[Request-Response & HTTP-HTTPS|Request/Response & HTTP/HTTPS]]
+- [[Định dạng JSON]]
+- [[Kiến trúc Decoupled (Frontend-Backend tách biệt)|Kiến trúc Decoupled (Frontend/Backend tách biệt)]]
+- [[SSR vs SPA vs API-first]]
+- [[FastAPI = Starlette + Pydantic]]
+- [[WSGI vs ASGI]]
+- [[Uvicorn (ASGI server)]]
+
+— Thuộc [[Session 02 — MOC]]

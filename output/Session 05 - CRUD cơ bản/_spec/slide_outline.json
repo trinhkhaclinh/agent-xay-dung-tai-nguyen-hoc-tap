@@ -1,0 +1,163 @@
+{
+  "filename": "Session 05 - CRUD co ban",
+  "subdir": "Bài giảng",
+  "title": "CRUD cơ bản",
+  "module": "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+  "version": "1.0",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "CRUD cơ bản",
+      "content": [
+        "Session 05",
+        "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+        "Phiên bản: 1.0"
+      ]
+    },
+    {
+      "layout": "agenda",
+      "section": "NỘI DUNG",
+      "title": "Nội dung bài học",
+      "content": [
+        "1. API Create: Tạo dữ liệu (POST)",
+        "2. API Read: Đọc dữ liệu (GET)",
+        "3. API Update: Cập nhật dữ liệu (PUT)",
+        "4. API Delete: Xóa dữ liệu (DELETE)"
+      ]
+    },
+    {
+      "layout": "section-title",
+      "section": "1. API Create",
+      "title": "Phần 1: API Create - Tạo mới dữ liệu",
+      "content": [
+        "Phương thức HTTP POST",
+        "Mã phản hồi 201 Created",
+        "Kiểm tra trùng lặp in-memory"
+      ]
+    },
+    {
+      "layout": "bullets",
+      "section": "1. API Create",
+      "title": "Thao tác Create với POST",
+      "content": [
+        "Dùng để gửi dữ liệu từ Request Body lên server nhằm tạo tài nguyên mới.",
+        "Không mang tính chất idempotent: mỗi lần gọi POST thành công sinh ra 1 tài nguyên mới.",
+        "Phản hồi thành công: HTTP 201 Created kèm đối tượng vừa tạo."
+      ]
+    },
+    {
+      "layout": "code",
+      "section": "1. API Create",
+      "title": "Triển khai POST API trong FastAPI",
+      "content": [
+        "@app.post(\"/students\", status_code=201)\ndef create(student: StudentCreate):\n    # logic validate email trùng lặp\n    # append vào list in-memory\n    return new_student"
+      ],
+      "speaker_notes": "Hướng dẫn cấu hình status_code=201 trong decorator và xử lý trùng lặp email."
+    },
+    {
+      "layout": "section-title",
+      "section": "2. API Read",
+      "title": "Phần 2: API Read - Truy xuất dữ liệu",
+      "content": [
+        "Phương thức HTTP GET",
+        "Lọc danh sách theo keyword",
+        "Xử lý chi tiết và lỗi 404 Not Found"
+      ]
+    },
+    {
+      "layout": "bullets",
+      "section": "2. API Read",
+      "title": "Thao tác Read với GET",
+      "content": [
+        "Đọc dữ liệu từ server, mang tính chất an toàn (Safe) và đồng nhất (Idempotent).",
+        "GET /students: Lấy danh sách toàn bộ, kết hợp query parameter để tìm kiếm.",
+        "GET /students/{id}: Lấy chi tiết. Trả về 404 Not Found nếu ID không tồn tại."
+      ]
+    },
+    {
+      "layout": "code",
+      "section": "2. API Read",
+      "title": "Triển khai GET API trong FastAPI",
+      "content": [
+        "@app.get(\"/students/{student_id}\")\ndef detail(student_id: int):\n    # tìm sinh viên khớp ID\n    # không thấy -> raise HTTPException(status_code=404)\n    return student"
+      ],
+      "speaker_notes": "Giải thích mã lỗi 404 Not Found và cách ném lỗi với HTTPException."
+    },
+    {
+      "layout": "section-title",
+      "section": "3. API Update",
+      "title": "Phần 3: API Update - Cập nhật dữ liệu",
+      "content": [
+        "Phương thức HTTP PUT",
+        "Tính chất ghi đè toàn bộ",
+        "Phân biệt PUT và PATCH"
+      ]
+    },
+    {
+      "layout": "bullets",
+      "section": "3. API Update",
+      "title": "Thao tác Update với PUT",
+      "content": [
+        "PUT dùng để ghi đè/thay thế hoàn toàn tài nguyên đang tồn tại.",
+        "Client phải gửi lên toàn bộ các trường của schema.",
+        "Khác biệt với PATCH: PATCH chỉ cập nhật một vài trường được chỉ định (cập nhật từng phần)."
+      ]
+    },
+    {
+      "layout": "code",
+      "section": "3. API Update",
+      "title": "Triển khai PUT API trong FastAPI",
+      "content": [
+        "@app.put(\"/students/{student_id}\")\ndef update(student_id: int, data: StudentUpdate):\n    # tìm ID -> ghi đè name, email\n    # không thấy -> raise 404 Not Found\n    return updated_student"
+      ],
+      "speaker_notes": "Hướng dẫn cách viết logic ghi đè thuộc tính in-memory."
+    },
+    {
+      "layout": "section-title",
+      "section": "4. API Delete",
+      "title": "Phần 4: API Delete - Xóa dữ liệu",
+      "content": [
+        "Phương thức HTTP DELETE",
+        "Mã trạng thái 204 No Content",
+        "Xóa vật lý vs Xóa mềm (Soft Delete)"
+      ]
+    },
+    {
+      "layout": "bullets",
+      "section": "4. API Delete",
+      "title": "Thao tác Delete với DELETE",
+      "content": [
+        "DELETE dùng để loại bỏ tài nguyên ra khỏi hệ thống.",
+        "Xóa thành công thường trả về mã 204 No Content (body trống) hoặc 200 OK.",
+        "Phân loại: Xóa vật lý (xóa vĩnh viễn) và Xóa mềm (chỉ đổi cờ trạng thái is_deleted = True)."
+      ]
+    },
+    {
+      "layout": "code",
+      "section": "4. API Delete",
+      "title": "Triển khai DELETE API trong FastAPI",
+      "content": [
+        "@app.delete(\"/students/{student_id}\", status_code=204)\ndef delete(student_id: int):\n    # tìm ID -> pop khỏi list\n    # không thấy -> raise 404\n    return # 204 trả về body rỗng"
+      ],
+      "speaker_notes": "Giải thích mã 204 No Content và cách trả về body trống khi xóa thành công."
+    },
+    {
+      "layout": "summary",
+      "section": "TỔNG KẾT",
+      "title": "Tổng kết bài học",
+      "content": [
+        "Create: HTTP POST, trả về 201 Created.",
+        "Read: HTTP GET, an toàn/idempotent, trả lỗi 404 Not Found.",
+        "Update: HTTP PUT, ghi đè toàn bộ, phân biệt với PATCH cập nhật từng phần.",
+        "Delete: HTTP DELETE, xóa vật lý hoặc xóa mềm, trả về 204 No Content."
+      ]
+    },
+    {
+      "layout": "closing",
+      "title": "KẾT THÚC",
+      "content": [
+        "HỌC VIỆN ĐÀO TẠO LẬP TRÌNH CHẤT LƯỢNG NHẬT BẢN"
+      ]
+    }
+  ]
+}

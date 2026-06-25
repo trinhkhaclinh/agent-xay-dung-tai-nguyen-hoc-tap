@@ -1,0 +1,129 @@
+{
+  "session_no": 5,
+  "session_id": "Session 05",
+  "title": "CRUD cơ bản",
+  "folder_name": "Session 05 - CRUD cơ bản",
+  "module": "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+  "hinh_thuc_hoc": "Lý thuyết",
+  "summary": "Học cách thiết kế và triển khai 4 thao tác quản lý dữ liệu cơ bản (CRUD) in-memory bằng FastAPI: API Create (POST), API Read (GET), API Update (PUT), và API Delete (DELETE) kết hợp xử lý các mã trạng thái HTTP thích hợp và kiểm chứng dữ liệu bằng Pydantic.",
+  "domain_xuyen_suot": "Quản lý thông tin học viên / khóa học (nhất quán với các Session trước). Học viên thực hiện các thao tác CRUD in-memory trước khi tích hợp cơ sở dữ liệu thực ở giai đoạn sau.",
+  "lessons": [
+    {
+      "no": 1,
+      "title": "API Create (Tạo dữ liệu)",
+      "objectives": [
+        "Triển khai (Vận dụng) Endpoint POST để nhận dữ liệu và thêm mới sinh viên/khóa học",
+        "Giải thích (Hiểu) mã trạng thái HTTP 201 Created và cách phản hồi dữ liệu sau khi tạo thành công"
+      ],
+      "key_concepts": [
+        "POST method",
+        "HTTP 201 Created",
+        "In-memory database",
+        "Dữ liệu trùng lặp"
+      ],
+      "scenario": "API thêm mới sinh viên vào danh sách in-memory của hệ thống. Kiểm tra trùng lặp email và phản hồi mã 201 Created cùng đối tượng mới.",
+      "facts": [
+        "Thao tác Create thường ánh xạ tới phương thức POST trong kiến trúc RESTful.",
+        "HTTP 201 Created là mã trạng thái chuẩn khi một tài nguyên được tạo thành công."
+      ],
+      "code_examples": [
+        {
+          "caption": "Triển khai API POST tạo mới sinh viên (main.py)",
+          "lang": "python",
+          "code": "from fastapi import FastAPI, HTTPException, status\nfrom pydantic import BaseModel\n\napp = FastAPI()\nstudents = []\n\nclass StudentCreate(BaseModel):\n    name: str\n    email: str\n\n@app.post(\"/students\", status_code=status.HTTP_201_CREATED)\ndef create_student(student: StudentCreate):\n    for s in students:\n        if s[\"email\"] == student.email:\n            raise HTTPException(status_code=400, detail=\"Email đã tồn tại\")\n    new_student = {\"id\": len(students) + 1, \"name\": student.name, \"email\": student.email}\n    students.append(new_student)\n    return new_student"
+        }
+      ],
+      "san_pham_dau_ra": "API POST"
+    },
+    {
+      "no": 2,
+      "title": "API Read (Đọc dữ liệu)",
+      "objectives": [
+        "Triển khai (Vận dụng) API GET lấy danh sách toàn bộ hoặc lọc theo từ khóa",
+        "Triển khai (Vận dụng) API GET lấy chi tiết một sinh viên theo ID và trả về lỗi 404 nếu không tìm thấy"
+      ],
+      "key_concepts": [
+        "GET method",
+        "HTTP 200 OK",
+        "HTTP 404 Not Found",
+        "Lọc danh sách"
+      ],
+      "scenario": "API lấy danh sách toàn bộ sinh viên (lọc theo tên) và lấy thông tin chi tiết một sinh viên theo ID. Trả lỗi 404 nếu ID không hợp lệ.",
+      "facts": [
+        "GET là phương thức an toàn (safe) và không thay đổi trạng thái hệ thống (idempotent).",
+        "HTTP 404 Not Found là mã trạng thái chuẩn khi truy xuất tài nguyên không tồn tại."
+      ],
+      "code_examples": [
+        {
+          "caption": "Triển khai API GET lấy danh sách và chi tiết sinh viên",
+          "lang": "python",
+          "code": "@app.get(\"/students\")\ndef get_students(name: str = \"\"):\n    if name:\n        return [s for s in students if name.lower() in s[\"name\"].lower()]\n    return students\n\n@app.get(\"/students/{student_id}\")\ndef get_student(student_id: int):\n    for s in students:\n        if s[\"id\"] == student_id:\n            return s\n    raise HTTPException(status_code=404, detail=\"Không tìm thấy sinh viên\")"
+        }
+      ],
+      "san_pham_dau_ra": "API GET"
+    },
+    {
+      "no": 3,
+      "title": "API Update (Cập nhật dữ liệu)",
+      "objectives": [
+        "Triển khai (Vận dụng) API PUT để ghi đè cập nhật thông tin tài nguyên",
+        "Phân tích (Phân tích) sự khác biệt giữa ghi đè toàn bộ (PUT) và cập nhật từng phần (PATCH)"
+      ],
+      "key_concepts": [
+        "PUT method",
+        "Idempotent update",
+        "Ghi đè thuộc tính",
+        "Cập nhật từng phần (PATCH)"
+      ],
+      "scenario": "API cập nhật toàn bộ thông tin của sinh viên qua PUT `/students/{student_id}`. Kiểm tra xem ID có tồn tại không trước khi ghi đè thuộc tính.",
+      "facts": [
+        "Phương thức PUT yêu cầu client gửi lên toàn bộ các trường để thay thế tài nguyên cũ.",
+        "PUT là thao tác idempotent: thực hiện nhiều lần cùng một dữ liệu cho kết quả giống nhau."
+      ],
+      "code_examples": [
+        {
+          "caption": "Triển khai API PUT cập nhật sinh viên",
+          "lang": "python",
+          "code": "class StudentUpdate(BaseModel):\n    name: str\n    email: str\n\n@app.put(\"/students/{student_id}\")\ndef update_student(student_id: int, student: StudentUpdate):\n    for s in students:\n        if s[\"id\"] == student_id:\n            s[\"name\"] = student.name\n            s[\"email\"] = student.email\n            return s\n    raise HTTPException(status_code=404, detail=\"Không tìm thấy sinh viên\")"
+        }
+      ],
+      "san_pham_dau_ra": "API PUT"
+    },
+    {
+      "no": 4,
+      "title": "API Delete (Xóa dữ liệu)",
+      "objectives": [
+        "Triển khai (Vận dụng) API DELETE để xóa bỏ tài nguyên",
+        "Giải thích (Hiểu) các mã trạng thái HTTP phản hồi khi xóa thành công (204 No Content hoặc 200 OK)"
+      ],
+      "key_concepts": [
+        "DELETE method",
+        "HTTP 204 No Content",
+        "Xóa vật lý",
+        "Xóa mềm (Soft Delete)"
+      ],
+      "scenario": "API xóa sinh viên khỏi danh sách theo ID thông qua phương thức DELETE. Kiểm tra ID tồn tại và phản hồi mã 204 No Content hoặc 200 OK kèm thông điệp.",
+      "facts": [
+        "DELETE là phương thức idempotent: xóa lần đầu trả về 200/204; các lần sau có thể trả về 404 nhưng trạng thái hệ thống không đổi.",
+        "Mã 204 No Content phản hồi khi thao tác thành công và server không gửi kèm body."
+      ],
+      "code_examples": [
+        {
+          "caption": "Triển khai API DELETE xóa sinh viên",
+          "lang": "python",
+          "code": "@app.delete(\"/students/{student_id}\", status_code=status.HTTP_204_NO_CONTENT)\ndef delete_student(student_id: int):\n    global students\n    for idx, s in enumerate(students):\n        if s[\"id\"] == student_id:\n            students.pop(idx)\n            return\n    raise HTTPException(status_code=404, detail=\"Không tìm thấy sinh viên\")"
+        }
+      ],
+      "san_pham_dau_ra": "API DELETE"
+    }
+  ],
+  "prior_session": {
+    "no": 4,
+    "title": "Parameters, Request body & Pydantic Validation",
+    "review_topics": [
+      "Path Parameters & Query Parameters",
+      "Pydantic BaseModel & Field Constraints",
+      "Lỗi 422 Unprocessable Entity"
+    ]
+  }
+}

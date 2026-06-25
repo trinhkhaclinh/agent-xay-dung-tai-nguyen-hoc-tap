@@ -1,0 +1,339 @@
+{
+  "filename": "Session 02 - Giới thiệu và Cài đặt FastAPI",
+  "subdir": "Bài giảng",
+  "title": "Giới thiệu và Cài đặt FastAPI",
+  "module": "Module: Training Program Preparation",
+  "version": "1.0",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Giới thiệu và Cài đặt FastAPI",
+      "content": [
+        "Session 02",
+        "Module: Training Program Preparation",
+        "Phiên bản: 1.0"
+      ]
+    },
+    {
+      "layout": "agenda",
+      "section": "NỘI DUNG",
+      "title": "Nội dung",
+      "content": [
+        "1. Tổng quan kiến trúc web và FastAPI",
+        "2. Thiết lập môi trường và Virtual Environment",
+        "3. Khởi tạo ứng dụng FastAPI",
+        "4. API endpoint và routing",
+        "5. Tài liệu API với OpenAPI và Swagger UI"
+      ]
+    },
+
+    {
+      "layout": "section-title",
+      "section": "1. Tổng quan kiến trúc web và FastAPI",
+      "title": "1. Tổng quan kiến trúc web và FastAPI - 1",
+      "content": [
+        "Mô hình Client-Server và vòng đời Request-Response",
+        "SSR vs API-first, kiến trúc Decoupled",
+        "FastAPI, WSGI vs ASGI, Uvicorn"
+      ],
+      "speaker_notes": "Khớp Kịch bản video Lesson 01 phần Mở đầu: đặt vấn đề vì sao cần hiểu kiến trúc web trước khi viết API; nêu 3 trọng tâm của Lesson."
+    },
+    {
+      "layout": "bullets",
+      "section": "1. Tổng quan kiến trúc web và FastAPI",
+      "title": "1. Mô hình Client-Server & vòng đời Request-Response - 2",
+      "content": [
+        "Client gửi Request → Server xử lý → trả Response",
+        "HTTP/HTTPS là nền tảng mọi ứng dụng web hiện đại",
+        "JSON: định dạng trao đổi dữ liệu nhẹ giữa FE và BE",
+        "Chuỗi bọc nháy kép; số/bool không cần nháy"
+      ],
+      "diagram_hint": "Sơ đồ Client ↔ Internet (HTTP/HTTPS) ↔ Server, mũi tên Request đi và Response về",
+      "speaker_notes": "Khớp Kịch bản video Lesson 01 phần Request-Response: mở DevTools tab Network minh hoạ một cuộc gọi HTTP và xem JSON trả về."
+    },
+    {
+      "layout": "comparison-table",
+      "section": "1. Tổng quan kiến trúc web và FastAPI",
+      "title": "1. Web truyền thống (SSR) vs Web Service/API - 3",
+      "content": [
+        "SSR: server dựng và trả toàn bộ HTML cho trình duyệt",
+        "Decoupled/API-first: server chỉ trả dữ liệu thuần JSON",
+        "Một API phục vụ được Web, Mobile và bên thứ ba"
+      ],
+      "diagram_hint": "Bảng 2 cột so sánh: Web truyền thống (SSR) | Web Service (Decoupled/API)",
+      "speaker_notes": "Khớp Kịch bản video Lesson 01 phần So sánh SSR và API: đối chiếu trải nghiệm tải trang website tin tức SSR với SPA tiêu thụ API."
+    },
+    {
+      "layout": "comparison-table",
+      "section": "1. Tổng quan kiến trúc web và FastAPI",
+      "title": "1. WSGI vs ASGI và vai trò Uvicorn - 4",
+      "content": [
+        "WSGI (Django/Flask): đồng bộ, mỗi request một thread",
+        "ASGI: bất đồng bộ (async/await), chịu tải cao hơn",
+        "Uvicorn là ASGI server siêu nhanh cho FastAPI",
+        "Hiệu năng FastAPI tiệm cận NodeJS/Go"
+      ],
+      "diagram_hint": "Bảng 2 cột so sánh WSGI (đồng bộ) | ASGI (bất đồng bộ)",
+      "speaker_notes": "Khớp Kịch bản video Lesson 01 phần Hiệu năng: giải thích vì sao async giúp FastAPI chịu tải cao, dẫn vào vai trò của Uvicorn."
+    },
+    {
+      "layout": "3-card",
+      "section": "1. Tổng quan kiến trúc web và FastAPI",
+      "title": "1. FastAPI = Starlette + Pydantic - 5",
+      "content": [
+        "Starlette: web toolkit (routing, middleware)",
+        "Pydantic: data validation bằng type hints",
+        "Sơ đồ luồng: Client → API (FastAPI) → Database"
+      ],
+      "diagram_hint": "3 card: Starlette | Pydantic | Sơ đồ Client → API → Database",
+      "speaker_notes": "Khớp Kịch bản video Lesson 01 phần Kết: chốt FastAPI đứng trên Starlette + Pydantic; yêu cầu học viên vẽ được sơ đồ Client → API → Database (sản phẩm đầu ra)."
+    },
+
+    {
+      "layout": "section-title",
+      "section": "2. Thiết lập môi trường và Virtual Environment",
+      "title": "2. Thiết lập môi trường và Virtual Environment - 1",
+      "content": [
+        "Vì sao cần môi trường ảo",
+        "Tạo và kích hoạt venv đa nền tảng",
+        "Quản lý thư viện với pip và requirements.txt"
+      ],
+      "speaker_notes": "Khớp Kịch bản video Lesson 02 phần Mở đầu: nêu tình huống hai dự án cần hai phiên bản thư viện khác nhau, dẫn vào nhu cầu cô lập môi trường."
+    },
+    {
+      "layout": "bullets",
+      "section": "2. Thiết lập môi trường và Virtual Environment",
+      "title": "2. Vấn đề xung đột phiên bản - 2",
+      "content": [
+        "Cài thư viện vào Python hệ thống → dễ xung đột",
+        "Project A cần Lib X v1.0, Project B cần v2.0",
+        "Giải pháp: cô lập mỗi dự án bằng môi trường ảo"
+      ],
+      "diagram_hint": "Sơ đồ hai dự án dùng chung Python hệ thống bị xung đột vs mỗi dự án có venv riêng",
+      "speaker_notes": "Khớp Kịch bản video Lesson 02 phần Vấn đề: minh hoạ xung đột phiên bản qua tình huống Project A/B, nhấn mạnh đây là lý do tồn tại của venv."
+    },
+    {
+      "layout": "3-card",
+      "section": "2. Thiết lập môi trường và Virtual Environment",
+      "title": "2. Vòng đời môi trường ảo (venv) - 3",
+      "content": [
+        "Tạo: python -m venv venv (có trình thông dịch + pip riêng)",
+        "Kích hoạt: Windows .\\venv\\Scripts\\activate; macOS/Linux source venv/bin/activate",
+        "Hủy kích hoạt: deactivate; dấu hiệu là tiền tố (venv)"
+      ],
+      "diagram_hint": "3 card quy trình: Tạo → Kích hoạt → Hủy kích hoạt môi trường ảo",
+      "speaker_notes": "Khớp Kịch bản video Lesson 02 phần Thực hành venv: demo tạo, kích hoạt trên Windows và nhận biết tiền tố (venv) trên terminal."
+    },
+    {
+      "layout": "code",
+      "section": "2. Thiết lập môi trường và Virtual Environment",
+      "title": "2. Đóng gói và tái tạo môi trường - 4",
+      "content": [
+        "python -m venv venv",
+        ".\\venv\\Scripts\\activate",
+        "pip install fastapi uvicorn",
+        "pip freeze > requirements.txt"
+      ],
+      "diagram_hint": "Khối code bash 4 dòng kèm chú thích từng bước",
+      "speaker_notes": "Khớp Kịch bản video Lesson 02 phần Đóng gói: giải thích pip freeze > requirements.txt để khoá phiên bản và pip install -r requirements.txt để đồng đội tái tạo; nhắc thêm venv/ vào .gitignore. Sản phẩm đầu ra: môi trường Python + FastAPI hoạt động."
+    },
+
+    {
+      "layout": "section-title",
+      "section": "3. Khởi tạo ứng dụng FastAPI",
+      "title": "3. Khởi tạo ứng dụng FastAPI - 1",
+      "content": [
+        "Viết ứng dụng FastAPI tối thiểu trong main.py",
+        "Chạy server bằng Uvicorn",
+        "Cơ chế Hot Reload với --reload"
+      ],
+      "speaker_notes": "Khớp Kịch bản video Lesson 03 phần Mở đầu: dẫn dắt từ môi trường đã sẵn sàng sang viết và chạy ứng dụng FastAPI đầu tiên."
+    },
+    {
+      "layout": "3-card",
+      "section": "3. Khởi tạo ứng dụng FastAPI",
+      "title": "3. Quy trình 3 bước thiết lập code - 2",
+      "content": [
+        "Bước 1: nạp lớp FastAPI",
+        "Bước 2: tạo thực thể app = FastAPI()",
+        "Bước 3: định nghĩa route và hàm xử lý (@app.get)"
+      ],
+      "diagram_hint": "3 card đánh số: Nạp lớp → Tạo app → Định nghĩa route",
+      "speaker_notes": "Khớp Kịch bản video Lesson 03 phần Worked example: trình bày quy trình 3 bước rõ ràng để giảm tải nhận thức trước khi xem code."
+    },
+    {
+      "layout": "code",
+      "section": "3. Khởi tạo ứng dụng FastAPI",
+      "title": "3. Ứng dụng FastAPI tối thiểu (main.py) - 3",
+      "content": [
+        "from fastapi import FastAPI",
+        "app = FastAPI()",
+        "@app.get(\"/\")",
+        "def read_root(): return {\"message\": \"Chào mừng đến FastAPI!\"}",
+        "Hàm trả Dictionary → FastAPI tự chuyển thành JSON"
+      ],
+      "diagram_hint": "Khối code Python main.py kèm chú thích 3 bước",
+      "speaker_notes": "Khớp Kịch bản video Lesson 03 phần Code mẫu: gõ từng dòng main.py, nhấn mạnh hàm xử lý trả Dictionary được tự động chuyển thành JSON."
+    },
+    {
+      "layout": "code",
+      "section": "3. Khởi tạo ứng dụng FastAPI",
+      "title": "3. Chạy server bằng Uvicorn & Hot Reload - 4",
+      "content": [
+        "uvicorn main:app --reload",
+        "main = tên file, app = biến instance, --reload = tự restart",
+        "FastAPI không tự lắng nghe cổng → cần Uvicorn",
+        "Mặc định http://127.0.0.1:8000; log 200 OK xác nhận chạy"
+      ],
+      "diagram_hint": "Sơ đồ trình duyệt gọi 127.0.0.1:8000 → Uvicorn → app FastAPI",
+      "speaker_notes": "Khớp Kịch bản video Lesson 03 phần Chạy server: phân tích lệnh uvicorn main:app --reload, mở localhost:8000, sửa code để minh hoạ Hot Reload. Sản phẩm đầu ra: project FastAPI đầu tiên chạy bằng Uvicorn."
+    },
+    {
+      "layout": "code",
+      "section": "3. Khởi tạo ứng dụng FastAPI",
+      "title": "3. Ví dụ domain: cổng điều phối Logistics (gateway.py) - 5",
+      "content": [
+        "@app.get(\"/\") trả JSON tình trạng vận hành kho",
+        "gateway_status, workload_ratio, active_nodes, system_message",
+        "Bật --reload để cập nhật tức thì khi sửa code"
+      ],
+      "diagram_hint": "Khối code Python gateway.py trả về JSON trạng thái nhiều trường",
+      "speaker_notes": "Khớp Kịch bản video Lesson 03 phần Vận dụng domain: áp ngay kiến thức vào API giám sát cổng điều phối Logistics (domain xuyên suốt của môn học)."
+    },
+
+    {
+      "layout": "section-title",
+      "section": "4. API endpoint và routing",
+      "title": "4. API endpoint và routing - 1",
+      "content": [
+        "Cấu trúc HTTP Request/Response",
+        "Các HTTP method cốt lõi và ánh xạ CRUD",
+        "Quy chuẩn đặt tên endpoint RESTful & Routing Engine"
+      ],
+      "speaker_notes": "Khớp Kịch bản video Lesson 04 phần Mở đầu: chuyển từ một endpoint đơn lẻ sang thiết kế hệ endpoint chuẩn RESTful."
+    },
+    {
+      "layout": "comparison-table",
+      "section": "4. API endpoint và routing",
+      "title": "4. Cấu trúc HTTP Request và Response - 2",
+      "content": [
+        "Request: Method, URL, Headers, Body",
+        "Response: Status Code, Headers, Body",
+        "Mỗi hội thoại HTTP gồm một Request và một Response",
+        "HTTP là nền tảng của mọi RESTful API"
+      ],
+      "diagram_hint": "Bảng 2 cột: thành phần HTTP Request | thành phần HTTP Response",
+      "speaker_notes": "Khớp Kịch bản video Lesson 04 phần HTTP: bóc tách các thành phần Request/Response bằng DevTools hoặc Postman."
+    },
+    {
+      "layout": "table",
+      "section": "4. API endpoint và routing",
+      "title": "4. Ánh xạ CRUD ↔ HTTP Method - 3",
+      "content": [
+        "GET = Read (đọc)",
+        "POST = Create (tạo)",
+        "PUT = Update toàn bộ",
+        "PATCH = Update một phần",
+        "DELETE = Delete (xoá)"
+      ],
+      "diagram_hint": "Bảng 2 cột: HTTP Method | Hành động CRUD tương ứng",
+      "speaker_notes": "Khớp Kịch bản video Lesson 04 phần CRUD: nhấn mạnh hành động được xác định bởi HTTP Method chứ không phải bởi URL."
+    },
+    {
+      "layout": "bullets",
+      "section": "4. API endpoint và routing",
+      "title": "4. Quy chuẩn đặt tên RESTful & Routing Engine - 4",
+      "content": [
+        "Đặt tên bằng danh từ số nhiều: /students, /courses",
+        "Không nhúng động từ (sai: /getStudents, /createCourse)",
+        "Endpoint định danh tài nguyên, không mô tả hành động",
+        "Routing Engine dò URL path + HTTP method → đúng hàm xử lý"
+      ],
+      "diagram_hint": "Sơ đồ Routing Engine: (URL path + Method) → ánh xạ tới hàm Python",
+      "speaker_notes": "Khớp Kịch bản video Lesson 04 phần RESTful naming: đối chiếu cách đặt tên đúng/sai, giải thích cơ chế Routing Engine của FastAPI."
+    },
+    {
+      "layout": "code",
+      "section": "4. API endpoint và routing",
+      "title": "4. Endpoint /hello và hệ endpoint tài nguyên - 5",
+      "content": [
+        "@app.get(\"/hello\") def say_hello()",
+        "@app.get(\"/students\") liệt kê sinh viên",
+        "@app.post(\"/students\") tạo sinh viên mới",
+        "Cùng URL /students, hành động khác nhau theo Method"
+      ],
+      "diagram_hint": "Khối code Python: decorator @app.get và @app.post trên cùng path /students",
+      "speaker_notes": "Khớp Kịch bản video Lesson 04 phần Code mẫu: triển khai /hello rồi mở rộng sang /students với GET và POST. Sản phẩm đầu ra: endpoint /hello hoạt động."
+    },
+
+    {
+      "layout": "section-title",
+      "section": "5. Tài liệu API với OpenAPI và Swagger UI",
+      "title": "5. Tài liệu API với OpenAPI và Swagger UI - 1",
+      "content": [
+        "Chuẩn OpenAPI và Zero Configuration",
+        "Swagger UI tại /docs để đọc và kiểm thử",
+        "Phân biệt Swagger UI và ReDoc"
+      ],
+      "speaker_notes": "Khớp Kịch bản video Lesson 05 phần Mở đầu: nêu giá trị của tài liệu API tự động đối với cộng tác nhóm và bên thứ ba."
+    },
+    {
+      "layout": "bullets",
+      "section": "5. Tài liệu API với OpenAPI và Swagger UI",
+      "title": "5. OpenAPI & Zero Configuration - 2",
+      "content": [
+        "OpenAPI: tiêu chuẩn quốc tế mô tả REST API",
+        "FastAPI tuân thủ hoàn toàn chuẩn OpenAPI",
+        "Tự đọc cấu trúc hàm và kiểu dữ liệu để sinh tài liệu",
+        "Không cần cấu hình thêm (Zero Configuration)"
+      ],
+      "diagram_hint": "Sơ đồ: code + type hints → FastAPI tự sinh tài liệu OpenAPI",
+      "speaker_notes": "Khớp Kịch bản video Lesson 05 phần OpenAPI: giải thích vì sao tài liệu tự sinh mà không cần viết thủ công nhờ type hints."
+    },
+    {
+      "layout": "comparison-table",
+      "section": "5. Tài liệu API với OpenAPI và Swagger UI",
+      "title": "5. Swagger UI vs ReDoc - 3",
+      "content": [
+        "Swagger UI tại /docs: tài liệu + kiểm thử tương tác",
+        "Try it out / Execute: gọi API không cần Postman",
+        "ReDoc tại /redoc: giao diện ba cột tối giản, tối ưu tra cứu"
+      ],
+      "diagram_hint": "Bảng 2 cột so sánh Swagger UI (/docs) | ReDoc (/redoc)",
+      "speaker_notes": "Khớp Kịch bản video Lesson 05 phần Demo: mở /docs dùng Try it out gọi thử endpoint, rồi mở /redoc để so sánh giao diện đọc tài liệu."
+    },
+    {
+      "layout": "code",
+      "section": "5. Tài liệu API với OpenAPI và Swagger UI",
+      "title": "5. Tùy biến metadata & tags cho Swagger - 4",
+      "content": [
+        "FastAPI(title=..., description=..., version=...)",
+        "@app.get(\"/courses\", tags=[\"courses\"])",
+        "Dùng tags metadata để phân nhóm endpoint gọn gàng"
+      ],
+      "diagram_hint": "Khối code Python khai báo metadata FastAPI và tags trên endpoint",
+      "speaker_notes": "Khớp Kịch bản video Lesson 05 phần Tùy biến: thêm title/description/version và tags để Swagger UI hiển thị đẹp, có phân nhóm. Sản phẩm đầu ra: Swagger hiển thị và test được API."
+    },
+
+    {
+      "layout": "summary",
+      "section": "TỔNG KẾT",
+      "title": "Tổng kết",
+      "content": [
+        "1. Kiến trúc Client-Server, SSR vs API-first, FastAPI trên ASGI/Uvicorn",
+        "2. Cô lập dự án bằng venv, quản lý thư viện với pip và requirements.txt",
+        "3. Viết app FastAPI tối thiểu và chạy bằng uvicorn main:app --reload",
+        "4. Thiết kế endpoint RESTful, ánh xạ CRUD qua HTTP method",
+        "5. Khai thác tài liệu tự động OpenAPI qua Swagger UI (/docs) và ReDoc (/redoc)"
+      ],
+      "speaker_notes": "Khớp Kịch bản video phần Tổng kết Session: điểm lại 5 Lesson, nối tới sản phẩm đầu ra và chuẩn bị cho session tiếp theo."
+    },
+    {
+      "layout": "closing",
+      "title": "KẾT THÚC",
+      "content": [
+        "HỌC VIỆN ĐÀO TẠO LẬP TRÌNH CHẤT LƯỢNG NHẬT BẢN"
+      ]
+    }
+  ]
+}

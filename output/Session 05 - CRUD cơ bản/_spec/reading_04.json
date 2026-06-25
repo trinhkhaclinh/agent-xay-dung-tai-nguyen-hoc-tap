@@ -1,0 +1,72 @@
+{
+  "filename": "BÀI ĐỌC_ API DELETE TRONG FASTAPI_",
+  "subdir": "Bài đọc",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Bài Đọc Chuyên Sâu: API Delete - Phương Thức DELETE, Trạng Thái 204 No Content Và Xóa Mềm"
+    },
+    {
+      "type": "p",
+      "text": "Thao tác cuối cùng trong CRUD là Delete (Xóa dữ liệu). Trong thiết kế API chuẩn RESTful, việc loại bỏ một tài nguyên khỏi hệ thống sử dụng phương thức HTTP DELETE. Bài đọc này hướng dẫn chi tiết cách triển khai API DELETE xóa sinh viên theo ID, làm quen với mã phản hồi 204 No Content và tìm hiểu về khái niệm Xóa mềm (Soft Delete) trong thiết kế database."
+    },
+    {
+      "type": "h2",
+      "text": "1. Phương thức DELETE và tính chất Idempotent"
+    },
+    {
+      "type": "p",
+      "text": "Phương thức DELETE dùng để xóa tài nguyên được chỉ định. Đây cũng là một phương thức idempotent: xóa lần đầu thành công trả về 200/204; các lần sau tài nguyên đã biến mất nên hệ thống có thể trả lỗi 404, nhưng trạng thái thực tế của máy chủ không thay đổi thêm (tài nguyên vẫn ở trạng thái đã bị xóa)."
+    },
+    {
+      "type": "h2",
+      "text": "2. Triển khai API DELETE với trạng thái 204 No Content"
+    },
+    {
+      "type": "p",
+      "text": "Khi xóa thành công, nếu server không có dữ liệu nào cần gửi lại cho client ngoài thông điệp thành công, mã trạng thái HTTP chuẩn xác nhất cần phản hồi là 204 No Content."
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "text": "@app.delete(\"/students/{student_id}\", status_code=status.HTTP_204_NO_CONTENT)\ndef remove_student(student_id: int):\n    global students_db\n    for idx, s in enumerate(students_db):\n        if s[\"id\"] == student_id:\n            students_db.pop(idx)\n            return # Kết thúc hàm, trả về 204 No Content không kèm body\n    raise HTTPException(status_code=404, detail=\"Không tìm thấy sinh viên để xóa\")"
+    },
+    {
+      "type": "h2",
+      "text": "3. Xóa vật lý (Hard Delete) và Xóa mềm (Soft Delete)"
+    },
+    {
+      "type": "p",
+      "text": "Trong thực tế dự án doanh nghiệp, việc xóa bỏ hoàn toàn dữ liệu khỏi cơ sở dữ liệu (Hard Delete) là hành động mạo hiểm và có thể gây mất tính toàn vẹn dữ liệu liên kết. Thay vào đó, người ta thường dùng Xóa mềm (Soft Delete):"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "**Xóa vật lý (Hard Delete):** Dùng lệnh `pop()` hoặc `DELETE FROM` để xóa hoàn toàn bản ghi khỏi bộ nhớ.",
+        "**Xóa mềm (Soft Delete):** Thêm một trường trạng thái (ví dụ `is_deleted: bool = False` hoặc `deleted_at: datetime = None`). Khi gọi DELETE, API chỉ chuyển đổi `is_deleted = True`. Các API GET danh sách sau đó sẽ lọc bỏ các sinh viên có `is_deleted == True`."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Tổng Kết"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Phương thức DELETE dùng để loại bỏ tài nguyên và mang tính chất idempotent.",
+        "Mã HTTP 204 No Content được sử dụng để phản hồi khi xóa thành công và không cần trả về nội dung body.",
+        "Xóa mềm (Soft Delete) là giải pháp tối ưu trong các dự án thực tế để bảo toàn dữ liệu lịch sử."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Tài Liệu Tham Khảo"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "MDN Web Docs - DELETE: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE"
+      ]
+    }
+  ]
+}

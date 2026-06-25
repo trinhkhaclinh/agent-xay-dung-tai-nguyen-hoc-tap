@@ -1,0 +1,66 @@
+{
+  "filename": "Session 04 - Parameters, Request body và Pydantic Validation",
+  "subdir": "Mindmap",
+  "root": "Parameters, Request body & Pydantic Validation",
+  "children": [
+    {
+      "title": "1. Path Parameters (Định danh tài nguyên)",
+      "children": [
+        {
+          "title": "Khai báo: dùng cặp ngoặc nhọn trong URL, ví dụ /students/{student_id}"
+        },
+        {
+          "title": "Tự động ép kiểu & validate theo Type Hints của Python"
+        },
+        {
+          "title": "Tránh xung đột route: Luôn đặt route tĩnh trước route động"
+        }
+      ]
+    },
+    {
+      "title": "2. Query Parameters (Lọc & Tìm kiếm)",
+      "children": [
+        {
+          "title": "Khai báo: các tham số hàm không có trong route path"
+        },
+        {
+          "title": "Phân loại: Bắt buộc (không mặc định) vs Tùy chọn (có mặc định)"
+        },
+        {
+          "title": "Ép kiểu Boolean linh hoạt từ URL: true/false, 1/0, yes/no"
+        }
+      ]
+    },
+    {
+      "title": "3. Request Body với Pydantic (Dữ liệu phức tạp)",
+      "children": [
+        {
+          "title": "Pydantic BaseModel: Định nghĩa cấu trúc dữ liệu JSON (Schema)"
+        },
+        {
+          "title": "Tự động validate đầu vào & Trả lỗi 422 Unprocessable Entity"
+        },
+        {
+          "title": " response_model: Lọc dữ liệu đầu ra và bảo mật thông tin nhạy cảm"
+        }
+      ]
+    },
+    {
+      "title": "4. Type Hints & Validation nâng cao",
+      "children": [
+        {
+          "title": "Ràng buộc Query Parameter: Dùng Query(min_length, max_length, ge, le)"
+        },
+        {
+          "title": "Ràng buộc Path Parameter: Dùng Path(..., ge, le, description)"
+        },
+        {
+          "title": "Ràng buộc thuộc tính Model: Dùng Field(..., gt, pattern)"
+        },
+        {
+          "title": "Cấu trúc lỗi 422: Gồm loc (vị trí lỗi), msg (thông báo), type (loại lỗi)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+---
+type: "bai-doc"
+title: "API endpoint và routing"
+session: 2
+lesson: 4
+tags:
+  - "type/bai-doc"
+  - "session/02"
+concepts:
+  - "[[HTTP Request (Method-URL-Headers-Body)|HTTP Request (Method/URL/Headers/Body)]]"
+  - "[[HTTP Response (Status Code-Headers-Body)|HTTP Response (Status Code/Headers/Body)]]"
+  - "[[Ánh xạ CRUD ↔ HTTP Method]]"
+  - "[[Endpoint định danh tài nguyên]]"
+  - "[[RESTful naming]]"
+  - "[[Decorator routing (@app.get-post-put-delete)|Decorator routing (@app.get/post/put/delete)]]"
+  - "[[Routing Engine]]"
+deliverable_filename: "BÀI ĐỌC_ API ENDPOINT VÀ ROUTING THEO CHUẨN RESTFUL_"
+status: "done"
+---
+
+# Bài Đọc Chuyên Sâu: API Endpoint Và Routing Theo Chuẩn RESTful
+
+Ở bài trước, chúng ta đã tạo được một endpoint đơn giản tại đường dẫn gốc. Nhưng một ứng dụng thực tế có hàng chục, thậm chí hàng trăm endpoint, mỗi cái phục vụ một mục đích khác nhau. Câu hỏi đặt ra: thiết kế và đặt tên các endpoint này thế nào cho rõ ràng, nhất quán và dễ bảo trì? Bài đọc này trình bày cấu trúc HTTP Request/Response chi tiết, các phương thức HTTP cốt lõi, quy chuẩn đặt tên RESTful, và cơ chế Routing Engine bên trong FastAPI.
+
+Chúng ta sẽ dùng một kịch bản nghiệp vụ xuyên suốt: hệ thống quản lý sinh viên và khóa học. Hệ thống cần các endpoint để xem danh sách sinh viên, tạo sinh viên mới, xem khóa học, tra điểm của một sinh viên cụ thể... Cách chúng ta thiết kế các endpoint này sẽ quyết định API dễ dùng hay rối rắm với những lập trình viên khác (và với chính chúng ta sáu tháng sau).
+
+## 1. Cấu Trúc Một HTTP Request
+
+Như đã học ở bài đầu tiên, mỗi cuộc hội thoại HTTP gồm một Request và một Response. Giờ chúng ta mổ xẻ chi tiết bốn thành phần của một HTTP Request:
+
+- Method (Phương thức) — cho biết hành động muốn thực hiện: GET, POST, PUT, PATCH, DELETE...
+- URL (Đường dẫn) — định danh tài nguyên muốn tác động, ví dụ /students hoặc /courses.
+- Headers (Phần đầu) — thông tin bổ sung về yêu cầu: định dạng dữ liệu, thông tin xác thực...
+- Body (Phần thân) — dữ liệu đính kèm, thường có ở POST/PUT khi gửi thông tin mới lên server.
+
+Hiểu rõ bốn thành phần này rất quan trọng vì chúng tách bạch hai câu hỏi khác nhau: 'làm gì' (do Method trả lời) và 'với cái gì' (do URL trả lời). Đây là chìa khóa để hiểu vì sao thiết kế RESTful lại được tổ chức như ở các mục sau.
+
+## 2. Cấu Trúc Một HTTP Response
+
+Đáp lại mỗi Request, Server gửi về một Response gồm ba thành phần chính:
+
+- Status Code (Mã trạng thái) — con số cho biết kết quả: 200 (thành công), 201 (đã tạo mới), 404 (không tìm thấy), 500 (lỗi server)...
+- Headers — thông tin bổ sung về phản hồi, ví dụ kiểu dữ liệu trả về là application/json.
+- Body — dữ liệu trả về thực tế, với API của chúng ta thường là JSON.
+
+Mã trạng thái là phần quan trọng cần đọc đầu tiên khi gỡ lỗi: nó cho biết ngay yêu cầu thành công hay thất bại, và thất bại theo kiểu nào. HTTP là nền tảng của mọi RESTful API, nên thành thạo cách đọc Request và Response là kỹ năng cốt lõi của người làm backend.
+
+## 3. Các Phương Thức HTTP Cốt Lõi Và Ánh Xạ CRUD
+
+CRUD là viết tắt của bốn thao tác cơ bản với dữ liệu: Create (Tạo), Read (Đọc), Update (Cập nhật), Delete (Xóa). Mỗi thao tác CRUD được ánh xạ tới một phương thức HTTP tương ứng. Đây là một quy ước nền tảng của thiết kế API mà chúng ta phải thuộc lòng:
+
+| Phương thức HTTP | Thao tác CRUD | Ý nghĩa |
+| --- | --- | --- |
+| GET | Read | Đọc / lấy dữ liệu, không làm thay đổi dữ liệu trên server |
+| POST | Create | Tạo mới một tài nguyên |
+| PUT | Update (toàn bộ) | Cập nhật toàn bộ một tài nguyên đã có |
+| PATCH | Update (một phần) | Cập nhật một phần một tài nguyên |
+| DELETE | Delete | Xóa một tài nguyên |
+
+Áp vào hệ thống quản lý sinh viên: GET /students để lấy danh sách sinh viên; POST /students để thêm một sinh viên mới; PUT /students/{id} để cập nhật toàn bộ thông tin một sinh viên; PATCH /students/{id} để chỉ sửa một trường (ví dụ số điện thoại); DELETE /students/{id} để xóa một sinh viên. Phân biệt PUT và PATCH: PUT thay thế toàn bộ bản ghi, PATCH chỉ vá một phần.
+
+## 4. Endpoint Định Danh Tài Nguyên — Hành Động Do Method Quyết Định
+
+Đây là tư tưởng trung tâm của REST, và cũng là chỗ người mới hay hiểu sai nhất. Trong thiết kế RESTful, URL (endpoint) dùng để định danh TÀI NGUYÊN — tức là 'cái gì' — chứ không mô tả hành động. Hành động được xác định bởi HTTP Method, chứ không phải bởi URL.
+
+Hãy so sánh hai cách thiết kế cho cùng một việc 'lấy danh sách sinh viên' và 'tạo sinh viên':
+
+| Nhu cầu | Cách SAI (nhúng động từ vào URL) | Cách ĐÚNG (RESTful) |
+| --- | --- | --- |
+| Lấy danh sách sinh viên | GET /getStudents | GET /students |
+| Tạo sinh viên mới | POST /createStudent | POST /students |
+| Xóa một sinh viên | POST /deleteStudent?id=5 | DELETE /students/5 |
+
+Quan sát cột bên phải: cùng một URL /students, nhưng GET nghĩa là đọc còn POST nghĩa là tạo. Method gánh vai trò thể hiện hành động, nên URL được giữ sạch và chỉ tập trung vào tài nguyên. Cách thiết kế này giúp API nhất quán, dễ đoán: chỉ cần biết tên tài nguyên là biết toàn bộ tập endpoint của nó.
+
+## 5. Quy Chuẩn Đặt Tên Endpoint RESTful
+
+Từ tư tưởng trên, cộng đồng đúc kết một số quy tắc đặt tên endpoint mà chúng ta nên tuân thủ:
+
+1. Dùng danh từ, không dùng động từ: /students chứ không phải /getStudents.
+2. Dùng danh từ số nhiều cho tập hợp tài nguyên: /students, /courses (không phải /student, /course).
+3. Định danh một phần tử cụ thể bằng tham số đường dẫn: /students/{id} trỏ tới sinh viên có mã id đó.
+4. Thể hiện quan hệ lồng nhau qua đường dẫn phân cấp: /students/{id}/grades nghĩa là điểm của một sinh viên cụ thể.
+5. Giữ URL ngắn gọn, nhất quán, viết thường.
+
+Áp dụng vào hệ thống của chúng ta, một bộ endpoint thiết kế tốt sẽ trông như sau:
+
+```text
+GET    /students              -> Lấy danh sách tất cả sinh viên
+POST   /students              -> Tạo một sinh viên mới
+GET    /students/{id}         -> Lấy thông tin một sinh viên
+GET    /courses               -> Lấy danh sách khóa học
+GET    /students/{id}/grades  -> Lấy bảng điểm của một sinh viên cụ thể
+```
+
+> Ghi nhớ lỗi điển hình: /getStudents, /createCourse, /deleteStudent đều SAI vì nhúng động từ vào URL. Hãy để HTTP Method nói lên hành động.
+
+## 6. Routing Engine: Cách FastAPI Tìm Đúng Hàm Xử Lý
+
+Khi một Request đến server, làm sao FastAPI biết phải gọi hàm Python nào để xử lý? Câu trả lời nằm ở Routing Engine (bộ định tuyến) — một thành phần kế thừa từ Starlette. Routing Engine dò tìm dựa trên SỰ KẾT HỢP của hai yếu tố: URL path và HTTP method của Request.
+
+Cụ thể, mỗi lần chúng ta viết một decorator như @app.get("/students"), FastAPI ghi vào bảng định tuyến một cặp (method=GET, path=/students) → hàm list_students. Khi Request 'GET /students' đến, Routing Engine tra bảng, tìm thấy cặp khớp, và gọi đúng hàm list_students. Nếu là 'POST /students' thì lại trỏ tới hàm create_student — cùng path nhưng khác method nên ánh xạ tới hàm khác.
+
+Điều này lý giải vì sao trong FastAPI chúng ta có @app.get, @app.post, @app.put, @app.patch, @app.delete — mỗi decorator khai báo cho Routing Engine biết hàm bên dưới phục vụ phương thức HTTP nào. Hiểu cơ chế này giúp chúng ta tránh lỗi 'Method Not Allowed' (405): đó là khi path đúng nhưng method không khớp với bất kỳ hàm nào đã khai báo.
+
+## 7. Vận Dụng: Endpoint /hello Và Ánh Xạ CRUD Cho Sinh Viên
+
+Giờ chúng ta hiện thực hóa lý thuyết bằng code chạy được. Bắt đầu với một endpoint /hello đơn giản để củng cố cú pháp decorator, rồi mở rộng sang các endpoint quản lý sinh viên minh họa ánh xạ CRUD qua HTTP method:
+
+```python
+# main.py — Hệ thống quản lý sinh viên/khóa học (bản minh họa routing)
+from fastapi import FastAPI
+
+app = FastAPI()
+
+# Endpoint đơn giản: GET /hello -> trả lời chào
+@app.get("/hello")
+def say_hello():
+    return {"message": "Hello!"}
+
+# READ: GET /students -> lấy danh sách sinh viên
+@app.get("/students")
+def list_students():
+    return [{"id": 1, "name": "An"}]
+
+# CREATE: POST /students -> tạo sinh viên mới
+@app.post("/students")
+def create_student(name: str):
+    return {"id": 2, "name": name}
+```
+
+Phân tích đoạn code trên theo những gì vừa học. Hàm say_hello gắn với GET /hello: đây là endpoint kiểm thử quen thuộc, chính là sản phẩm đầu ra của bài học. Hai hàm tiếp theo cùng dùng path /students nhưng khác method: list_students dùng GET (đọc, trả về một danh sách), còn create_student dùng POST (tạo mới). Đây là minh họa trực tiếp cho nguyên lý 'cùng tài nguyên, hành động do method quyết định'.
+
+Chạy ứng dụng bằng lệnh đã quen 'uvicorn main:app --reload', rồi truy cập http://127.0.0.1:8000/hello để thấy lời chào, và http://127.0.0.1:8000/students để thấy danh sách sinh viên. Lưu ý: trình duyệt chỉ gửi được GET; để thử POST /students chúng ta cần công cụ như Postman hoặc trang tài liệu tự động /docs (chủ đề của bài đọc tiếp theo).
+
+## 8. Mở Rộng: Đặt Tên Hàm Xử Lý Có Ý Nghĩa
+
+Một thói quen tốt cần xây dựng ngay từ đầu: đặt tên hàm xử lý phản ánh đúng hành động nghiệp vụ. Lưu ý rằng tên hàm Python (như list_students, create_student) hoàn toàn độc lập với đường dẫn URL — Routing Engine không quan tâm tên hàm, nó chỉ dựa vào method và path. Tuy nhiên, tên hàm rõ ràng giúp người đọc code hiểu ngay ý đồ, và FastAPI còn dùng tên hàm để sinh định danh trong tài liệu API tự động.
+
+Ví dụ với hệ thống khóa học, một bộ hàm đặt tên tốt sẽ là: list_courses cho GET /courses, get_course cho GET /courses/{id}, create_course cho POST /courses. Sự nhất quán giữa method, path và tên hàm làm cho mã nguồn tự giải thích — một phẩm chất quý của code chuyên nghiệp.
+
+## Tổng Kết
+
+Bài đọc đã trang bị cho chúng ta tư duy thiết kế API đúng chuẩn — nền tảng để xây dựng các hệ thống lớn về sau. Các điểm cốt lõi cần ghi nhớ:
+
+- Mỗi cuộc hội thoại HTTP gồm Request (Method/URL/Headers/Body) và Response (Status Code/Headers/Body); HTTP là nền tảng của mọi RESTful API.
+- Ánh xạ CRUD ↔ HTTP method: GET=Read, POST=Create, PUT=Update toàn bộ, PATCH=Update một phần, DELETE=Delete.
+- Endpoint định danh tài nguyên ('cái gì'); hành động ('làm gì') được xác định bởi HTTP method, không phải bởi URL.
+- Quy chuẩn RESTful: đặt tên bằng danh từ số nhiều (/students), không nhúng động từ (sai: /getStudents, /createCourse); định danh phần tử bằng /students/{id}.
+- Routing Engine của FastAPI dò sự kết hợp URL path + HTTP method để ánh xạ tới đúng hàm xử lý Python; mỗi decorator (@app.get/post/put/delete) khai báo method tương ứng.
+
+## Tài Liệu Tham Khảo
+
+- FastAPI Official Documentation — Path Parameters: https://fastapi.tiangolo.com/tutorial/path-params/
+- FastAPI Official Documentation — First Steps (HTTP Methods): https://fastapi.tiangolo.com/tutorial/first-steps/#define-a-path-operation-decorator
+- MDN Web Docs — HTTP request methods: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+- MDN Web Docs — HTTP response status codes: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+- REST API Tutorial — REST Resource Naming Guide: https://restfulapi.net/resource-naming/
+
+## Khái niệm liên quan
+
+- [[HTTP Request (Method-URL-Headers-Body)|HTTP Request (Method/URL/Headers/Body)]]
+- [[HTTP Response (Status Code-Headers-Body)|HTTP Response (Status Code/Headers/Body)]]
+- [[Ánh xạ CRUD ↔ HTTP Method]]
+- [[Endpoint định danh tài nguyên]]
+- [[RESTful naming]]
+- [[Decorator routing (@app.get-post-put-delete)|Decorator routing (@app.get/post/put/delete)]]
+- [[Routing Engine]]
+
+— Thuộc [[Session 02 — MOC]]

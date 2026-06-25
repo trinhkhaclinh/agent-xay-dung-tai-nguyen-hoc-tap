@@ -1,0 +1,149 @@
+{
+  "sheet_name": "Quiz_DauGio_FastAPI_01",
+  "questions": [
+    {
+      "q": "Để khai báo một phương thức khởi tạo trong một Class của Python, ta dùng định nghĩa hàm nào?",
+      "answers": [
+        "def init(self):",
+        "def __init__(self):",
+        "def create(self):",
+        "def constructor(self):"
+      ],
+      "explanations": [
+        "Không đúng tên hàm khởi tạo.",
+        "Chính xác, __init__ (dunder init) là hàm khởi dựng của class trong Python.",
+        "Không đúng.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Kiểu dữ liệu nào trong Python biểu diễn một danh sách có thứ tự và có thể thay đổi (mutable)?",
+      "answers": [
+        "Tuple",
+        "List",
+        "Set",
+        "Dictionary"
+      ],
+      "explanations": [
+        "Tuple là danh sách không thể thay đổi sau khi tạo (immutable).",
+        "Chính xác, List được khai báo bằng ngoặc vuông và có thể thêm/bớt phần tử.",
+        "Set là tập hợp không trùng lặp và không có thứ tự.",
+        "Dictionary lưu trữ dữ liệu dạng cặp key-value."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Trong Python, làm thế nào để chuyển đổi một chuỗi ký tự '15' thành số nguyên?",
+      "answers": [
+        "str(15)",
+        "int('15')",
+        "convert('15', int)",
+        "float('15')"
+      ],
+      "explanations": [
+        "Đây là chuyển số thành chuỗi.",
+        "Chính xác, int() được dùng để ép kiểu sang số nguyên.",
+        "Hàm convert không tồn tại mặc định trong Python.",
+        "Đây là chuyển sang số thực."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Phương thức nào dùng để thêm một phần tử vào cuối danh sách List trong Python?",
+      "answers": [
+        "add()",
+        "push()",
+        "append()",
+        "insert()"
+      ],
+      "explanations": [
+        "Không dùng cho list.",
+        "Là phương thức của mảng trong JavaScript.",
+        "Chính xác, append() thêm phần tử vào cuối danh sách.",
+        "insert() chèn phần tử vào một chỉ số cụ thể."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Từ khóa nào trong Python được dùng để kế thừa một Class cha?",
+      "answers": [
+        "extends",
+        "inherits",
+        "Khai báo tên Class cha trong ngoặc đơn sau tên Class con",
+        "implements"
+      ],
+      "explanations": [
+        "Là từ khóa của Java/PHP.",
+        "Không phải từ khóa của Python.",
+        "Chính xác, ví dụ: class Con(Cha):",
+        "Là từ khóa của Java/TypeScript."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Cú pháp để lấy ra toàn bộ các keys của một Dictionary tên là 'student' là gì?",
+      "answers": [
+        "student.all()",
+        "student.get_keys()",
+        "student.keys()",
+        "student.items()"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Không đúng.",
+        "Chính xác, student.keys() trả về dict_keys chứa toàn bộ các khóa.",
+        "student.items() trả về các cặp key-value."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "FastAPI là framework chuyên dụng để xây dựng sản phẩm gì là chính?",
+      "answers": [
+        "Trang web giao diện tĩnh",
+        "Ứng dụng di động cục bộ",
+        "Dịch vụ Web API (RESTful API)",
+        "Hệ điều hành máy tính"
+      ],
+      "explanations": [
+        "FastAPI chủ yếu trả JSON, không tối ưu cho giao diện tĩnh truyền thống.",
+        "Ứng dụng di động dùng Flutter/Kotlin.",
+        "Chính xác, FastAPI sinh ra để xây dựng Web API nhanh và hiệu quả.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Công cụ nào được dùng phổ biến để kiểm thử gửi request và đọc response từ API?",
+      "answers": [
+        "Git",
+        "Postman",
+        "VS Code Extension Store",
+        "MySQL Workbench"
+      ],
+      "explanations": [
+        "Git để quản lý mã nguồn.",
+        "Chính xác, Postman là client HTTP chuyên dụng cho kiểm thử API.",
+        "Dùng để cài plugin.",
+        "Dùng để quản lý CSDL MySQL."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    }
+  ]
+}

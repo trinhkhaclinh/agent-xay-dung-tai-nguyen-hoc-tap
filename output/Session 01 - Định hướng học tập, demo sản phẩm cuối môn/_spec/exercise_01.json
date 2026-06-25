@@ -1,0 +1,56 @@
+{
+  "filename": "[Vận dụng cơ bản 1] Thiết lập Git và thực hiện Commit đầu tiên",
+  "subdir": "Bài tập",
+  "level": "Vận dụng cơ bản",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Thiết lập Git quản lý mã nguồn dự án"
+    },
+    {
+      "type": "h2",
+      "text": "1. Bối cảnh nghiệp vụ"
+    },
+    {
+      "type": "p",
+      "text": "Học viên chuẩn bị bắt đầu dự án môn học IT-215. Để nộp bài tập và quản lý các phiên bản code, việc cài đặt và làm quen với Git là yêu cầu bắt buộc ngay từ buổi học đầu tiên."
+    },
+    {
+      "type": "h2",
+      "text": "2. Yêu cầu bài toán"
+    },
+    {
+      "type": "p",
+      "text": "Hãy khởi tạo một kho lưu trữ Git cục bộ trong thư mục dự án mẫu, cấu hình thông tin cá nhân và tạo commit đầu tiên chứa file README.md."
+    },
+    {
+      "type": "h2",
+      "text": "3. Mã nguồn hiện tại (Legacy Code)"
+    },
+    {
+      "type": "code",
+      "lang": "bash",
+      "text": "# Thực hiện chạy các lệnh trong terminal\n# Bước 1: Khởi tạo git\ngit init\n\n# Bước 2: Cấu hình thông tin cá nhân\ngit config --global user.name \"Tên của bạn\"\ngit config --global user.email \"email@gmail.com\""
+    },
+    {
+      "type": "h2",
+      "text": "4. Yêu cầu đầu ra"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Tạo file README.md mô tả dự án học tập cá nhân.",
+        "Thêm file vào khu vực theo dõi (staging area) bằng lệnh `git add`.",
+        "Tạo commit đầu tiên bằng `git commit -m 'Initial commit'`.",
+        "Chụp màn hình log lịch sử commit (`git log`)."
+      ]
+    }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session01",
+    "ex": "Ex01",
+    "example": "HNKS25CNTT1_FastAPI_Session01_Ex01"
+  }
+}

@@ -1,0 +1,114 @@
+---
+type: "kich-ban-video"
+title: "Lesson 01  - Tổng quan mô hình client server"
+session: 2
+lesson: 1
+tags:
+  - "type/kich-ban-video"
+  - "session/02"
+concepts:
+  - "[[Mô hình Client-Server]]"
+  - "[[Request-Response & HTTP-HTTPS|Request/Response & HTTP/HTTPS]]"
+  - "[[Định dạng JSON]]"
+  - "[[Kiến trúc Decoupled (Frontend-Backend tách biệt)|Kiến trúc Decoupled (Frontend/Backend tách biệt)]]"
+  - "[[SSR vs SPA vs API-first]]"
+  - "[[FastAPI = Starlette + Pydantic]]"
+  - "[[WSGI vs ASGI]]"
+  - "[[Uvicorn (ASGI server)]]"
+deliverable_filename: "Lesson 01  - Tổng quan mô hình client server"
+status: "done"
+---
+
+## Tổng quan về Mô hình Client - Server
+
+Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Trong bài học hôm nay, thầy và các em sẽ cùng nhau tìm hiểu về mô hình Client - Server, vòng đời của một cuộc trao đổi Request và Response, định dạng dữ liệu JSON, và sự khác biệt giữa Web truyền thống với Web Service hiện đại. Đây chính là nền tảng để các em hiểu được FastAPI sinh ra để giải quyết bài toán gì.
+
+Trước khi đi sâu vào FastAPI, thầy muốn các em nắm thật chắc bức tranh tổng thể. Bởi vì FastAPI là một framework để xây dựng phía Server, nên nếu các em không hiểu Server giao tiếp với Client như thế nào, thì sau này khi viết code các em sẽ rất khó hình dung mình đang làm gì.
+
+**[Chuyển tiếp slide]**
+
+Các em hãy nhìn vào sơ đồ tổng quan trên màn hình. Bên trái là Client, hay còn gọi là phía khách. Đó có thể là trình duyệt web trên máy tính của các em, là ứng dụng di động trên điện thoại, hoặc thậm chí là một chương trình khác. Bên phải là Server, hay còn gọi là phía máy chủ, nơi lưu trữ dữ liệu và xử lý logic nghiệp vụ.
+
+Mối quan hệ giữa hai bên rất đơn giản để hình dung. Client là bên đặt yêu cầu, giống như thực khách trong nhà hàng. Server là bên phục vụ, giống như nhà bếp. Thực khách gọi món, nhà bếp nấu rồi mang món ăn ra. Trong thế giới web, lời gọi món chính là Request, và món ăn được mang ra chính là Response.
+
+- Client: phía gửi yêu cầu, ví dụ trình duyệt, ứng dụng di động.
+- Server: phía nhận yêu cầu, xử lý và trả về kết quả.
+- Giao thức kết nối hai bên: HTTP và HTTPS.
+
+Vậy hai bên nói chuyện với nhau bằng ngôn ngữ gì? Câu trả lời là giao thức HTTP, viết tắt của HyperText Transfer Protocol, hoặc phiên bản bảo mật của nó là HTTPS. Các em có thể coi HTTP như một bộ quy tắc giao tiếp chung mà cả Client và Server đều phải tuân theo, giống như hai người muốn nói chuyện thì phải dùng chung một ngôn ngữ. HTTP và HTTPS chính là nền tảng của mọi ứng dụng web hiện đại.
+
+**[Chuyển tiếp slide]**
+
+## Vòng đời Request và Response
+
+Bây giờ thầy và các em sẽ đi sâu vào một vòng đời hoàn chỉnh của một cuộc trao đổi. Các em hãy quan sát sơ đồ trên màn hình với mũi tên đi từ Client sang Server rồi quay ngược trở lại.
+
+Bước đầu tiên, Client tạo ra một Request và gửi đi. Trong Request này có chứa thông tin như: địa chỉ muốn truy cập, phương thức muốn thực hiện, và đôi khi là dữ liệu kèm theo. Bước thứ hai, Server nhận Request, phân tích xem Client muốn gì, rồi xử lý: có thể là truy vấn cơ sở dữ liệu, tính toán, hay kiểm tra điều kiện. Bước thứ ba, Server đóng gói kết quả thành một Response và gửi trả về cho Client.
+
+Như vậy, các em hãy ghi nhớ chu trình cốt lõi này: Client gửi Request, Server phân tích và trả về Response. Toàn bộ thế giới web vận hành dựa trên chu trình lặp đi lặp lại này. Khi các em mở một trang web, khi các em bấm nút đăng nhập, khi các em cuộn bảng tin trên mạng xã hội, đằng sau đó đều là vô số cặp Request và Response như vậy.
+
+**[mở trình duyệt]**
+
+**[mở tab Network trên trình duyệt]**
+
+Để các em thấy điều này là có thật chứ không phải lý thuyết suông, thầy sẽ mở trình duyệt và bật công cụ dành cho lập trình viên, vào tab Network. Bây giờ thầy tải lại một trang web bất kỳ. Các em hãy nhìn vào màn hình: mỗi dòng xuất hiện trong tab Network chính là một Request mà trình duyệt đã gửi đi, kèm theo Response mà Server trả về. Các em có thể thấy địa chỉ, trạng thái, và cả thời gian phản hồi của từng yêu cầu.
+
+**[Chuyển tiếp slide]**
+
+## Định dạng dữ liệu JSON
+
+Khi Server trả dữ liệu về cho Client, dữ liệu đó cần được trình bày theo một định dạng mà cả hai bên đều hiểu được. Định dạng phổ biến nhất hiện nay, và cũng là định dạng mà FastAPI sử dụng mặc định, chính là JSON, viết tắt của JavaScript Object Notation.
+
+Các em đừng để cái tên có chữ JavaScript làm mình nhầm lẫn. JSON là một định dạng trao đổi dữ liệu độc lập với mọi ngôn ngữ lập trình. Nó nhẹ, dễ đọc với con người, và dễ xử lý với máy tính. Đó là lý do nó trở thành tiêu chuẩn chung giữa Frontend và Backend.
+
+Các em hãy nhìn vào ví dụ JSON trên màn hình. Dữ liệu được tổ chức thành các cặp khóa và giá trị. Các em để ý quy tắc quan trọng sau đây: phần khóa và phần giá trị nếu là chuỗi thì phải được bọc trong dấu nháy kép, còn nếu giá trị là số hoặc giá trị đúng sai thì không cần nháy kép.
+
+```json
+{
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere",
+  "body": "quia et suscipit..."
+}
+```
+
+Nhìn vào đoạn JSON này, các em thấy userId và id có giá trị là số nên không có nháy kép, còn title và body có giá trị là chuỗi nên được bọc trong nháy kép. Đây là một cấu trúc cực kỳ gọn gàng. Sau này khi viết FastAPI, các em chỉ cần trả về một dictionary trong Python, FastAPI sẽ tự động chuyển nó thành JSON đúng chuẩn như thế này cho các em.
+
+**[Chuyển tiếp slide]**
+
+## Web truyền thống SSR so với Web Service API
+
+Phần cuối của video này, thầy muốn các em phân biệt được hai cách tổ chức ứng dụng web. Cách thứ nhất là Web truyền thống, hay còn gọi là kiến trúc Server-Side Rendering, viết tắt là SSR. Cách thứ hai là Web Service, hay còn gọi là kiến trúc tách rời, tức là Decoupled.
+
+Trong kiến trúc SSR truyền thống, mỗi lần Client gửi Request, Server sẽ dựng sẵn toàn bộ trang HTML hoàn chỉnh rồi trả về. Trình duyệt chỉ việc hiển thị. Nghĩa là Server vừa lo dữ liệu, vừa lo giao diện. Các em hãy hình dung một website tin tức kiểu cũ: mỗi lần bấm sang trang khác là cả trang tải lại từ đầu.
+
+Ngược lại, trong kiến trúc tách rời, Server không quan tâm đến giao diện nữa. Server chỉ trả về dữ liệu thuần, thường là JSON. Phần hiển thị do phía Client tự lo, ví dụ một ứng dụng SPA hiện đại. Điều này mang lại một lợi ích cực kỳ lớn mà thầy muốn các em ghi nhớ.
+
+- SSR: Server dựng sẵn HTML hoàn chỉnh và trả về, gắn chặt dữ liệu với giao diện.
+- Decoupled: Server chỉ trả dữ liệu thuần dạng JSON, giao diện tách riêng.
+- Một API duy nhất phục vụ được cả Web, Mobile và bên thứ ba.
+
+Lợi ích đó là: với kiến trúc tách rời, một API duy nhất có thể phục vụ cùng lúc cho website, cho ứng dụng di động, và cho cả các đối tác bên thứ ba. Các em chỉ cần viết phần dữ liệu một lần, mọi nền tảng đều dùng chung được. Đây chính là tư tưởng API-first, và cũng chính là sân chơi mà FastAPI được sinh ra để chinh phục.
+
+Đến đây, một câu hỏi tự nhiên sẽ nảy ra trong đầu các em: vậy thì FastAPI được xây dựng như thế nào, và tại sao nó lại nhanh đến vậy? Để giải đáp điều này, chúng ta sẽ cùng nhau bước sang video tiếp theo.
+
+**[Chuyển tiếp slide]**
+
+## Tổng kết bài giảng
+
+Như vậy là trong bài học hôm nay, thầy và các em đã cùng nhau đi qua những viên gạch nền tảng nhất. Chúng ta đã hiểu mô hình Client - Server với Client là bên gửi Request và Server là bên trả về Response thông qua giao thức HTTP và HTTPS. Chúng ta đã nắm được định dạng JSON dùng để trao đổi dữ liệu, và phân biệt được Web truyền thống SSR với Web Service theo kiến trúc tách rời, nơi một API phục vụ được nhiều nền tảng.
+
+Cảm ơn các em đã theo dõi bài học hôm nay. Hẹn gặp lại các em trong các bài học tiếp theo.
+
+## Khái niệm liên quan
+
+- [[Mô hình Client-Server]]
+- [[Request-Response & HTTP-HTTPS|Request/Response & HTTP/HTTPS]]
+- [[Định dạng JSON]]
+- [[Kiến trúc Decoupled (Frontend-Backend tách biệt)|Kiến trúc Decoupled (Frontend/Backend tách biệt)]]
+- [[SSR vs SPA vs API-first]]
+- [[FastAPI = Starlette + Pydantic]]
+- [[WSGI vs ASGI]]
+- [[Uvicorn (ASGI server)]]
+
+— Thuộc [[Session 02 — MOC]]

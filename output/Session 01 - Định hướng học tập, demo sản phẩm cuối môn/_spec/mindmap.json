@@ -1,0 +1,60 @@
+{
+  "filename": "Session 01 - Định hướng học tập và demo sản phẩm cuối môn",
+  "subdir": "Mindmap",
+  "root": "Định hướng & Demo sản phẩm cuối môn",
+  "children": [
+    {
+      "title": "1. Lộ trình môn học IT-215",
+      "children": [
+        {
+          "title": "26 buổi kết hợp lý thuyết và thực hành dự án"
+        },
+        {
+          "title": "Mục tiêu đầu ra: Thiết kế & Xây dựng RESTful API hoàn chỉnh"
+        }
+      ]
+    },
+    {
+      "title": "2. Chuẩn bị môi trường phát triển",
+      "children": [
+        {
+          "title": "Ngôn ngữ: Python 3.10+"
+        },
+        {
+          "title": "IDE: VS Code"
+        },
+        {
+          "title": "Quản lý mã nguồn: Git"
+        },
+        {
+          "title": "Kiểm thử API: Postman"
+        }
+      ]
+    },
+    {
+      "title": "3. Kiến trúc hệ thống 3 tầng",
+      "children": [
+        {
+          "title": "Client: Trình duyệt/Mobile App gửi Request"
+        },
+        {
+          "title": "Server: FastAPI xử lý logic, trả JSON"
+        },
+        {
+          "title": "Database: MySQL lưu trữ dữ liệu bền vững"
+        }
+      ]
+    },
+    {
+      "title": "4. Phương pháp học tập chủ động",
+      "children": [
+        {
+          "title": "Thiết kế ngược (Backwards Design): Học đi đôi với làm sản phẩm"
+        },
+        {
+          "title": "Kỹ năng sửa lỗi, gỡ lỗi (Debugging) là ưu tiên số một"
+        }
+      ]
+    }
+  ]
+}

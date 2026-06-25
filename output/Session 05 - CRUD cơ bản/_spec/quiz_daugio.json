@@ -1,0 +1,365 @@
+{
+  "sheet_name": "Quiz_DauGio_FastAPI_05",
+  "questions": [
+    {
+      "q": "Nếu route khai báo là /users/{id} và ta muốn id chỉ nhận giá trị lớn hơn hoặc bằng 1, ta cấu hình như thế nào?",
+      "answers": [
+        "id: int = Path(..., gt=1)",
+        "id: int = Path(..., ge=1)",
+        "id: int = Query(..., ge=1)",
+        "id: int = Field(..., ge=1)"
+      ],
+      "explanations": [
+        "gt là lớn hơn hẳn (Greater Than).",
+        "Chính xác, ge là lớn hơn hoặc bằng (Greater than or Equal) và sử dụng Path() cho path parameter.",
+        "Query() dùng cho query parameter.",
+        "Field() dùng cho thuộc tính trong BaseModel."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Tham số nào của hàm được xem là Query Parameter mặc định trong FastAPI?",
+      "answers": [
+        "Tham số nằm trong ngoặc nhọn {} ở route decorator",
+        "Tham số kế thừa từ BaseModel của Pydantic",
+        "Tham số không nằm trong route path và có kiểu dữ liệu nguyên thủy (số, chuỗi, boolean)",
+        "Tham số được khai báo trong Request Body"
+      ],
+      "explanations": [
+        "Đó là Path Parameter.",
+        "Đó là Request Body.",
+        "Chính xác, FastAPI tự động phân giải các tham số này từ query string trên URL.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Khi validate dữ liệu thất bại, FastAPI mặc định trả về mã lỗi HTTP nào?",
+      "answers": [
+        "400 Bad Request",
+        "404 Not Found",
+        "500 Internal Server Error",
+        "422 Unprocessable Entity"
+      ],
+      "explanations": [
+        "Lỗi request không hợp lệ nói chung.",
+        "Lỗi không tìm thấy tài nguyên.",
+        "Lỗi hệ thống phía server.",
+        "Chính xác, mã 422 được tự động sinh kèm thông tin chi tiết lỗi."
+      ],
+      "correct": 4,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Từ khóa nào đại diện cho giá trị bắt buộc truyền khi sử dụng Path() hoặc Query()?",
+      "answers": [
+        "None",
+        "Required",
+        "... (Ellipsis)",
+        "True"
+      ],
+      "explanations": [
+        "None biểu thị tham số tùy chọn.",
+        "Không phải cú pháp Python.",
+        "Chính xác, dấu ba chấm biểu thị giá trị bắt buộc phải có.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Trường 'loc' trong JSON lỗi 422 của FastAPI dùng để chỉ ra điều gì?",
+      "answers": [
+        "Thời gian xảy ra lỗi",
+        "Vị trí của tham số gây lỗi trong request",
+        "Mô tả thông điệp lỗi bằng tiếng Anh",
+        "Loại lỗi lập trình"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Chính xác, loc viết tắt của Location (ví dụ: ['body', 'email'] chỉ ra email trong request body bị lỗi).",
+        "Đó là trường msg.",
+        "Đó là trường type."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Hàm Field() dùng để đặt ràng buộc dữ liệu được import từ thư viện nào?",
+      "answers": [
+        "fastapi",
+        "starlette",
+        "pydantic",
+        "typing"
+      ],
+      "explanations": [
+        "FastAPI cung cấp Query và Path.",
+        "Không cung cấp Field.",
+        "Chính xác, Field() được cung cấp bởi pydantic.",
+        "Cung cấp các type hint."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Đâu là quy tắc vàng để tránh xung đột đường dẫn route trong FastAPI?",
+      "answers": [
+        "Khai báo route động trước, route tĩnh sau",
+        "Đặt tên các route hoàn toàn giống nhau",
+        "Luôn khai báo route tĩnh lên trước các route động",
+        "Không được dùng quá 2 route trong ứng dụng"
+      ],
+      "explanations": [
+        "Gây xung đột lỗi 422.",
+        "Gây lỗi đè route.",
+        "Chính xác, đặt route cụ thể lên trước giúp FastAPI định tuyến chính xác.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Pydantic BaseModel chủ yếu được dùng để làm gì khi khai báo ở tham số hàm POST?",
+      "answers": [
+        "Đọc dữ liệu từ Path Parameter",
+        "Định nghĩa cấu trúc (schema) và đại diện cho dữ liệu nhận từ Request Body",
+        "Tự động kết nối tới cơ sở dữ liệu MySQL",
+        "Render giao diện trang web"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Chính xác, giúp nhận và kiểm chứng dữ liệu JSON gửi lên từ client.",
+        "Đó là ORM model.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Để kiểm tra định dạng email bằng regex trong Field() của Pydantic v2, ta dùng tham số nào?",
+      "answers": [
+        "regex",
+        "pattern",
+        "format",
+        "match"
+      ],
+      "explanations": [
+        "Đã bị bỏ ở bản cũ.",
+        "Chính xác, pattern nhận biểu thức chính quy để kiểm tra định dạng chuỗi.",
+        "Không đúng.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Ý nghĩa của tham số response_model trong route decorator là gì?",
+      "answers": [
+        "Tăng tốc độ xử lý của API",
+        "Chuẩn hóa dữ liệu đầu ra và tự động lọc bỏ các trường thông tin nhạy cảm trước khi trả về client",
+        "Tự động kết nối với MySQL",
+        "Quy định kiểu dữ liệu của request body"
+      ],
+      "explanations": [
+        "Không ảnh hưởng tốc độ.",
+        "Chính xác, ví dụ dùng để ẩn mật khẩu người dùng trước khi phản hồi.",
+        "Không đúng.",
+        "Đó là Pydantic model trong tham số hàm."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Trong Python, làm thế nào để khai báo một trường tùy chọn kiểu chuỗi có mặc định là None?",
+      "answers": [
+        "email: str",
+        "email: str | None = None",
+        "email: Optional",
+        "email: None = str"
+      ],
+      "explanations": [
+        "Đây là trường bắt buộc.",
+        "Chính xác, cú pháp Union type hoặc Optional giúp biểu thị trường tùy chọn.",
+        "Không đúng cú pháp gán mặc định.",
+        "Sai cú pháp."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Khi validate thành công, đối tượng Pydantic có thể chuyển đổi thành kiểu Dictionary của Python bằng phương thức nào?",
+      "answers": [
+        "to_dict()",
+        "dict()",
+        "json()",
+        "convert()"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Chính xác, student.dict() (hoặc model_dump() trong Pydantic v2).",
+        "Chuyển thành chuỗi JSON.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Trong chu trình CRUD, thao tác 'Create' thường ánh xạ tới phương thức HTTP nào?",
+      "answers": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "explanations": [
+        "GET dùng cho Read.",
+        "Chính xác, POST dùng cho Create.",
+        "PUT dùng cho Update.",
+        "DELETE dùng cho Delete."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Mã trạng thái HTTP chuẩn nhất biểu thị việc tạo mới tài nguyên thành công là gì?",
+      "answers": [
+        "200 OK",
+        "201 Created",
+        "204 No Content",
+        "400 Bad Request"
+      ],
+      "explanations": [
+        "Dùng cho các thao tác thành công chung.",
+        "Chính xác, 201 Created.",
+        "Dùng khi thành công nhưng không có nội dung trả về.",
+        "Dùng khi request bị lỗi cú pháp."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Phương thức HTTP nào được thiết kế để ghi đè toàn bộ thông tin của tài nguyên đang tồn tại?",
+      "answers": [
+        "POST",
+        "PATCH",
+        "PUT",
+        "GET"
+      ],
+      "explanations": [
+        "Dùng để tạo mới.",
+        "Dùng để cập nhật từng phần.",
+        "Chính xác, PUT ghi đè toàn bộ tài nguyên.",
+        "Dùng để đọc."
+      ],
+      "correct": 3,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Nếu xóa tài nguyên thành công và server không muốn gửi lại bất kỳ dữ liệu nào trong body, mã HTTP phản hồi là gì?",
+      "answers": [
+        "200 OK",
+        "201 Created",
+        "204 No Content",
+        "404 Not Found"
+      ],
+      "explanations": [
+        "Trả về dữ liệu kèm body.",
+        "Dùng cho tạo mới.",
+        "Chính xác, 204 No Content biểu thị thành công và body trống.",
+        "Không tìm thấy tài nguyên."
+      ],
+      "correct": 3,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Tính chất 'Idempotent' của một phương thức HTTP có nghĩa là gì?",
+      "answers": [
+        "Phương thức đó chạy rất nhanh",
+        "Thực hiện gọi API nhiều lần liên tiếp với cùng dữ liệu luôn cho kết quả trạng thái hệ thống giống nhau",
+        "Yêu cầu phải có mật khẩu xác thực",
+        "Không cho phép truyền tham số"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Chính xác, ví dụ gọi PUT sửa thông tin hoặc DELETE xóa đối tượng nhiều lần thì kết quả cuối cùng đối tượng vẫn chỉ bị sửa/xóa như vậy.",
+        "Không đúng.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Cơ chế 'Soft Delete' (Xóa mềm) hoạt động như thế nào trong thực tế?",
+      "answers": [
+        "Xóa hoàn toàn dữ liệu khỏi RAM",
+        "Chỉ xóa dữ liệu khi máy tính tắt",
+        "Thay đổi trạng thái của cờ đánh dấu (ví dụ is_deleted = True) thay vì xóa vật lý khỏi database",
+        "Tự động gửi email thông báo cho người dùng khi xóa"
+      ],
+      "explanations": [
+        "Đó là xóa vật lý.",
+        "Không đúng.",
+        "Chính xác, giúp bảo toàn tính toàn vẹn dữ liệu và lưu lịch sử.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Để ném ra lỗi không tìm thấy tài nguyên khi client gọi GET hoặc DELETE sai ID, ta dùng cú pháp nào?",
+      "answers": [
+        "raise HTTPException(status_code=400, detail='...')",
+        "raise HTTPException(status_code=404, detail='...')",
+        "return {'error': 'Not Found'}",
+        "sys.exit(1)"
+      ],
+      "explanations": [
+        "400 là Bad Request.",
+        "Chính xác, mã 404 biểu thị Not Found.",
+        "Chỉ trả về dict thường, mã HTTP phản hồi vẫn là 200 OK.",
+        "Dừng ứng dụng server lập tức, gây crash."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Sự khác biệt lớn nhất giữa PUT và PATCH là gì?",
+      "answers": [
+        "PUT chạy nhanh hơn PATCH",
+        "PUT ghi đè toàn bộ thuộc tính; PATCH chỉ cập nhật các thuộc tính được truyền lên (cập nhật từng phần)",
+        "PATCH là phương thức an toàn (safe), PUT thì không",
+        "FastAPI không hỗ trợ PATCH, chỉ hỗ trợ PUT"
+      ],
+      "explanations": [
+        "Hiệu năng tương đương.",
+        "Chính xác, đây là quy chuẩn thiết kế RESTful.",
+        "Cả hai đều là update không safe.",
+        "FastAPI hỗ trợ đầy đủ các phương thức."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "sheet_name": "Quiz_CuoiGio_FastAPI_01",
+  "questions": [
+    {
+      "q": "Khóa học IT-215 FastAPI sử dụng phương pháp giảng dạy nào làm cốt lõi?",
+      "answers": [
+        "Thiết kế ngược (Backwards Design) và Lập trình chủ động",
+        "Nghe giảng lý thuyết thuần túy không thực hành",
+        "Lập trình hướng đối tượng nâng cao",
+        "Chỉ viết code theo mẫu có sẵn"
+      ],
+      "explanations": [
+        "Chính xác, học từ sản phẩm đầu ra đi ngược lại lý thuyết giúp học chủ động.",
+        "Không đúng.",
+        "Đó là mô hình lập trình.",
+        "Học viên phải tự thiết kế và sửa lỗi."
+      ],
+      "correct": 1,
+      "difficulty": 6,
+      "category": "DIENTICH"
+    },
+    {
+      "q": "Mô hình kiến trúc nào phân tách hoàn toàn Frontend và Backend thông qua cổng API dữ liệu JSON?",
+      "answers": [
+        "Monolithic Architecture",
+        "Decoupled Architecture (Tách biệt)",
+        "Server-Side Rendering (SSR)",
+        "Kiến trúc hướng sự kiện"
+      ],
+      "explanations": [
+        "Monolithic gộp chung giao diện và backend.",
+        "Chính xác, giúp API backend có thể dùng chung cho cả Web và App mobile.",
+        "SSR dựng HTML tại server.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "KIEN_TRUC"
+    },
+    {
+      "q": "Công cụ Git được sử dụng trong môn học IT-215 với mục đích gì?",
+      "answers": [
+        "Chạy server web FastAPI",
+        "Lưu trữ cơ sở dữ liệu MySQL",
+        "Quản lý phiên bản mã nguồn dự án và nộp bài tập cá nhân",
+        "Thiết kế giao diện người dùng"
+      ],
+      "explanations": [
+        "Uvicorn chạy server web.",
+        "MySQL lưu database.",
+        "Chính xác, Git quản lý mã nguồn và hỗ trợ đẩy bài lên GitHub.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 5,
+      "category": "CONG_CU"
+    },
+    {
+      "q": "Trong sơ đồ kiến trúc Client-API-Database, FastAPI đóng vai trò ở tầng nào?",
+      "answers": [
+        "Tầng Client (máy khách)",
+        "Tầng API Server (máy chủ trung gian)",
+        "Tầng Database (cơ sở dữ liệu)",
+        "Tầng Network (đường truyền vật lý)"
+      ],
+      "explanations": [
+        "Client là trình duyệt/điện thoại.",
+        "Chính xác, FastAPI xử lý request và trả dữ liệu JSON.",
+        "Database là MySQL.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "KIEN_TRUC"
+    },
+    {
+      "q": "Mục tiêu đầu ra lớn nhất của khóa học IT-215 đối với mỗi học viên là gì?",
+      "answers": [
+        "Cài đặt thành công Python",
+        "Xây dựng hoàn chỉnh một ứng dụng Web API thực tế (Final Project)",
+        "Vẽ thành công sơ đồ Client-Server",
+        "Đạt điểm tối đa các bài quiz đầu giờ"
+      ],
+      "explanations": [
+        "Đây chỉ là bước chuẩn bị ban đầu.",
+        "Chính xác, sản phẩm cuối môn hoàn chỉnh chứng minh năng lực lập trình backend.",
+        "Chỉ là bài tập cơ bản buổi đầu.",
+        "Quiz chỉ dùng để ôn luyện kiến thức."
+      ],
+      "correct": 2,
+      "difficulty": 5,
+      "category": "DINH_HUONG"
+    }
+  ]
+}

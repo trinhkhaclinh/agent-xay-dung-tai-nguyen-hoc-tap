@@ -1,0 +1,75 @@
+{
+  "filename": "[Phân tích] So sánh Postman và Swagger UI trong kiểm thử API",
+  "subdir": "Bài tập",
+  "level": "Phân tích",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "So sánh các công cụ kiểm thử API phổ biến"
+    },
+    {
+      "type": "h2",
+      "text": "1. Bối cảnh nghiệp vụ"
+    },
+    {
+      "type": "p",
+      "text": "FastAPI tự động sinh tài liệu Swagger UI tại đường dẫn `/docs`. Tuy nhiên, trong phát triển dự án thực tế, các lập trình viên vẫn sử dụng thêm công cụ Postman để kiểm thử API nâng cao."
+    },
+    {
+      "type": "h2",
+      "text": "2. Yêu cầu đầu ra"
+    },
+    {
+      "type": "h3",
+      "text": "(1) Lập bảng so sánh tính năng"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Tiêu chí so sánh",
+        "Swagger UI tự động",
+        "Postman Desktop"
+      ],
+      "rows": [
+        [
+          "Khởi tạo dữ liệu kiểm thử",
+          "",
+          ""
+        ],
+        [
+          "Hỗ trợ cấu hình biến môi trường",
+          "",
+          ""
+        ],
+        [
+          "Khả năng lưu trữ lịch sử request",
+          "",
+          ""
+        ],
+        [
+          "Tự động cập nhật khi sửa code",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "(2) Đánh giá tình huống"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Đưa ra nhận định: khi nào nên ưu tiên dùng Swagger UI, khi nào nên dùng Postman.",
+        "Giải thích vai trò của việc tạo Collection trong Postman."
+      ]
+    }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session01",
+    "ex": "Ex04",
+    "example": "HNKS25CNTT1_FastAPI_Session01_Ex04"
+  }
+}

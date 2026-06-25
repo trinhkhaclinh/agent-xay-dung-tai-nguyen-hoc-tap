@@ -1,0 +1,275 @@
+{
+  "sheet_name": "Quiz_CuoiGio_FastAPI_05",
+  "questions": [
+    {
+      "q": "Để khai báo mã trạng thái HTTP trả về mặc định khi gọi API thành công trong route decorator, ta dùng đối số nào?",
+      "answers": [
+        "code",
+        "status",
+        "status_code",
+        "response_status"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Không đúng.",
+        "Chính xác, ví dụ: @app.post('/...', status_code=201).",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 5,
+      "category": "DECORATOR"
+    },
+    {
+      "q": "Khi thực hiện API POST tạo mới đối tượng, nếu phát hiện email gửi lên đã tồn tại trong danh sách, lập trình viên nên xử lý như thế nào?",
+      "answers": [
+        "Vẫn cho ghi đè đè lên đối tượng cũ",
+        "Ném ra lỗi HTTPException với mã lỗi 400 Bad Request để thông báo email đã tồn tại",
+        "Trả về thông tin đối tượng cũ với mã 201 Created",
+        "Crash server bằng lệnh exit"
+      ],
+      "explanations": [
+        "Gây mất dữ liệu người dùng cũ.",
+        "Chính xác, đây là cách validate logic nghiệp vụ cơ bản.",
+        "Sai logic nghiệp vụ và mã phản hồi.",
+        "Không được phép làm sập ứng dụng."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "VALIDATION"
+    },
+    {
+      "q": "Vì sao phương thức HTTP GET được coi là an toàn (safe)?",
+      "answers": [
+        "Vì dữ liệu truyền lên luôn được mã hóa",
+        "Vì nó chỉ thực hiện đọc dữ liệu và không làm thay đổi trạng thái tài nguyên trên máy chủ",
+        "Vì nó không cho phép truyền bất kỳ tham số nào",
+        "Vì nó bắt buộc phải chạy qua giao thức HTTPS"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Chính xác, GET không làm ghi nhận mới, sửa đổi hay xóa dữ liệu.",
+        "GET cho phép truyền query và path parameters.",
+        "GET chạy được cả trên HTTP."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "SAFE_METHOD"
+    },
+    {
+      "q": "Thao tác cập nhật in-memory list bằng PUT yêu cầu logic xử lý nào sau khi tìm thấy ID khớp?",
+      "answers": [
+        "Xóa phần tử cũ đi và dùng append() thêm phần tử mới",
+        "Ghi đè giá trị mới lên các thuộc tính tương ứng của phần tử cũ",
+        "Chuyển đổi cờ is_deleted sang True",
+        "Trả về lỗi 400 Bad Request"
+      ],
+      "explanations": [
+        "Không cần thiết và thay đổi thứ tự phần tử.",
+        "Chính xác, ghi đè giá trị giúp giữ nguyên tham chiếu đối tượng trong danh sách.",
+        "Đây là thao tác xóa mềm.",
+        "Thao tác thành công nên không trả lỗi 400."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "UPDATE"
+    },
+    {
+      "q": "Khi xóa thành công một đối tượng và trả về mã trạng thái HTTP 204 No Content, body của HTTP response sẽ chứa thông tin gì?",
+      "answers": [
+        "Chuỗi JSON {'message': 'Success'}",
+        "Hoàn toàn trống rỗng (không chứa dữ liệu)",
+        "Mã ID của đối tượng vừa bị xóa",
+        "Thông tin chi tiết đối tượng bị xóa để đối chiếu"
+      ],
+      "explanations": [
+        "Mã 204 yêu cầu body phải trống.",
+        "Chính xác, No Content nghĩa là không có nội dung body.",
+        "Không đúng.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 7,
+      "category": "DELETE"
+    },
+    {
+      "q": "Trong thực tế, khi triển khai API DELETE, phương thức nào dưới đây an toàn hơn để bảo toàn lịch sử dữ liệu?",
+      "answers": [
+        "Xóa vật lý (Hard Delete)",
+        "Xóa mềm (Soft Delete)",
+        "Reset lại toàn bộ máy chủ",
+        "Tự động sao lưu dữ liệu sang ổ đĩa khác rồi xóa vật lý"
+      ],
+      "explanations": [
+        "Mất dữ liệu vĩnh viễn và có thể gây lỗi khóa ngoại.",
+        "Chính xác, chỉ cập nhật cờ ẩn dữ liệu giúp khôi phục dễ dàng.",
+        "Gây gián đoạn dịch vụ toàn bộ hệ thống.",
+        "Tốn kém tài nguyên và phức tạp."
+      ],
+      "correct": 2,
+      "difficulty": 5,
+      "category": "SOFT_DELETE"
+    },
+    {
+      "q": "Khi client gọi API GET /students/100 (trong đó ID 100 không tồn tại), mã trạng thái HTTP nào là chuẩn nhất để trả về?",
+      "answers": [
+        "200 OK",
+        "400 Bad Request",
+        "404 Not Found",
+        "500 Internal Server Error"
+      ],
+      "explanations": [
+        "Không đúng, API thất bại.",
+        "Lỗi cú pháp request, còn ở đây request đúng cú pháp nhưng không có dữ liệu.",
+        "Chính xác, 404 Not Found biểu thị tài nguyên không tồn tại.",
+        "Lỗi hệ thống phía server."
+      ],
+      "correct": 3,
+      "difficulty": 5,
+      "category": "READ"
+    },
+    {
+      "q": "Đối với API GET danh sách sinh viên, việc truyền thêm tham số keyword: str = '' đóng vai trò gì?",
+      "answers": [
+        "Là path parameter bắt buộc để định vị sinh viên",
+        "Là query parameter tùy chọn dùng để lọc kết quả theo tên sinh viên",
+        "Là request body nhận dữ liệu JSON",
+        "Là cấu hình bảo mật bắt buộc"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Chính xác, mặc định chuỗi rỗng để trả về toàn bộ nếu không truyền keyword.",
+        "Không đúng.",
+        "Không liên quan."
+      ],
+      "correct": 2,
+      "difficulty": 5,
+      "category": "READ"
+    },
+    {
+      "q": "Thao tác cập nhật từng phần (PATCH) trong Pydantic được thực hiện thuận tiện nhờ phương thức chuyển đổi dữ liệu nào?",
+      "answers": [
+        "student.dict(exclude_unset=True)",
+        "student.dict()",
+        "student.json()",
+        "str(student)"
+      ],
+      "explanations": [
+        "Chính xác, exclude_unset=True giúp loại bỏ các trường client không truyền lên (giữ lại None mặc định).",
+        "Phương thức này sẽ lấy toàn bộ các trường kể cả các trường mặc định None.",
+        "Trả về chuỗi JSON.",
+        "Trả về chuỗi biểu diễn đối tượng."
+      ],
+      "correct": 1,
+      "difficulty": 8,
+      "category": "PATCH"
+    },
+    {
+      "q": "Khi thiết kế RESTful API, Endpoint dùng để xóa sinh viên có ID là 5 nên đặt đường dẫn và phương thức nào?",
+      "answers": [
+        "GET /students/delete/5",
+        "DELETE /students/5",
+        "POST /students/5/delete",
+        "PUT /students/5"
+      ],
+      "explanations": [
+        "Sai phương thức và vi phạm RESTful naming.",
+        "Chính xác, dùng đúng phương thức DELETE và path parameter định danh tài nguyên.",
+        "Sai phương thức.",
+        "PUT dùng cho cập nhật ghi đè."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "REST_DESIGN"
+    },
+    {
+      "q": "Phương thức HTTP POST có tính chất Idempotent hay không?",
+      "answers": [
+        "Có, luôn trả về cùng kết quả",
+        "Không, mỗi lần gọi POST thành công thường tạo thêm một tài nguyên mới trong hệ thống",
+        "Có, chỉ khi chạy trên máy chủ Uvicorn",
+        "Không, nhưng có tính chất Safe"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Chính xác, gọi nhiều lần sinh ra nhiều tài nguyên khác nhau.",
+        "Không liên quan tới máy chủ.",
+        "POST không an toàn vì làm thay đổi trạng thái máy chủ."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "POST"
+    },
+    {
+      "q": "Khi viết hàm delete_student(student_id: int) thao tác trên list in-memory của Python, từ khóa nào cần dùng để thay đổi danh sách bên ngoài phạm vi hàm?",
+      "answers": [
+        "local",
+        "nonlocal",
+        "global",
+        "import"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Dùng cho hàm lồng nhau.",
+        "Chính xác, sử dụng global students_db để khai báo biến danh sách toàn cục.",
+        "Dùng để import thư viện."
+      ],
+      "correct": 3,
+      "difficulty": 6,
+      "category": "PYTHON"
+    },
+    {
+      "q": "Tại sao không nên dùng phương thức HTTP GET cho hành động xóa dữ liệu?",
+      "answers": [
+        "Vì GET không hỗ trợ truyền tham số",
+        "Vì các công cụ tìm kiếm (crawler) hoặc trình duyệt có thể tự động gọi trước (prefetch) các link GET, dẫn tới vô tình xóa sạch dữ liệu hệ thống",
+        "Vì GET chạy chậm hơn các phương thức khác",
+        "Vì dữ liệu xóa bằng GET sẽ bị lỗi hiển thị"
+      ],
+      "explanations": [
+        "GET hỗ trợ truyền tham số trên URL.",
+        "Chính xác, đây là lỗ hổng bảo mật nghiêm trọng nếu dùng GET để thay đổi trạng thái hệ thống.",
+        "Tốc độ tương đương.",
+        "Không liên quan."
+      ],
+      "correct": 2,
+      "difficulty": 7,
+      "category": "REST_DESIGN"
+    },
+    {
+      "q": "Nếu client gửi request PUT đến /students/5 mà thiếu trường email bắt buộc trong schema, FastAPI phản hồi lỗi gì?",
+      "answers": [
+        "400 Bad Request",
+        "404 Not Found",
+        "422 Unprocessable Entity",
+        "500 Internal Server Error"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Không đúng.",
+        "Chính xác, do dữ liệu không vượt qua bước validate cấu trúc Pydantic của request body.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 5,
+      "category": "VALIDATION"
+    },
+    {
+      "q": "Khi thực hiện xóa mềm (Soft Delete), API GET lấy danh sách thông thường cần bổ sung logic gì?",
+      "answers": [
+        "Không cần bổ sung gì",
+        "Chỉ lấy các phần tử có cờ trạng thái is_deleted == False",
+        "Xóa sạch bộ nhớ cache",
+        "Tự động phục hồi các bản ghi đã xóa"
+      ],
+      "explanations": [
+        "Sẽ hiển thị cả đối tượng đã bị xóa mềm.",
+        "Chính xác, lọc bỏ các đối tượng đã bị đánh dấu xóa mềm để ẩn chúng khỏi danh sách hiển thị thông thường.",
+        "Không liên quan.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 6,
+      "category": "SOFT_DELETE"
+    }
+  ]
+}

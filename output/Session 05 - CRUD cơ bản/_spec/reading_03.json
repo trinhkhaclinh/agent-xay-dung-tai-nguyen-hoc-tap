@@ -1,0 +1,72 @@
+{
+  "filename": "BÀI ĐỌC_ API UPDATE TRONG FASTAPI_",
+  "subdir": "Bài đọc",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Bài Đọc Chuyên Sâu: API Update - Phương Thức PUT, Ghi Đè Dữ Liệu Và Phân Biệt Với PATCH"
+    },
+    {
+      "type": "p",
+      "text": "Thao tác thứ ba trong CRUD là Update (Cập nhật dữ liệu). Trong thiết kế API chuẩn RESTful, thao tác cập nhật toàn bộ thuộc tính của tài nguyên thường sử dụng phương thức HTTP PUT. Bài đọc này giúp học viên triển khai thành công API PUT cập nhật thông tin sinh viên in-memory và phân tích so sánh chi tiết với phương thức PATCH."
+    },
+    {
+      "type": "h2",
+      "text": "1. Phương thức PUT và tính chất ghi đè toàn bộ"
+    },
+    {
+      "type": "p",
+      "text": "Phương thức PUT đại diện cho hành động thay thế/ghi đè hoàn toàn tài nguyên hiện tại bằng dữ liệu mới gửi lên từ client. Khi gọi PUT, client bắt buộc phải truyền đầy đủ các thuộc tính của đối tượng. Nếu thiếu một trường nào đó, trường đó có thể bị xóa hoặc đặt về giá trị mặc định tùy thiết kế hệ thống."
+    },
+    {
+      "type": "h2",
+      "text": "2. Triển khai API PUT cập nhật thông tin trong FastAPI"
+    },
+    {
+      "type": "p",
+      "text": "Khi nhận request PUT, đầu tiên ta dùng ID sinh viên để tìm kiếm sinh viên đó. Nếu tìm thấy, thực hiện ghi đè dữ liệu. Nếu không tìm thấy, trả về lỗi 404 Not Found."
+    },
+    {
+      "type": "code",
+      "lang": "python",
+      "text": "class StudentUpdateSchema(BaseModel):\n    name: str\n    email: str\n\n@app.put(\"/students/{student_id}\")\ndef update_student_info(student_id: int, student_data: StudentUpdateSchema):\n    for s in students_db:\n        if s[\"id\"] == student_id:\n            s[\"name\"] = student_data.name\n            s[\"email\"] = student_data.email\n            return {\"message\": \"Cập nhật thành công\", \"data\": s}\n    raise HTTPException(status_code=404, detail=\"Không tìm thấy sinh viên để cập nhật\")"
+    },
+    {
+      "type": "h2",
+      "text": "3. Phân biệt PUT và PATCH"
+    },
+    {
+      "type": "p",
+      "text": "Trong thiết kế API nâng cao, có hai phương thức cập nhật:"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "**PUT (Replace):** Thay thế toàn bộ đối tượng. Phải truyền tất cả các trường. Mang tính chất idempotent.",
+        "**PATCH (Modify):** Cập nhật từng phần (chỉ sửa các trường gửi lên). Client chỉ gửi các trường cần thay đổi (ví dụ: chỉ đổi mỗi email). Cần xử lý logic kiểm tra các trường truyền lên linh hoạt hơn."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Tổng Kết"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "PUT dùng để ghi đè toàn bộ tài nguyên hiện có và mang tính chất idempotent.",
+        "Nếu ID tài nguyên không tồn tại, API PUT phải phản hồi lỗi 404 Not Found.",
+        "Phân biệt rõ PUT (ghi đè toàn phần) và PATCH (cập nhật từng phần) khi thiết kế API hệ thống."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Tài Liệu Tham Khảo"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "MDN Web Docs - PUT: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT"
+      ]
+    }
+  ]
+}

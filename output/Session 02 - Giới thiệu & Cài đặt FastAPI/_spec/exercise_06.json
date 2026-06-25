@@ -1,0 +1,72 @@
+{
+  "filename": "[BTTH] Xây dựng API quản lý sinh viên cơ bản",
+  "subdir": "Bài tập",
+  "level": "BTTH",
+  "blocks": [
+    { "type": "h1", "text": "Xây dựng API quản lý sinh viên cơ bản" },
+
+    { "type": "h2", "text": "1. Bối cảnh nghiệp vụ" },
+    { "type": "p", "text": "Đây là bài thực hành tổng hợp cuối Session 02. Bạn sẽ tự tay dựng một dự án FastAPI hoàn chỉnh từ đầu cho hệ thống Quản lý sinh viên: thiết lập môi trường ảo, khởi tạo ứng dụng, thiết kế hệ endpoint theo chuẩn RESTful và khai thác tài liệu tự sinh trên Swagger UI." },
+    { "type": "p", "text": "Mục tiêu là gộp tất cả kiến thức đã học trong session thành một sản phẩm chạy được, sẵn sàng cho các session sau (validate dữ liệu, kết nối database)." },
+
+    { "type": "h2", "text": "2. Quy tắc nghiệp vụ" },
+    { "type": "bullets", "items": [
+      "Tài nguyên quản lý là students; mỗi sinh viên gồm: id (tự sinh), name, email, class_name.",
+      "Hệ thống cần hỗ trợ các thao tác CRUD cơ bản: liệt kê, xem chi tiết theo ID, tạo mới, cập nhật, xóa.",
+      "Mỗi thao tác phải dùng đúng HTTP method theo ánh xạ CRUD: GET (đọc), POST (tạo), PUT (cập nhật), DELETE (xóa).",
+      "Endpoint đặt tên theo chuẩn RESTful (danh từ số nhiều /students, path parameter /students/{student_id}, không nhúng động từ).",
+      "Dữ liệu lưu tạm trong bộ nhớ (in-memory) cho phạm vi bài tập; trao đổi ở định dạng JSON."
+    ]},
+
+    { "type": "h2", "text": "3. Mã nguồn hiện tại (Legacy Code)" },
+    { "type": "p", "text": "Khung dự án khởi điểm dưới đây mới có danh sách tạm và một endpoint liệt kê. Bạn phát triển tiếp thành API CRUD hoàn chỉnh." },
+    { "type": "code", "lang": "python", "text": "# main.py - khung khoi diem cho BTTH\nfrom fastapi import FastAPI\n\napp = FastAPI(\n    title=\"Student Management API\",\n    description=\"API quan ly sinh vien co ban - Session 02\",\n    version=\"1.0.0\"\n)\n\nstudents_db = [\n    {\"id\": 1, \"name\": \"Nguyen Van An\", \"email\": \"an@ptit.edu.vn\", \"class_name\": \"CNTT1\"}\n]\n\n@app.get(\"/students\", tags=[\"students\"])\ndef list_students():\n    return students_db\n\n# TODO: bo sung cac endpoint con lai cua CRUD" },
+
+    { "type": "h2", "text": "4. Yêu cầu" },
+
+    { "type": "h3", "text": "Phần 1 — Thiết lập môi trường" },
+    { "type": "numbers", "items": [
+      "Tạo và kích hoạt môi trường ảo: python -m venv venv rồi .\\venv\\Scripts\\activate (Windows).",
+      "Cài thư viện: pip install fastapi uvicorn.",
+      "Đóng gói môi trường: pip freeze > requirements.txt và thêm venv/ vào .gitignore."
+    ]},
+
+    { "type": "h3", "text": "Phần 2 — Triển khai hệ endpoint CRUD" },
+    { "type": "p", "text": "Hoàn thiện đầy đủ các endpoint sau cho tài nguyên students:" },
+    { "type": "table",
+      "headers": ["Đường dẫn", "HTTP method", "Chức năng", "CRUD"],
+      "rows": [
+        ["/students", "GET", "Lấy danh sách toàn bộ sinh viên", "Read"],
+        ["/students/{student_id}", "GET", "Lấy chi tiết 1 sinh viên theo ID", "Read"],
+        ["/students", "POST", "Đăng ký (tạo mới) sinh viên, id tự sinh", "Create"],
+        ["/students/{student_id}", "PUT", "Cập nhật thông tin sinh viên theo ID", "Update"],
+        ["/students/{student_id}", "DELETE", "Xóa sinh viên theo ID", "Delete"]
+      ]
+    },
+    { "type": "bullets", "items": [
+      "Khai báo kiểu dữ liệu cho path parameter (student_id: int) để FastAPI tự validate.",
+      "Endpoint tạo mới phải tự sinh id tăng dần và trả về hồ sơ vừa tạo.",
+      "Các endpoint thao tác theo ID phải xử lý trường hợp không tìm thấy sinh viên (trả về thông báo lỗi rõ ràng)."
+    ]},
+
+    { "type": "h3", "text": "Phần 3 — Chạy & kiểm thử trên Swagger UI" },
+    { "type": "numbers", "items": [
+      "Chạy server bằng uvicorn main:app --reload và truy cập http://127.0.0.1:8000.",
+      "Mở Swagger UI tại http://127.0.0.1:8000/docs, dùng Try it out để kiểm thử lần lượt cả 5 endpoint.",
+      "Thực hiện một kịch bản đầy đủ: tạo mới một sinh viên → liệt kê → xem chi tiết → cập nhật → xóa → liệt kê lại để xác nhận.",
+      "Đối chiếu giao diện tài liệu tại /docs (Swagger UI) và /redoc (ReDoc)."
+    ]},
+    { "type": "h3", "text": "Sản phẩm nộp" },
+    { "type": "bullets", "items": [
+      "Mã nguồn dự án (main.py) và file requirements.txt.",
+      "Ảnh chụp màn hình Swagger UI thể hiện cả 5 endpoint chạy thành công."
+    ]}
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session02",
+    "ex": "Ex06",
+    "example": "HNKS25CNTT1_FastAPI_Session02_Ex06"
+  }
+}

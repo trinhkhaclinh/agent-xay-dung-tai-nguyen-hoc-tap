@@ -1,0 +1,46 @@
+{
+  "filename": "[Sáng tạo] Đề xuất ý tưởng tính năng mở rộng cho dự án cuối khóa",
+  "subdir": "Bài tập",
+  "level": "Sáng tạo",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Đề xuất giá trị cộng thêm cho sản phẩm tốt nghiệp"
+    },
+    {
+      "type": "h2",
+      "text": "1. Bối cảnh nghiệp vụ"
+    },
+    {
+      "type": "p",
+      "text": "Hội đồng đánh giá dự án cuối khóa của Rikkei Education đánh giá rất cao các dự án có tính ứng dụng thực tế và có sự sáng tạo thêm các tính năng độc đáo ngoài yêu cầu tối thiểu."
+    },
+    {
+      "type": "h2",
+      "text": "2. Thử thách sáng tạo"
+    },
+    {
+      "type": "p",
+      "text": "Hãy lựa chọn một chủ đề dự án (ví dụ: Quản lý khóa học trực tuyến) và đề xuất ít nhất 2 tính năng nâng cao (ví dụ: Xuất báo cáo điểm sang file PDF, tự động gửi email thông báo kết quả cho học viên)."
+    },
+    {
+      "type": "h2",
+      "text": "3. Yêu cầu đầu ra"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Mô tả nghiệp vụ chi tiết của 2 tính năng đề xuất.",
+        "Vẽ hoặc mô tả luồng xử lý API Backend của 2 tính năng đó.",
+        "Giải thích lợi ích thực tế mang lại cho người dùng cuối."
+      ]
+    }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session01",
+    "ex": "Ex05",
+    "example": "HNKS25CNTT1_FastAPI_Session01_Ex05"
+  }
+}

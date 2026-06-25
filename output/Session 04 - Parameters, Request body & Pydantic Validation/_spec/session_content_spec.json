@@ -1,0 +1,150 @@
+{
+  "session_no": 4,
+  "session_id": "Session 04",
+  "title": "Parameters, Request body & Pydantic Validation",
+  "folder_name": "Session 04 - Parameters, Request body & Pydantic Validation",
+  "module": "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+  "hinh_thuc_hoc": "Lý thuyết",
+  "mon_hoc": "FastAPI",
+  "summary": "Học cách nhận và kiểm chứng dữ liệu đầu vào của API: Path Parameters (lấy dữ liệu từ URL), Query Parameters (tham số tìm kiếm/lọc), Request Body với Pydantic (nhận JSON có cấu trúc), và Type Hints kết hợp Query/Path/Field để tự động validate dữ liệu và trả về lỗi 422 chuẩn.",
+  "domain_xuyen_suot": "Quản lý sinh viên / Khóa học (đào tạo) — nhất quán với Session 02; thêm ví dụ sản phẩm (e-commerce) cho query/validation.",
+  "lessons": [
+    {
+      "no": 1,
+      "title": "Path Parameters",
+      "objectives": [
+        "Giải thích (Hiểu) Path Parameter và cách lấy dữ liệu định danh tài nguyên từ URL",
+        "Triển khai (Vận dụng) endpoint /students/{student_id} với type hint để FastAPI tự ép kiểu",
+        "Giải thích (Hiểu) cơ chế tự động validate và lỗi 422 khi sai kiểu path parameter",
+        "Phân tích (Phân tích) thứ tự khai báo route để tránh xung đột giữa route tĩnh và route động"
+      ],
+      "key_concepts": [
+        "Path Parameter", "Ép kiểu theo type hint (int/str)", "Tự động validate 422",
+        "Thứ tự khai báo route", "Enum cho giá trị định sẵn", "RESTful naming"
+      ],
+      "scenario": "API quản lý sinh viên: lấy chi tiết một sinh viên theo mã định danh qua /students/{student_id}; xử lý trường hợp nhập sai kiểu (chữ thay vì số) và route đặc biệt /students/me.",
+      "facts": [
+        "Path parameter khai báo trong dấu {} của đường dẫn và phải trùng tên với tham số hàm xử lý.",
+        "FastAPI ép kiểu path parameter theo type hint; nếu sai kiểu (vd 'abc' cho int) tự trả lỗi 422.",
+        "Route cụ thể phải khai báo TRƯỚC route động: /students/me phải đặt trên /students/{student_id}.",
+        "Dùng Enum (kế thừa str, Enum) để giới hạn path parameter trong tập giá trị định sẵn.",
+        "Path parameter luôn là bắt buộc vì nó là một phần của đường dẫn."
+      ],
+      "code_examples": [
+        {
+          "caption": "Path parameter có ép kiểu (main.py)",
+          "lang": "python",
+          "code": "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get(\"/students/{student_id}\")\ndef get_student(student_id: int):\n    # student_id được FastAPI ép sang int; sai kiểu -> 422\n    return {\"student_id\": student_id, \"name\": \"Nguyen Van An\"}"
+        },
+        {
+          "caption": "Route tĩnh đặt trước route động",
+          "lang": "python",
+          "code": "@app.get(\"/students/me\")\ndef get_current_student():\n    return {\"student_id\": 0, \"name\": \"Tôi\"}\n\n@app.get(\"/students/{student_id}\")\ndef get_student(student_id: int):\n    return {\"student_id\": student_id}"
+        }
+      ],
+      "san_pham_dau_ra": "API /students/{id}"
+    },
+    {
+      "no": 2,
+      "title": "Query Parameters",
+      "objectives": [
+        "Giải thích (Hiểu) Query Parameter và phân biệt với Path Parameter",
+        "Triển khai (Vận dụng) API tìm kiếm/lọc /courses?keyword=...&level=... với nhiều query",
+        "Phân biệt (Hiểu) tham số bắt buộc và tùy chọn qua giá trị mặc định",
+        "Vận dụng (Vận dụng) kết hợp Path + Query trong cùng một endpoint"
+      ],
+      "key_concepts": [
+        "Query Parameter", "Tham số mặc định (optional)", "Tham số bắt buộc (required)",
+        "Optional / None", "Kết hợp Path + Query"
+      ],
+      "scenario": "API tìm kiếm khóa học của trung tâm đào tạo: /courses?keyword=python&level=beginner&max_price=2000000; trả toàn bộ nếu không truyền keyword, lọc theo level/giá khi có.",
+      "facts": [
+        "Tham số hàm KHÔNG nằm trong đường dẫn sẽ được FastAPI hiểu là query parameter.",
+        "Query có giá trị mặc định -> tùy chọn (optional); không có mặc định -> bắt buộc (required).",
+        "Dùng kiểu Optional[str] = None (hoặc str | None = None) để biểu thị query tùy chọn.",
+        "Query parameter kiểu bool nhận các giá trị true/false, 1/0, yes/no trên URL.",
+        "Có thể kết hợp path parameter và query parameter trong cùng một hàm xử lý."
+      ],
+      "code_examples": [
+        {
+          "caption": "Query parameters cho tìm kiếm khóa học",
+          "lang": "python",
+          "code": "from fastapi import FastAPI\n\napp = FastAPI()\n\ncourses = [\n    {\"id\": 1, \"name\": \"Python Basic\", \"level\": \"beginner\", \"price\": 1500000},\n    {\"id\": 2, \"name\": \"Web API with FastAPI\", \"level\": \"intermediate\", \"price\": 2500000},\n]\n\n@app.get(\"/courses\")\ndef search_courses(keyword: str = \"\", level: str | None = None):\n    result = courses\n    if keyword:\n        result = [c for c in result if keyword.lower() in c[\"name\"].lower()]\n    if level:\n        result = [c for c in result if c[\"level\"] == level]\n    return result"
+        }
+      ],
+      "san_pham_dau_ra": "API /products?name=laptop"
+    },
+    {
+      "no": 3,
+      "title": "Request Body với Pydantic",
+      "objectives": [
+        "Giải thích (Hiểu) Pydantic BaseModel và vai trò khai báo cấu trúc dữ liệu (schema)",
+        "Triển khai (Vận dụng) endpoint POST nhận Request Body JSON nhờ tham số kiểu model",
+        "Giải thích (Hiểu) cơ chế tự động validate JSON và lỗi 422 khi thiếu/sai trường",
+        "Vận dụng (Vận dụng) response_model và model lồng nhau cho dữ liệu phức tạp"
+      ],
+      "key_concepts": [
+        "Pydantic BaseModel", "Request Body", "Khai báo schema", "Tự động validate JSON",
+        "response_model", "Định dạng JSON"
+      ],
+      "scenario": "API tạo sinh viên mới: POST /students nhận JSON {name, email, age} đã được kiểm chứng cấu trúc bằng Pydantic trước khi lưu.",
+      "facts": [
+        "Pydantic model kế thừa BaseModel; mỗi thuộc tính khai báo type hint mô tả schema dữ liệu.",
+        "Khi tham số hàm có kiểu là Pydantic model, FastAPI đọc dữ liệu từ Request Body (JSON).",
+        "FastAPI tự động validate body theo model; thiếu trường hoặc sai kiểu sẽ trả lỗi 422 kèm chi tiết.",
+        "response_model giúp chuẩn hóa và lọc dữ liệu trả về (vd ẩn mật khẩu) theo một schema khác.",
+        "Pydantic model có thể lồng nhau để mô tả dữ liệu phân cấp (vd địa chỉ trong hồ sơ sinh viên)."
+      ],
+      "code_examples": [
+        {
+          "caption": "Request body với Pydantic (schemas.py + main.py)",
+          "lang": "python",
+          "code": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\napp = FastAPI()\n\nclass StudentCreate(BaseModel):\n    name: str\n    email: str\n    age: int\n\n@app.post(\"/students\")\ndef create_student(student: StudentCreate):\n    # student đã được validate theo schema StudentCreate\n    return {\"message\": \"Đã tạo sinh viên\", \"data\": student}"
+        }
+      ],
+      "san_pham_dau_ra": "API Create User"
+    },
+    {
+      "no": 4,
+      "title": "Type Hints trong FastAPI",
+      "objectives": [
+        "Giải thích (Hiểu) vai trò của Type Hints làm nền tảng cho validate tự động trong FastAPI",
+        "Vận dụng (Vận dụng) Query() và Path() để đặt ràng buộc (min_length, ge, le, gt)",
+        "Vận dụng (Vận dụng) Field() trong Pydantic model để ràng buộc và mô tả dữ liệu",
+        "Giải thích (Hiểu) cấu trúc thông báo lỗi 422 (loc / msg / type) để gỡ lỗi"
+      ],
+      "key_concepts": [
+        "Type Hints", "Query() validation", "Path() validation", "Field() constraints",
+        "422 Unprocessable Entity", "Swagger UI (/docs)"
+      ],
+      "scenario": "API tìm kiếm sản phẩm có ràng buộc: keyword tối thiểu 2 ký tự, page >= 1; API tạo sản phẩm với giá > 0 — tất cả ràng buộc hiển thị trên Swagger UI và tự sinh lỗi 422 khi vi phạm.",
+      "facts": [
+        "Type hints là cơ sở để FastAPI + Pydantic suy ra cách parse và validate dữ liệu đầu vào.",
+        "Query(default, min_length=, max_length=, pattern=) đặt ràng buộc cho query parameter.",
+        "Path(..., ge=, le=, gt=, lt=) đặt ràng buộc số học cho path parameter (ge = lớn hơn hoặc bằng).",
+        "Field(..., gt=, max_length=, description=) ràng buộc và mô tả thuộc tính trong Pydantic model.",
+        "Khi validate thất bại, FastAPI trả 422 với danh sách lỗi gồm loc (vị trí), msg (thông điệp), type."
+      ],
+      "code_examples": [
+        {
+          "caption": "Ràng buộc với Query, Path, Field",
+          "lang": "python",
+          "code": "from fastapi import FastAPI, Query, Path\nfrom pydantic import BaseModel, Field\n\napp = FastAPI()\n\n@app.get(\"/products\")\ndef search_products(\n    keyword: str = Query(min_length=2, max_length=50),\n    page: int = Query(1, ge=1),\n):\n    return {\"keyword\": keyword, \"page\": page}\n\nclass ProductCreate(BaseModel):\n    name: str = Field(max_length=100, description=\"Tên sản phẩm\")\n    price: int = Field(gt=0, description=\"Giá phải lớn hơn 0\")\n\n@app.post(\"/products\")\ndef create_product(product: ProductCreate):\n    return product\n\n@app.get(\"/products/{product_id}\")\ndef get_product(product_id: int = Path(ge=1)):\n    return {\"product_id\": product_id}"
+        }
+      ],
+      "san_pham_dau_ra": "API tự động validate dữ liệu"
+    }
+  ],
+  "prior_session": {
+    "no": 2,
+    "title": "Giới thiệu & Cài đặt FastAPI cơ bản (đã thực hành ở Session 03)",
+    "review_topics": [
+      "Khởi tạo FastAPI app và chạy bằng Uvicorn (uvicorn main:app --reload)",
+      "Định nghĩa endpoint với decorator @app.get/@app.post",
+      "HTTP methods và ánh xạ CRUD (GET/POST/PUT/DELETE)",
+      "Quy chuẩn đặt tên endpoint RESTful (danh từ số nhiều)",
+      "Định dạng JSON và cơ chế Request/Response",
+      "Swagger UI tại /docs để kiểm thử API"
+    ]
+  }
+}

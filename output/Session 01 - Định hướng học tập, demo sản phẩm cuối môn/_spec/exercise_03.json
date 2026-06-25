@@ -1,0 +1,50 @@
+{
+  "filename": "[Vận dụng chuyên sâu] Lên danh sách API Endpoints cho Đăng nhập và Đăng ký",
+  "subdir": "Bài tập",
+  "level": "Vận dụng chuyên sâu",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Thiết kế danh sách API Endpoint ban đầu cho dự án"
+    },
+    {
+      "type": "h2",
+      "text": "1. Bối cảnh nghiệp vụ"
+    },
+    {
+      "type": "p",
+      "text": "Dự án cuối khóa yêu cầu tính năng đăng nhập và đăng ký tài khoản người dùng để bảo mật hệ thống. Trước khi viết code, đội ngũ phân tích cần xác định rõ các Endpoint cần xây dựng."
+    },
+    {
+      "type": "h2",
+      "text": "2. Quy tắc nghiệp vụ"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Đường dẫn API phải tuân theo chuẩn RESTful.",
+        "Xác định đúng HTTP Method (GET, POST, PUT, DELETE) cho từng chức năng.",
+        "Mô tả định dạng Request Body JSON tối thiểu cần thiết."
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "3. Yêu cầu đầu ra"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Thiết kế Endpoint tạo tài khoản mới (đăng ký).",
+        "Thiết kế Endpoint xác thực tài khoản nhận token (đăng nhập).",
+        "Mô tả chi tiết các trường JSON gửi lên của mỗi API."
+      ]
+    }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session01",
+    "ex": "Ex03",
+    "example": "HNKS25CNTT1_FastAPI_Session01_Ex03"
+  }
+}

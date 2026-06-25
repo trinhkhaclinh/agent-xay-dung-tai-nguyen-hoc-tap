@@ -1,0 +1,55 @@
+{
+  "filename": "Lesson 02 - API Read - Lấy danh sách và chi tiết dữ liệu với GET",
+  "subdir": "Kịch bản quay video",
+  "lesson_no": 2,
+  "blocks": [
+    {
+      "type": "h2",
+      "text": "## Phương thức GET và API đọc dữ liệu"
+    },
+    {
+      "type": "narration",
+      "text": "Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Hôm nay, thầy và các em sẽ đi tiếp thao tác thứ hai trong chu trình CRUD - đó là thao tác Read, sử dụng phương thức HTTP GET."
+    },
+    {
+      "type": "narration",
+      "text": "GET là phương thức an toàn và đồng nhất, có nhiệm vụ trả dữ liệu về mà không thay đổi bất kỳ trạng thái nào trên server."
+    },
+    {
+      "type": "marker",
+      "text": "[Chuyển tiếp slide]"
+    },
+    {
+      "type": "h2",
+      "text": "## API lấy danh sách và tìm kiếm chi tiết"
+    },
+    {
+      "type": "narration",
+      "text": "Hãy cùng nhìn vào mã nguồn khai báo GET API. Để hỗ trợ tìm kiếm, chúng ta kết hợp thêm query parameter keyword trong hàm xử lý danh sách."
+    },
+    {
+      "type": "marker",
+      "text": "[mở trình duyệt hiển thị code API GET list và GET detail]"
+    },
+    {
+      "type": "narration",
+      "text": "Còn đối với API lấy chi tiết một sinh viên cụ thể theo ID, chúng ta khai báo ID dưới dạng path parameter. Thầy dùng vòng lặp để duyệt và tìm kiếm sinh viên. Nếu tìm thấy, chúng ta trả về dữ liệu. Nếu không tìm thấy, chúng ta ném ra lỗi HTTPException với mã lỗi 404 Not Found."
+    },
+    {
+      "type": "marker",
+      "text": "[mở Postman gọi GET /students/999 để minh họa lỗi 404]"
+    },
+    {
+      "type": "narration",
+      "text": "Khi thầy truyền ID sinh viên là 999 không tồn tại, Postman sẽ nhận ngay phản hồi lỗi 404 Not Found. Đây là cách xử lý lỗi cực kỳ chuẩn mực trong thiết kế API."
+    },
+    {
+      "type": "h2",
+      "text": "## Tổng kết bài giảng"
+    },
+    {
+      "type": "narration",
+      "text": "Tóm lại, trong bài học này các em đã biết cách lấy danh sách và thông tin chi tiết của đối tượng sử dụng GET và xử lý lỗi 404 Not Found. Cảm ơn các em đã theo dõi. Hẹn gặp lại các em ở bài học cập nhật dữ liệu!"
+    }
+  ]
+}

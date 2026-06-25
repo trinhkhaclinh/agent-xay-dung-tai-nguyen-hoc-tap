@@ -1,0 +1,97 @@
+{
+  "filename": "Session 01 - Định hướng học tập và demo sản phẩm cuối môn",
+  "subdir": "Bài giảng",
+  "title": "Định hướng học tập & Demo sản phẩm cuối môn",
+  "module": "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+  "version": "1.0",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Định hướng học tập & Demo sản phẩm",
+      "content": [
+        "Session 01",
+        "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+        "Phiên bản: 1.0"
+      ]
+    },
+    {
+      "layout": "agenda",
+      "section": "NỘI DUNG",
+      "title": "Nội dung bài học",
+      "content": [
+        "1. Định hướng học tập & Lộ trình môn học IT-215",
+        "2. Chuẩn bị công cụ phát triển phần mềm",
+        "3. Sơ đồ kiến trúc 3 tầng Client-API-Database",
+        "4. Demo sản phẩm cuối khóa (Final Project) mẫu"
+      ]
+    },
+    {
+      "layout": "section-title",
+      "section": "1. Định hướng & Lộ trình",
+      "title": "Phần 1: Định hướng học tập & Lộ trình IT-215",
+      "content": [
+        "Tổng quan chương trình học",
+        "Chuẩn đầu ra môn học",
+        "Phương pháp học tập chủ động"
+      ]
+    },
+    {
+      "layout": "bullets",
+      "section": "1. Định hướng & Lộ trình",
+      "title": "Lộ trình khóa học FastAPI",
+      "content": [
+        "Khóa học gồm 26 buổi tập trung thực hành phát triển Web API.",
+        "Lý thuyết tinh gọn (ASGI, Pydantic, SQLAlchemy ORM, JWT Token).",
+        "Thực hành lập trình, thiết kế cơ sở dữ liệu MySQL và viết code API."
+      ]
+    },
+    {
+      "layout": "section-title",
+      "section": "2. Sơ đồ kiến trúc",
+      "title": "Phần 2: Kiến trúc hệ thống & Demo sản phẩm",
+      "content": [
+        "Kiến trúc 3 lớp phân tách",
+        "Cấu trúc thư mục dự án chuẩn",
+        "Demo sản phẩm thực tế"
+      ]
+    },
+    {
+      "layout": "bullets",
+      "section": "2. Sơ đồ kiến trúc",
+      "title": "Kiến trúc Client - API Server - Database",
+      "content": [
+        "Client (Frontend): gửi yêu cầu HTTP và nhận dữ liệu JSON.",
+        "API Server (FastAPI): trung tâm tiếp nhận, kiểm tra dữ liệu và xử lý logic.",
+        "Database (MySQL): lưu trữ và bảo toàn thông tin hệ thống."
+      ],
+      "diagram_hint": "Sơ đồ Client ↔ API Server ↔ Database liên kết bằng mũi tên hai chiều"
+    },
+    {
+      "layout": "code",
+      "section": "2. Sơ đồ kiến trúc",
+      "title": "Cấu trúc dự án FastAPI tiêu chuẩn",
+      "content": [
+        "my_project/\n├── app/\n│   ├── main.py (Khởi chạy)\n│   ├── models.py (ORM Models)\n│   ├── schemas.py (Pydantic Schemas)\n│   └── routers/ (Định tuyến API)\n└── requirements.txt (Thư viện)"
+      ],
+      "speaker_notes": "Giải thích vai trò của việc chia nhỏ dự án lớn thành các file nhỏ dễ kiểm soát."
+    },
+    {
+      "layout": "summary",
+      "section": "TỔNG KẾT",
+      "title": "Tổng kết bài học",
+      "content": [
+        "Mục tiêu môn học: Tự tay hoàn thành ứng dụng Web API tốt nghiệp.",
+        "Chuẩn bị đầy đủ: Python, VS Code, Git và Postman.",
+        "Phương pháp: Học chủ động, thiết kế ngược từ sản phẩm thực tế.",
+        "Cấu trúc dự án tiêu chuẩn là yêu cầu bắt buộc khi viết code."
+      ]
+    },
+    {
+      "layout": "closing",
+      "title": "KẾT THÚC",
+      "content": [
+        "HỌC VIỆN ĐÀO TẠO LẬP TRÌNH CHẤT LƯỢNG NHẬT BẢN"
+      ]
+    }
+  ]
+}

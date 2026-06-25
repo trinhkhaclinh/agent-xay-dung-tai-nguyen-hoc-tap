@@ -1,0 +1,599 @@
+{
+  "module": "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+  "source_file": "PM_RA_PTIT_2025_Software_Engineer_Python_Web.xlsx",
+  "session_count": 26,
+  "sessions": [
+    {
+      "stt": "1",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 01",
+      "session_no": 1,
+      "title": "Định hướng học tập, demo sản phẩm cuối môn",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Video sản phẩm cuối môn",
+          "noi_dung_chi_tiet": "",
+          "san_pham_dau_ra": ""
+        }
+      ]
+    },
+    {
+      "stt": "2",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 02",
+      "session_no": 2,
+      "title": "Giới thiệu & Cài đặt FastAPI cơ bản",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Tổng quan kiến trúc web và FastAPI",
+          "noi_dung_chi_tiet": "Tổng quan kiến trúc web và FastAPI",
+          "san_pham_dau_ra": "Vẽ được sơ đồ Client → API → Database"
+        },
+        {
+          "no": 2,
+          "title": "Thiết lập môi trường và Virtual Environment",
+          "noi_dung_chi_tiet": "Thiết lập môi trường và Virtual Environment",
+          "san_pham_dau_ra": "Môi trường Python + FastAPI hoạt động"
+        },
+        {
+          "no": 3,
+          "title": "Khởi tạo ứng dụng FastAPI",
+          "noi_dung_chi_tiet": "Khởi tạo ứng dụng FastAPI đầu tiên, chạy server với Uvicorn",
+          "san_pham_dau_ra": "Project FastAPI đầu tiên chạy bằng Uvicorn"
+        },
+        {
+          "no": 4,
+          "title": "API endpoint và routing",
+          "noi_dung_chi_tiet": "Cấu hình routing cho API endpoint",
+          "san_pham_dau_ra": "Endpoint /hello hoạt động"
+        },
+        {
+          "no": 5,
+          "title": "Swagger UI",
+          "noi_dung_chi_tiet": "Cài đặt và cấu hình Swagger UI, giới thiệu ReDoc và OpenAPI specs",
+          "san_pham_dau_ra": "Swagger hiển thị và test được API"
+        }
+      ]
+    },
+    {
+      "stt": "3",
+      "hinh_thuc_hoc": "Thực hành",
+      "session_id": "Session 03",
+      "session_no": 3,
+      "title": "Thực hành viết API endpoint và Swagger UI",
+      "lessons": []
+    },
+    {
+      "stt": "4",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 04",
+      "session_no": 4,
+      "title": "Parameters, Request body & Pydantic Validation",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Path Parameters",
+          "noi_dung_chi_tiet": "Lấy dữ liệu từ URL",
+          "san_pham_dau_ra": "API /users/{id}"
+        },
+        {
+          "no": 2,
+          "title": "Query Parameters",
+          "noi_dung_chi_tiet": "Nhận tham số tìm kiếm",
+          "san_pham_dau_ra": "API /products?name=laptop"
+        },
+        {
+          "no": 3,
+          "title": "Request Body với Pydantic",
+          "noi_dung_chi_tiet": "Nhận dữ liệu JSON",
+          "san_pham_dau_ra": "API Create User"
+        },
+        {
+          "no": 4,
+          "title": "Type Hints trong FastAPI",
+          "noi_dung_chi_tiet": "Validate dữ liệu",
+          "san_pham_dau_ra": "API tự động validate dữ liệu"
+        }
+      ]
+    },
+    {
+      "stt": "5",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 05",
+      "session_no": 5,
+      "title": "CRUD cơ bản",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "API create",
+          "noi_dung_chi_tiet": "Tạo dữ liệu",
+          "san_pham_dau_ra": "API POST"
+        },
+        {
+          "no": 2,
+          "title": "API read",
+          "noi_dung_chi_tiet": "Đọc dữ liệu",
+          "san_pham_dau_ra": "API GET"
+        },
+        {
+          "no": 3,
+          "title": "API update",
+          "noi_dung_chi_tiet": "Cập nhật dữ liệu",
+          "san_pham_dau_ra": "API PUT"
+        },
+        {
+          "no": 4,
+          "title": "API delete",
+          "noi_dung_chi_tiet": "Xóa dữ liệu",
+          "san_pham_dau_ra": "API DELETE"
+        }
+      ]
+    },
+    {
+      "stt": "6",
+      "hinh_thuc_hoc": "Thực hành",
+      "session_id": "Session 06",
+      "session_no": 6,
+      "title": "Thực hành CRUD",
+      "lessons": []
+    },
+    {
+      "stt": "7",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 07",
+      "session_no": 7,
+      "title": "API Response & Handling Errors",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Response Model",
+          "noi_dung_chi_tiet": "Chuẩn hóa phản hồi",
+          "san_pham_dau_ra": "API có response_model"
+        },
+        {
+          "no": 2,
+          "title": "HTTP Status Codes",
+          "noi_dung_chi_tiet": "Quản lý và áp dụng các mã trạng thái HTTP chuẩn RESTful (200, 201, 400, 404, 500)",
+          "san_pham_dau_ra": "API trả về đúng status code"
+        },
+        {
+          "no": 3,
+          "title": "Cơ chế bắt ngoại lệ",
+          "noi_dung_chi_tiet": "Sử dụng HTTPException để dừng luồng xử lý và trả về lỗi phù hợp",
+          "san_pham_dau_ra": "API xử lý lỗi 404"
+        },
+        {
+          "no": 4,
+          "title": "Custom Exception Handlers",
+          "noi_dung_chi_tiet": "Tùy biến thông báo lỗi trả về cho client ở mức toàn cục (Global Exception Handler)",
+          "san_pham_dau_ra": "Global Exception Handler"
+        }
+      ]
+    },
+    {
+      "stt": "8",
+      "hinh_thuc_hoc": "Thực hành",
+      "session_id": "Session 08",
+      "session_no": 8,
+      "title": "Thực hành Chuẩn hóa phản hồi & Xử lý lỗi",
+      "lessons": []
+    },
+    {
+      "stt": "9",
+      "hinh_thuc_hoc": "Mini Project",
+      "session_id": "Session 09",
+      "session_no": 9,
+      "title": "Mini Project 1",
+      "lessons": [
+        {
+          "no": null,
+          "title": "Thiết kế Endpoint",
+          "noi_dung_chi_tiet": "Phân tích yêu cầu",
+          "san_pham_dau_ra": "Danh sách API Endpoint"
+        },
+        {
+          "no": null,
+          "title": "CRUD",
+          "noi_dung_chi_tiet": "Xây dựng chức năng",
+          "san_pham_dau_ra": "Contact Management API"
+        },
+        {
+          "no": null,
+          "title": "Kiểm thử",
+          "noi_dung_chi_tiet": "Test toàn bộ API",
+          "san_pham_dau_ra": "Bộ API hoạt động hoàn chỉnh"
+        }
+      ]
+    },
+    {
+      "stt": "10",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 10",
+      "session_no": 10,
+      "title": "Kết nối Cơ sở dữ liệu với SQLAlchemy ORM",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Tổng quan ORM",
+          "noi_dung_chi_tiet": "Giới thiệu mô hình ORM và thư viện SQLAlchemy trong hệ sinh thái Python",
+          "san_pham_dau_ra": "Hiểu mapping Table ↔ Object"
+        },
+        {
+          "no": 2,
+          "title": "Kết nối CSDL và Database Session",
+          "noi_dung_chi_tiet": "Cấu hình chuỗi kết nối (Connection String) kết nối tới MySQL",
+          "san_pham_dau_ra": "Kết nối thành công tới DB"
+        },
+        {
+          "no": 3,
+          "title": "SQLAlchemy Models",
+          "noi_dung_chi_tiet": "Định nghĩa các bảng dữ liệu bằng cú pháp khai báo SQLAlchemy",
+          "san_pham_dau_ra": "Model User"
+        },
+        {
+          "no": 4,
+          "title": "Hàm Service Select/Insert",
+          "noi_dung_chi_tiet": "Viết các hàm Service độc lập để truy vấn (Select) và thêm mới (Insert) bản ghi",
+          "san_pham_dau_ra": "Service thêm và lấy dữ liệu"
+        }
+      ]
+    },
+    {
+      "stt": "11",
+      "hinh_thuc_hoc": "Thực hành",
+      "session_id": "Session 11",
+      "session_no": 11,
+      "title": "Khởi tạo CSDL và các thao tác CRUD",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Thực hành kết nối CSDL và API CRUD",
+          "noi_dung_chi_tiet": "Tích hợp hàm CRUD thêm mới và lấy danh sách bản ghi từ MySQL vào API Endpoint",
+          "san_pham_dau_ra": ""
+        }
+      ]
+    },
+    {
+      "stt": "12",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 12",
+      "session_no": 12,
+      "title": "Hàm CRUD nâng cao, Mapping Schema & Dependency Injection",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Hàm Service Update/Delete",
+          "noi_dung_chi_tiet": "Viết các hàm Service cập nhật (Update) và xóa (Delete) bản ghi khỏi CSDL",
+          "san_pham_dau_ra": "Service Update/Delete"
+        },
+        {
+          "no": 2,
+          "title": "Mapping Models & Schemas",
+          "noi_dung_chi_tiet": "Kỹ thuật chuyển đổi qua lại giữa Pydantic Schemas và SQLAlchemy Models",
+          "san_pham_dau_ra": "Model + Schema hoàn chỉnh"
+        },
+        {
+          "no": 3,
+          "title": "Khái niệm DI",
+          "noi_dung_chi_tiet": "Khái niệm Dependency Injection và lợi ích của việc tách biệt tài nguyên trong hệ thống",
+          "san_pham_dau_ra": "Dependency tái sử dụng"
+        },
+        {
+          "no": 4,
+          "title": "Hệ thống Depends",
+          "noi_dung_chi_tiet": "Cách sử dụng cú pháp Depends của FastAPI để nhúng phụ thuộc vào endpoint",
+          "san_pham_dau_ra": "Endpoint sử dụng Depends"
+        },
+        {
+          "no": 5,
+          "title": "Quản lý DB Session",
+          "noi_dung_chi_tiet": "Viết hàm Dependency tạo và tự động đóng Database Session sử dụng từ khóa yield",
+          "san_pham_dau_ra": "Session đóng mở tự động"
+        }
+      ]
+    },
+    {
+      "stt": "13",
+      "hinh_thuc_hoc": "Thực hành",
+      "session_id": "Session 13",
+      "session_no": 13,
+      "title": "Thực hành Tích hợp Database vào Endpoint API",
+      "lessons": []
+    },
+    {
+      "stt": "14",
+      "hinh_thuc_hoc": "Lý Thuyết",
+      "session_id": "Session 14",
+      "session_no": 14,
+      "title": "Project Structure",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Vai trò Project Structure",
+          "noi_dung_chi_tiet": "Vai trò Project Structure",
+          "san_pham_dau_ra": "Hiểu kiến trúc dự án"
+        },
+        {
+          "no": 2,
+          "title": "routers",
+          "noi_dung_chi_tiet": "Quản lý endpoint",
+          "san_pham_dau_ra": ""
+        },
+        {
+          "no": 3,
+          "title": "schemas",
+          "noi_dung_chi_tiet": "Validation",
+          "san_pham_dau_ra": ""
+        },
+        {
+          "no": 4,
+          "title": "models",
+          "noi_dung_chi_tiet": "ORM Model",
+          "san_pham_dau_ra": ""
+        },
+        {
+          "no": 5,
+          "title": "services",
+          "noi_dung_chi_tiet": "Business Logic",
+          "san_pham_dau_ra": ""
+        },
+        {
+          "no": 6,
+          "title": "database",
+          "noi_dung_chi_tiet": "Database Connection",
+          "san_pham_dau_ra": ""
+        }
+      ]
+    },
+    {
+      "stt": "15",
+      "hinh_thuc_hoc": "Hackathon",
+      "session_id": "Session 15",
+      "session_no": 15,
+      "title": "Thiết kế & Xây dựng RESTful API tổng hợp",
+      "lessons": []
+    },
+    {
+      "stt": "16",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 16",
+      "session_no": 16,
+      "title": "Quan hệ giữa các bảng (Relationships) trong CSDL",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Quan hệ giữa các bảng",
+          "noi_dung_chi_tiet": "Tổng quan",
+          "san_pham_dau_ra": "ERD đơn giản"
+        },
+        {
+          "no": 2,
+          "title": "Quan hệ 1-N",
+          "noi_dung_chi_tiet": "Thiết lập mối quan hệ Một - Nhiều (One-to-Many) giữa các bảng trong SQLAlchemy",
+          "san_pham_dau_ra": "Quan hệ 1-N"
+        },
+        {
+          "no": 3,
+          "title": "Quan hệ N-N",
+          "noi_dung_chi_tiet": "Thiết lập mối quan hệ Nhiều - Nhiều (Many-to-Many) qua bảng trung gian",
+          "san_pham_dau_ra": "Quan hệ N-N"
+        },
+        {
+          "no": 4,
+          "title": "Cơ chế Loading dữ liệu",
+          "noi_dung_chi_tiet": "Tìm hiểu và cấu hình kỹ thuật tải dữ liệu liên quan (Lazy Loading vs Joined Loading)",
+          "san_pham_dau_ra": "Truy vấn tối ưu"
+        },
+        {
+          "no": 5,
+          "title": "Thiết kế API cho dữ liệu quan hệ",
+          "noi_dung_chi_tiet": "Nested Response",
+          "san_pham_dau_ra": "API dữ liệu quan hệ"
+        }
+      ]
+    },
+    {
+      "stt": "17",
+      "hinh_thuc_hoc": "Thực hành",
+      "session_id": "Session 17",
+      "session_no": 17,
+      "title": "Thực hành",
+      "lessons": []
+    },
+    {
+      "stt": "18",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 18",
+      "session_no": 18,
+      "title": "Security - Authentication & JWT (JSON Web Tokens)",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Nguyên tắc bảo mật",
+          "noi_dung_chi_tiet": "Giới thiệu giao thức OAuth2, cơ chế Authentication trong ứng dụng web hiện đại",
+          "san_pham_dau_ra": "Hiểu luồng Login"
+        },
+        {
+          "no": 2,
+          "title": "Cấu trúc JWT",
+          "noi_dung_chi_tiet": "Tìm hiểu thành phần của chuỗi JWT (Header, Payload, Signature) và cơ chế sinh token",
+          "san_pham_dau_ra": "JWT Token"
+        },
+        {
+          "no": 3,
+          "title": "Mã hóa mật khẩu",
+          "noi_dung_chi_tiet": "Cơ chế băm mật khẩu một chiều (Password Hashing) sử dụng thư viện passlib và bcrypt",
+          "san_pham_dau_ra": "Password Hash Service"
+        }
+      ]
+    },
+    {
+      "stt": "19",
+      "hinh_thuc_hoc": "Thực hành",
+      "session_id": "Session 19",
+      "session_no": 19,
+      "title": "Thực hành Triển khai Đăng ký & Đăng nhập (Authentication)",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Thực hành API Đăng ký",
+          "noi_dung_chi_tiet": "Viết API Register nhận thông tin user, thực hiện hash mật khẩu và lưu vào bảng Users",
+          "san_pham_dau_ra": "API Register"
+        },
+        {
+          "no": 2,
+          "title": "Thực hành API Đăng nhập",
+          "noi_dung_chi_tiet": "Viết API Login/Token xác thực mật khẩu, tạo chuỗi Access Token JWT gửi về client",
+          "san_pham_dau_ra": "API Login + JWT"
+        }
+      ]
+    },
+    {
+      "stt": "20",
+      "hinh_thuc_hoc": "Mini Project",
+      "session_id": "Session 20",
+      "session_no": 20,
+      "title": "Mini Project 2",
+      "lessons": []
+    },
+    {
+      "stt": "21",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 21",
+      "session_no": 21,
+      "title": "Authorization, Middleware & CORS",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Authorization",
+          "noi_dung_chi_tiet": "Kỹ thuật giải mã (Decode) JWT và phân quyền người dùng từ Token",
+          "san_pham_dau_ra": "Current User Dependency"
+        },
+        {
+          "no": 2,
+          "title": "Phân quyền theo vai trò",
+          "noi_dung_chi_tiet": "Thiết lập phân quyền Role-based Access Control (Admin, User) bảo vệ endpoint nhạy cảm",
+          "san_pham_dau_ra": "API phân quyền"
+        },
+        {
+          "no": 3,
+          "title": "Middleware",
+          "noi_dung_chi_tiet": "Khái niệm Middleware",
+          "san_pham_dau_ra": "Middleware cơ bản"
+        },
+        {
+          "no": 4,
+          "title": "CORS",
+          "noi_dung_chi_tiet": "Cách cấu hình CORS để cho phép Frontend kết nối",
+          "san_pham_dau_ra": "CORS Middleware"
+        }
+      ]
+    },
+    {
+      "stt": "22",
+      "hinh_thuc_hoc": "Thực hành",
+      "session_id": "Session 22",
+      "session_no": 22,
+      "title": "Thực hành Phân quyền bảo mật & Cấu hình CORS",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Thực hành Security Dependency",
+          "noi_dung_chi_tiet": "Viết Security Dependency bắt buộc Client đính kèm JWT Token hợp lệ khi gọi API",
+          "san_pham_dau_ra": ""
+        },
+        {
+          "no": 2,
+          "title": "Thực hành Tích hợp CORS",
+          "noi_dung_chi_tiet": "Cấu hình và thử nghiệm chặn/cho phép các domain ngoại lai gửi request tới API",
+          "san_pham_dau_ra": ""
+        }
+      ]
+    },
+    {
+      "stt": "23",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 23",
+      "session_no": 23,
+      "title": "Form Data, Upload File, File Storage",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "Form Data",
+          "noi_dung_chi_tiet": "Nhận dữ liệu Form",
+          "san_pham_dau_ra": "API Form"
+        },
+        {
+          "no": 2,
+          "title": "Upload File",
+          "noi_dung_chi_tiet": "Upload ảnh/tài liệu",
+          "san_pham_dau_ra": "API Upload"
+        },
+        {
+          "no": 3,
+          "title": "File Storage",
+          "noi_dung_chi_tiet": "Lưu file server",
+          "san_pham_dau_ra": "Thư mục uploads"
+        }
+      ]
+    },
+    {
+      "stt": "24",
+      "hinh_thuc_hoc": "Thực hành",
+      "session_id": "Session 24",
+      "session_no": 24,
+      "title": "Upload Avatar, Upload Document",
+      "lessons": [
+        {
+          "no": null,
+          "title": "",
+          "noi_dung_chi_tiet": "",
+          "san_pham_dau_ra": "Avatar Upload API\n\nDocument Upload API\n\nFile Storage System"
+        }
+      ]
+    },
+    {
+      "stt": "25",
+      "hinh_thuc_hoc": "Lý thuyết",
+      "session_id": "Session 25",
+      "session_no": 25,
+      "title": "TESTING API",
+      "lessons": [
+        {
+          "no": 1,
+          "title": "API Testing cơ bản",
+          "noi_dung_chi_tiet": "Kiểm thử API",
+          "san_pham_dau_ra": "Test Project"
+        },
+        {
+          "no": 2,
+          "title": "Test GET",
+          "noi_dung_chi_tiet": "API Read",
+          "san_pham_dau_ra": "Test Case GET"
+        },
+        {
+          "no": 3,
+          "title": "Test POST",
+          "noi_dung_chi_tiet": "API Create",
+          "san_pham_dau_ra": "Test Case POST"
+        },
+        {
+          "no": 4,
+          "title": "Test JWT",
+          "noi_dung_chi_tiet": "Endpoint bảo mật",
+          "san_pham_dau_ra": "Test Authentication"
+        }
+      ]
+    },
+    {
+      "stt": "26",
+      "hinh_thuc_hoc": "Làm dự án cuối môn",
+      "session_id": "26-30",
+      "session_no": null,
+      "title": "",
+      "lessons": []
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "session_no": 1,
+  "session_id": "Session 01",
+  "title": "Định hướng học tập, demo sản phẩm cuối môn",
+  "folder_name": "Session 01 - Định hướng học tập, demo sản phẩm cuối môn",
+  "module": "[MODULE IT-215] - Phát triển dịch vụ web với FastAPI",
+  "hinh_thuc_hoc": "Lý thuyết",
+  "summary": "Giới thiệu tổng quan về môn học IT-215 Phát triển dịch vụ web với FastAPI, định hướng lộ trình học tập, hướng dẫn cài đặt môi trường ban đầu, và trình bày demo chi tiết sản phẩm cuối môn (Final Project) để học viên nắm vững mục tiêu đầu ra.",
+  "domain_xuyen_suot": "Tổng quan và định hướng phát triển phần mềm - Định hướng lộ trình học tập và demo ứng dụng thực tế.",
+  "lessons": [
+    {
+      "no": 1,
+      "title": "Định hướng học tập & Lộ trình môn học IT-215",
+      "objectives": [
+        "Giải thích (Hiểu) lộ trình và các cột mốc quan trọng của khóa học IT-215",
+        "Thiết lập (Vận dụng) môi trường phát triển cơ bản bao gồm Python, VS Code và Git",
+        "Mô tả (Hiểu) các yêu cầu kỹ thuật và thái độ học tập cần thiết để hoàn thành môn học"
+      ],
+      "key_concepts": [
+        "Lộ trình môn học",
+        "Python",
+        "VS Code",
+        "Git",
+        "E-learning",
+        "Lập trình chủ động"
+      ],
+      "scenario": "Học viên mới bắt đầu tiếp cận môn học IT-215; chuẩn bị môi trường làm việc cá nhân và nắm bắt bức tranh toàn cảnh để sẵn sàng cho các buổi học thực tế tiếp theo.",
+      "facts": [
+        "Khóa học IT-215 FastAPI gồm 26 buổi kết hợp lý thuyết, thực hành, mini project và dự án cuối khóa.",
+        "Git là hệ thống quản lý phiên bản mã nguồn phân tán bắt buộc phải dùng để quản lý và nộp bài tập của môn học.",
+        "Lập trình chủ động (Active Learning) và Backwards Design là hai phương pháp giảng dạy và học tập cốt lõi của chương trình."
+      ],
+      "code_examples": [
+        {
+          "caption": "Kiểm tra phiên bản Python và Git đã cài đặt thành công",
+          "lang": "bash",
+          "code": "python --version\ngit --version"
+        }
+      ],
+      "san_pham_dau_ra": "Thiết lập thành công môi trường học tập cá nhân"
+    },
+    {
+      "no": 2,
+      "title": "Demo & Phân tích sản phẩm cuối môn (Final Project)",
+      "objectives": [
+        "Phân tích (Phân tích) kiến trúc tổng quan Client-Server-Database của sản phẩm cuối môn",
+        "Mô tả (Hiểu) các tính năng cốt lõi bắt buộc phải hoàn thành trong đồ án tốt nghiệp",
+        "Liệt kê (Nhớ) các tiêu chí đánh giá chất lượng sản phẩm cuối khóa"
+      ],
+      "key_concepts": [
+        "Sản phẩm cuối môn",
+        "Kiến trúc hệ thống",
+        "Đặc tả yêu cầu (SRS)",
+        "API Endpoint",
+        "Swagger UI"
+      ],
+      "scenario": "Học viên xem demo sản phẩm hoàn chỉnh về ứng dụng quản lý đào tạo / bán hàng, phân tích cấu trúc các API và sơ đồ luồng dữ liệu để hiểu rõ đích đến kỹ thuật cuối khóa.",
+      "facts": [
+        "Sản phẩm cuối môn yêu cầu xây dựng một ứng dụng RESTful API hoàn chỉnh bằng FastAPI, tích hợp MySQL qua SQLAlchemy ORM.",
+        "Học viên phải đặc tả được danh sách các Endpoint API trên Swagger UI trước khi tiến hành viết code chi tiết.",
+        "Mô hình Client-API-Database là mô hình kiến trúc bắt buộc cho sản phẩm cuối khóa."
+      ],
+      "code_examples": [
+        {
+          "caption": "Cấu trúc thư mục tiêu chuẩn của một dự án FastAPI lớn cuối môn",
+          "lang": "text",
+          "code": "my_project/\n├── app/\n│   ├── main.py\n│   ├── database.py\n│   ├── models.py\n│   ├── schemas.py\n│   ├── services.py\n│   └── routers/\n│       ├── users.py\n│       └── courses.py\n├── requirements.txt\n└── README.md"
+        }
+      ],
+      "san_pham_dau_ra": "Bản phác thảo ý tưởng hoặc định hướng sản phẩm cuối môn"
+    }
+  ],
+  "prior_session": {
+    "no": 0,
+    "title": "Môi trường chuẩn bị trước khóa học",
+    "review_topics": [
+      "Lập trình Python cơ bản",
+      "Cú pháp OOP cơ bản (Class, Object)",
+      "Cấu trúc dữ liệu Python (List, Dict)"
+    ]
+  }
+}

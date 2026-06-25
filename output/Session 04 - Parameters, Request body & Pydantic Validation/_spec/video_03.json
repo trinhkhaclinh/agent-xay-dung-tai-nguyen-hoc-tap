@@ -1,0 +1,55 @@
+{
+  "filename": "Lesson 03 - Request Body với Pydantic - Nhận dữ liệu JSON",
+  "subdir": "Kịch bản quay video",
+  "lesson_no": 3,
+  "blocks": [
+    {
+      "type": "h2",
+      "text": "## Giới thiệu về Request Body và Pydantic"
+    },
+    {
+      "type": "narration",
+      "text": "Chào mừng các em đã quay trở lại với hệ thống Elearning của Rikkei Education. Hôm nay, thầy và các em sẽ cùng tìm hiểu về cách truyền dữ liệu lớn và phức tạp vào server bằng Request Body sử dụng thư viện Pydantic."
+    },
+    {
+      "type": "narration",
+      "text": "Khi các em muốn đăng ký một sinh viên mới hay thêm một khóa học mới, thông tin gửi lên rất nhiều. Việc truyền qua URL là không khả thi. Chúng ta sẽ đóng gói dữ liệu dưới dạng JSON và đặt trong Request Body."
+    },
+    {
+      "type": "marker",
+      "text": "[Chuyển tiếp slide]"
+    },
+    {
+      "type": "h2",
+      "text": "## Tạo Pydantic BaseModel để kiểm chứng dữ liệu"
+    },
+    {
+      "type": "narration",
+      "text": "Để FastAPI hiểu được cấu trúc JSON gửi lên, chúng ta sẽ định nghĩa một lớp kế thừa từ Pydantic BaseModel. Hãy cùng nhìn lên màn hình."
+    },
+    {
+      "type": "marker",
+      "text": "[mở trình duyệt hiển thị code định nghĩa class StudentCreate]"
+    },
+    {
+      "type": "narration",
+      "text": "Chúng ta khai báo các thuộc tính name, email kiểu str và age kiểu int. Khi áp dụng class này làm kiểu dữ liệu cho tham số của route xử lý POST, FastAPI sẽ tự động phân giải JSON từ request body và validate. Nếu dữ liệu gửi lên bị thiếu trường bắt buộc hoặc sai kiểu dữ liệu, FastAPI lập tức trả lỗi 422 mà các em không cần tự viết code validation."
+    },
+    {
+      "type": "marker",
+      "text": "[mở Postman thực hiện demo POST /students với body JSON hợp lệ và không hợp lệ]"
+    },
+    {
+      "type": "narration",
+      "text": "Như các em thấy, khi thầy truyền thiếu trường name, API lập tức phản hồi mã trạng thái 422 kèm mô tả rõ ràng lỗi thiếu trường name. Điều này giúp code backend của chúng ta cực kỳ an toàn."
+    },
+    {
+      "type": "h2",
+      "text": "## Tổng kết bài giảng"
+    },
+    {
+      "type": "narration",
+      "text": "Tóm lại, trong bài học này các em đã biết cách sử dụng Pydantic BaseModel để định nghĩa schema và tự động validate dữ liệu gửi lên trong Request Body. Cảm ơn các em đã chú ý lắng nghe. Hẹn gặp lại các em trong các bài học sau!"
+    }
+  ]
+}

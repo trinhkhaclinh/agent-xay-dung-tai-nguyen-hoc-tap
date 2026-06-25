@@ -1,0 +1,365 @@
+{
+  "sheet_name": "Quiz_DauGio_FastAPI_04",
+  "questions": [
+    {
+      "q": "FastAPI được xây dựng dựa trên hai thư viện chính nào?",
+      "answers": [
+        "Flask và Django",
+        "Tornado và Twisted",
+        "Starlette và Pydantic",
+        "Pyramid và Bottle"
+      ],
+      "explanations": [
+        "Không đúng, Flask và Django là các framework độc lập.",
+        "Không đúng, Tornado và Twisted là các thư viện mạng cũ.",
+        "Chính xác, FastAPI là sự kết hợp của Starlette (cho web) và Pydantic (cho validate dữ liệu).",
+        "Không đúng, đây là các micro-framework khác."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Lệnh nào dùng để khởi động server Uvicorn cho file main.py có khai báo app = FastAPI()?",
+      "answers": [
+        "python main.py",
+        "fastapi run main.py",
+        "uvicorn main:app --reload",
+        "run uvicorn mainapp"
+      ],
+      "explanations": [
+        "Chỉ chạy file script Python thường, không khởi chạy uvicorn trừ khi viết code khởi động bên trong.",
+        "Không phải lệnh chuẩn của FastAPI đời đầu.",
+        "Chính xác, uvicorn <tên_file>:<tên_biến_app> --reload để tự động tải lại code.",
+        "Sai cú pháp lệnh."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Để truy cập tài liệu Swagger UI tự sinh của ứng dụng FastAPI, ta dùng đường dẫn nào?",
+      "answers": [
+        "/swagger",
+        "/api/docs",
+        "/docs",
+        "/redoc/ui"
+      ],
+      "explanations": [
+        "Không đúng.",
+        "Không đúng.",
+        "Chính xác, FastAPI mặc định cấu hình Swagger UI tại đường dẫn /docs.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Kiểu kiến trúc nào phân tách hoàn toàn mã nguồn giao diện (Frontend) và xử lý dữ liệu (Backend)?",
+      "answers": [
+        "Server-Side Rendering (SSR)",
+        "Monolithic Architecture",
+        "Decoupled Architecture (API-first)",
+        "MVC Pattern"
+      ],
+      "explanations": [
+        "SSR trộn cả giao diện và dữ liệu tại server.",
+        "Monolithic gộp chung toàn bộ hệ thống làm một.",
+        "Chính xác, kiến trúc tách rời (decoupled) sử dụng API làm trung tâm giao tiếp.",
+        "MVC là mẫu thiết kế phần mềm, không phải kiến trúc hệ thống decoupled."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Thư viện nào trong FastAPI chịu trách nhiệm kiểm tra tính hợp lệ của dữ liệu đầu vào?",
+      "answers": [
+        "Starlette",
+        "Pydantic",
+        "SQLAlchemy",
+        "Uvicorn"
+      ],
+      "explanations": [
+        "Starlette lo phần routing và web toolkit.",
+        "Chính xác, Pydantic lo kiểm chứng dữ liệu dựa trên Type Hints.",
+        "SQLAlchemy là thư viện ORM làm việc với cơ sở dữ liệu.",
+        "Uvicorn là máy chủ web ASGI."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Chuẩn giao tiếp web ASGI viết tắt của cụm từ nào?",
+      "answers": [
+        "Asynchronous Server Gateway Interface",
+        "Advanced System Gate Integration",
+        "Active Service Gateway Interface",
+        "Asynchronous Socket Group Interaction"
+      ],
+      "explanations": [
+        "Chính xác, ASGI hỗ trợ xử lý bất đồng bộ trong Python web.",
+        "Không đúng.",
+        "Không đúng.",
+        "Không đúng."
+      ],
+      "correct": 1,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Trong Python, từ khóa nào đi kèm với 'await' dùng để khai báo một hàm bất đồng bộ?",
+      "answers": [
+        "def",
+        "async",
+        "async def",
+        "defer"
+      ],
+      "explanations": [
+        "Dùng khai báo hàm đồng bộ thường.",
+        "Không đi độc lập trước tên hàm.",
+        "Chính xác, async def dùng để định nghĩa một coroutine hàm bất đồng bộ.",
+        "Không phải từ khóa chuẩn của Python."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Định dạng trao đổi dữ liệu phổ biến nhất giữa client và server trong API hiện đại là gì?",
+      "answers": [
+        "XML",
+        "HTML",
+        "JSON",
+        "Plain Text"
+      ],
+      "explanations": [
+        "Đã cũ và cồng kềnh hơn.",
+        "Dùng để hiển thị giao diện web.",
+        "Chính xác, JSON nhẹ, dễ đọc, viết dưới dạng các cặp key-value.",
+        "Không có cấu trúc rõ ràng."
+      ],
+      "correct": 3,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Khi tạo môi trường ảo Python trên Windows bằng lệnh python -m venv venv, thư mục chứa file kích hoạt (activate) tên là gì?",
+      "answers": [
+        "bin",
+        "Scripts",
+        "Include",
+        "Lib"
+      ],
+      "explanations": [
+        "Thư mục này trên hệ điều hành Linux/macOS.",
+        "Chính xác, trên Windows đường dẫn kích hoạt là venv\\Scripts\\activate.",
+        "Chứa các file header C/C++.",
+        "Chứa thư viện Python."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Trong RESTful API, phương thức HTTP nào thường dùng để tạo mới dữ liệu?",
+      "answers": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "explanations": [
+        "GET dùng để đọc dữ liệu.",
+        "Chính xác, POST thường ánh xạ tới hành động Create.",
+        "PUT dùng để cập nhật dữ liệu.",
+        "DELETE dùng để xóa dữ liệu."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Mã trạng thái HTTP nào biểu thị việc tài nguyên yêu cầu thành công?",
+      "answers": [
+        "200 OK",
+        "201 Created",
+        "400 Bad Request",
+        "404 Not Found"
+      ],
+      "explanations": [
+        "Chính xác, 200 OK dùng cho các phản hồi thành công chung.",
+        "Dùng khi tạo tài nguyên thành công.",
+        "Dùng khi request bị lỗi cú pháp phía client.",
+        "Dùng khi không tìm thấy tài nguyên."
+      ],
+      "correct": 1,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Uvicorn được xây dựng dựa trên những thư viện hiệu năng cao nào?",
+      "answers": [
+        "django-admin và pip",
+        "uvloop và httptools",
+        "requests và urllib",
+        "flask và jinja2"
+      ],
+      "explanations": [
+        "Không liên quan.",
+        "Chính xác, đây là các thư viện giúp Uvicorn đạt tốc độ cực lớn.",
+        "Đây là các thư viện client HTTP.",
+        "Đây là các thư viện phục vụ Flask template."
+      ],
+      "correct": 2,
+      "difficulty": 4,
+      "category": "BÀI CŨ"
+    },
+    {
+      "q": "Làm thế nào để chỉ ra một tham số của route là Path Parameter trong FastAPI?",
+      "answers": [
+        "Khai báo trong Query()",
+        "Bọc tên tham số trong ngoặc nhọn {} ở đường dẫn route",
+        "Đặt giá trị mặc định là Path()",
+        "Khai báo trong Request Body"
+      ],
+      "explanations": [
+        "Query() dùng cho query parameter.",
+        "Chính xác, đường dẫn có dạng /items/{item_id} chỉ ra item_id là path parameter.",
+        "Path() dùng để validate chứ không định nghĩa vị trí.",
+        "Request body được lấy từ JSON body."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Khi nào một tham số trong hàm xử lý route được FastAPI coi là Query Parameter?",
+      "answers": [
+        "Khi nó có kiểu dữ liệu là Pydantic BaseModel",
+        "Khi nó được bọc trong {} ở route path",
+        "Khi nó có kiểu dữ liệu nguyên thủy và KHÔNG nằm trong route path",
+        "Khi nó được định nghĩa trong body"
+      ],
+      "explanations": [
+        "Nó sẽ được hiểu là Request Body.",
+        "Nó sẽ được hiểu là Path Parameter.",
+        "Chính xác, nếu không khai báo trong path, nó mặc định là query parameter.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Lớp cơ sở (Base Class) nào của Pydantic được dùng để kế thừa khi định nghĩa một Request Body Schema?",
+      "answers": [
+        "PydanticModel",
+        "BaseSchema",
+        "BaseModel",
+        "DataModel"
+      ],
+      "explanations": [
+        "Không đúng tên class.",
+        "Không đúng.",
+        "Chính xác, từ pydantic import BaseModel.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Trong FastAPI, tính chất BẮT BUỘC hay TÙY CHỌN của Query Parameter được quyết định bởi yếu tố nào?",
+      "answers": [
+        "Việc khai báo kiểu dữ liệu",
+        "Việc nó có giá trị mặc định hay không",
+        "Phương thức HTTP sử dụng",
+        "Sử dụng decorator khác nhau"
+      ],
+      "explanations": [
+        "Kiểu dữ liệu chỉ dùng để validate và ép kiểu.",
+        "Chính xác, nếu không có giá trị mặc định thì bắt buộc; ngược lại là tùy chọn.",
+        "Không đúng.",
+        "Không đúng."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Để đặt ràng buộc 'lớn hơn hoặc bằng 1' cho một Path Parameter, ta dùng tùy chọn nào trong Path()?",
+      "answers": [
+        "gt=1",
+        "ge=1",
+        "le=1",
+        "lt=1"
+      ],
+      "explanations": [
+        "gt là lớn hơn (Greater Than).",
+        "Chính xác, ge viết tắt của Greater than or Equal.",
+        "le là nhỏ hơn hoặc bằng (Less than or Equal).",
+        "lt là nhỏ hơn (Less Than)."
+      ],
+      "correct": 2,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Khi dữ liệu truyền lên từ client không vượt qua được bước xác thực (validate) của FastAPI, mã lỗi HTTP nào được trả về?",
+      "answers": [
+        "400 Bad Request",
+        "401 Unauthorized",
+        "404 Not Found",
+        "422 Unprocessable Entity"
+      ],
+      "explanations": [
+        "Là lỗi cú pháp request nói chung.",
+        "Là lỗi chưa xác thực tài khoản.",
+        "Là lỗi không tìm thấy tài nguyên.",
+        "Chính xác, 422 Unprocessable Entity là mã lỗi chuẩn mà FastAPI tự sinh khi validate thất bại."
+      ],
+      "correct": 4,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Đâu là quy tắc sắp xếp route đúng trong FastAPI để tránh xung đột đường dẫn?",
+      "answers": [
+        "Đọc ngẫu nhiên không quan trọng thứ tự",
+        "Đặt route động (chứa tham số) trước route tĩnh",
+        "Đặt các route tĩnh lên trước các route động",
+        "Khai báo tất cả route trong một hàm duy nhất"
+      ],
+      "explanations": [
+        "FastAPI duyệt từ trên xuống dưới nên thứ tự rất quan trọng.",
+        "Nếu đặt động trước, tĩnh sẽ bị nhận nhầm và gây lỗi 422.",
+        "Chính xác, luôn ưu tiên route tĩnh (vd /students/me) trước route động (vd /students/{id}).",
+        "Mỗi route tương ứng một hàm độc lập."
+      ],
+      "correct": 3,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    },
+    {
+      "q": "Trong Pydantic model, hàm nào được dùng để đặt các ràng buộc dữ liệu cho các thuộc tính của model?",
+      "answers": [
+        "Query()",
+        "Path()",
+        "Field()",
+        "Validate()"
+      ],
+      "explanations": [
+        "Dùng cho query parameter.",
+        "Dùng cho path parameter.",
+        "Chính xác, Field() từ pydantic dùng để đặt ràng buộc (min_length, gt...) cho thuộc tính trong BaseModel.",
+        "Không đúng."
+      ],
+      "correct": 3,
+      "difficulty": 8,
+      "category": "BÀI MỚI"
+    }
+  ]
+}

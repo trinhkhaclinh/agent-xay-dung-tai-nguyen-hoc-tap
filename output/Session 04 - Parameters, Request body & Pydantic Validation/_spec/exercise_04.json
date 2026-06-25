@@ -1,0 +1,83 @@
+{
+  "filename": "[Phân tích] Lựa chọn Path Parameters vs Query Parameters",
+  "subdir": "Bài tập",
+  "level": "Phân tích",
+  "blocks": [
+    {
+      "type": "h1",
+      "text": "Phân tích so sánh Path Parameters và Query Parameters"
+    },
+    {
+      "type": "h2",
+      "text": "1. Bối cảnh nghiệp vụ"
+    },
+    {
+      "type": "p",
+      "text": "Một công ty công nghệ giáo dục đang tái thiết kế hệ thống API của mình. Có hai nghiệp vụ cần thiết kế:\nNghiệp vụ A: Xem danh sách bài học của một khóa học cụ thể.\nNghiệp vụ B: Tìm kiếm khóa học theo từ khóa và sắp xếp theo giá tiền."
+    },
+    {
+      "type": "h2",
+      "text": "2. Yêu cầu phân tích"
+    },
+    {
+      "type": "p",
+      "text": "Sinh viên cần lập bảng phân tích so sánh và chọn giải pháp thiết kế URL tối ưu cho hai nghiệp vụ trên."
+    },
+    {
+      "type": "h2",
+      "text": "3. Yêu cầu đầu ra"
+    },
+    {
+      "type": "h3",
+      "text": "(1) Lập bảng so sánh"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Tiêu chí",
+        "Path Parameters",
+        "Query Parameters"
+      ],
+      "rows": [
+        [
+          "Mục đích sử dụng chính",
+          "",
+          ""
+        ],
+        [
+          "Tính bắt buộc",
+          "",
+          ""
+        ],
+        [
+          "Ảnh hưởng cấu trúc URL",
+          "",
+          ""
+        ],
+        [
+          "Khả năng caching ở phía Client",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "(2) Thiết kế API thực tế"
+    },
+    {
+      "type": "bullets",
+      "items": [
+        "Đề xuất URL và viết code triển khai API cho cả Nghiệp vụ A và Nghiệp vụ B trong FastAPI.",
+        "Giải thích lý do lựa chọn của mình dựa trên quy chuẩn RESTful API."
+      ]
+    }
+  ],
+  "submission": {
+    "lop": "[Tên Lớp]",
+    "mon": "FastAPI",
+    "session": "Session04",
+    "ex": "Ex04",
+    "example": "HNKS25CNTT1_FastAPI_Session04_Ex04"
+  }
+}
